@@ -1,0 +1,183 @@
+{
+  "main": {
+    "id": "9617179910e43052",
+    "type": "split",
+    "children": [
+      {
+        "id": "c16e2ec29c27392b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0e246f1e6eb98772",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "leetcode/leetcode.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a698d6b9700c092b",
+    "type": "split",
+    "children": [
+      {
+        "id": "fc9d21a37aad3791",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0be43685439d4950",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "b60bbb1dd5af59ac",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "7075706b1b68ad6e",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 375.5,
+    "collapsed": true
+  },
+  "right": {
+    "id": "6d9f6974883325c3",
+    "type": "split",
+    "children": [
+      {
+        "id": "0a6ecdb4b059fec2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "12286d0ab9d826d1",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "leetcode/leetcode.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b1619cecad9b972d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "leetcode/leetcode.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "fe8e7c1f178ff231",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "375a56fc46e0b0ef",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "leetcode/leetcode.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "0e246f1e6eb98772",
+  "lastOpenFiles": [
+    "书/新建文本文档.txt",
+    "新建文本文档.txt",
+    "书/Linux设备驱动程序.pdf",
+    "书/Linux内核设计与实现.pdf",
+    "书/C++Primer_practice.pdf",
+    "书/C++Primer.pdf",
+    "书/Linux内核/12.内存管理.md",
+    "书/Linux内核/img/Pasted image 20240306081005.png",
+    "毕业/孟毕业论文.md",
+    "毕业",
+    "书/Linux内核/9.内核同步.md",
+    "leetcode/leetcode.md",
+    "书/Linux内核/img/Pasted image 20240304104247.png",
+    "书/Linux内核/img/Pasted image 20240304103622.png",
+    "书/Linux内核/img/Pasted image 20240304103438.png",
+    "书/Linux内核/img/Pasted image 20240304103321.png",
+    "书/Linux内核/img/Pasted image 20240304103231.png",
+    "书/Linux内核/img/Pasted image 20240304103157.png",
+    "书/Linux内核/img/Pasted image 20240304083359.png",
+    "未命名.md",
+    "书/Linux内核/11.定时器和时间管理.md",
+    "书/Linux内核/img/Pasted image 20240303232021.png",
+    "书/Linux内核/10.内核同步方法.md",
+    "书/Linux内核/img/Pasted image 20240302134110.png",
+    "CPP/CPP.md",
+    "书/C++ Primer（第5版）_带书签_高清完整版.pdf",
+    "CPP/img",
+    "leetcode/img",
+    "书/Linux设备驱动程序(中文版第三版完美编辑带二级书签).pdf",
+    "Welcome.md"
+  ]
+}

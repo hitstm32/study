@@ -1,0 +1,665 @@
+## [23. 合并 K 个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
+
+[https://leetcode.cn/problems/merge-k-sorted-lists/](https://leetcode.cn/problems/merge-k-sorted-lists/) 该题需要动态插入式进行排序，比较高效的办法是使用优先级队列，而优先级队列有不同的实现方式，其中比较高效的就是二叉堆方式。
+
+```cpp
+class Solution {  
+​  
+public:  
+    ListNode* mergeKLists(vector<ListNode*>& lists) {  
+        ListNode *dummy = new ListNode;  
+        ListNode *p = dummy;  
+        priority_queue<ListNode*, vector<ListNode*>, function<bool(ListNode*, ListNode*)>> pq(  
+        [] (ListNode* a, ListNode* b) { return a->val > b->val; });  
+​  
+        for(auto head : lists){  
+            if(head!=NULL)  
+                pq.push(head);  
+        }  
+        while(!pq.empty()){  
+            ListNode *min = pq.top();  
+            p->next = min;  
+            p = p->next;  
+            pq.pop();  
+            if(min->next!=NULL)  
+                pq.push(min->next);  
+        }  
+        return dummy->next;  
+    }  
+};
+```
+
+## [19. 删除链表的倒数第 N 个结点](https://leetcode.cn/problems/remove-nth-node-from-end-of-list/)
+
+通过dummy来解决删除链表头的情况，减少考虑边界条件。**只要产生新链表，就以dummy作为新链表的头**
+
+```cpp
+class Solution {  
+public:  
+    ListNode* removeNthFromEnd(ListNode* head, int n) {  
+        ListNode* dummy = new ListNode(-1);  
+        ListNode* slow = dummy;  
+        ListNode* fast = head;  
+        dummy->next = head;  
+        for (int i = 0; i < n; i++) {  
+            fast = fast->next;  
+        }  
+​  
+        while (fast) {  
+            fast = fast->next;  
+            slow = slow->next;  
+        }  
+        slow->next = slow->next->next;  
+        return dummy->next;  
+    }  
+};
+```
+
+## [142. 环形链表 II](https://leetcode.cn/problems/linked-list-cycle-ii/)
+
+![[Pasted image 20240224133400.png]]
+判断环形链表的方法是快慢指针 ![[leetcode/img/Pasted image 20240224140153.png]]
+
+```cpp
+class Solution {  
+public:  
+    ListNode* detectCycle(ListNode* head) {  
+        ListNode* fast = head, * slow = head;  
+​  
+        while (fast != NULL && fast->next != NULL) {  
+            fast = fast->next->next;  
+            slow = slow->next;  
+            if (fast == slow)  
+                break;  
+        }  
+        if (fast == nullptr || fast->next == nullptr) {  
+            // fast 遇到空指针说明没有环  
+            return nullptr;  
+        }  
+​  
+        slow = head;  
+​  
+        while (slow != fast) { //一定要靠前判断，不能在赋值后判断，不然可能错过链表头为结果的情况  
+            slow = slow->next;  
+            fast = fast->next;  
+        }  
+        return slow;  
+    }  
+};
+```
+## [25. K 个一组翻转链表](https://leetcode.cn/problems/reverse-nodes-in-k-group/)
+
+```cpp
+class Solution {  
+public:  
+    ListNode* reverseKGroup(ListNode* head, int k) {  
+        int i=k;  
+        ListNode* pr=head;  
+        while(i--){  
+            if(pr==nullptr)  
+                return head;  
+            pr = pr->next;  
+        }  
+        ListNode* pnexthead = reverseA2B(head, pr);  
+        head->next = reverseKGroup(pr,k);  
+        return pnexthead;  
+    }  
+    ListNode* reverseA2B(ListNode* A, ListNode* B){  
+        ListNode *pnow = A;  
+        ListNode *pnext=nullptr;  
+        ListNode *ppriv=nullptr;  
+        while(pnow!=B){  
+            pnext = pnow->next;  
+            pnow->next = ppriv;  
+            ppriv = pnow;  
+​  
+            pnow = pnext;  
+        }  
+        return ppriv;  
+    }  
+};
+```
+
+## [234. 回文链表](https://leetcode.cn/problems/palindrome-linked-list/)
+
+该题目的思路是要做到后序遍历，如果想正序访问链表，那可以前序遍历，如果想倒序访问链表，那就得用后序遍历。
+
+```cpp
+/* 倒序打印单链表中的元素值 */  
+void traverse(ListNode* head) {  
+    if (head == NULL) return;  
+    traverse(head->next);  
+    // 后序遍历代码  
+    print(head->val);  
+}
+
+class Solution {  
+public:  
+    ListNode* left;  
+​  
+    bool isPalindrome(ListNode* head) {  
+        left = head;  
+        return reverse(head);  
+    }  
+    bool reverse(ListNode* right){  
+        if(right==nullptr)  
+            return true;  
+          
+        bool res = reverse(right->next);  
+        res = res&&(right->val==left->val);  
+          
+          
+        left = left->next;  
+        return res;  
+    }  
+};
+```
+## [26. 删除有序数组中的重复项](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/)
+```c
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int slow=0,fast=0;
+        
+        while(fast<nums.size()){
+            if(nums[fast]==nums[slow]){
+                fast++;
+            }else{
+                slow++;
+                nums[slow] = nums[fast];
+                fast++;
+            }
+        }
+        return slow+1;
+    }
+};
+```
+## [83. 删除排序链表中的重复元素](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/)
+```c
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode* fast = head;
+        ListNode* slow = head;
+        if(head==nullptr)
+            return nullptr;
+        while(fast!=nullptr){
+            if(fast->val == slow->val){
+                fast = fast->next;
+            }else{
+                slow->next = fast;
+                slow = slow->next;
+                fast = fast->next;
+            }
+        }
+        slow->next = nullptr;
+        return head;
+    }
+};
+```
+记得要把慢指针最后断开，不然还会连着后面的节点。
+## [27. 移除元素](https://leetcode.cn/problems/remove-element/)
+```c
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int fast=0,slow=0;
+        while(fast!=nums.size()){
+            if(nums[fast]==val){
+                fast++;
+            }
+            else{
+                nums[slow++] = nums[fast];
+                fast++;
+            }
+        }
+        return slow;
+    }
+};
+```
+## [283. 移动零](https://leetcode.cn/problems/move-zeroes/)
+```c
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int slow=0,fast=0;
+        if(nums.size()==1)
+            return;
+        while(fast!=nums.size()){
+            if(nums[fast]==0){
+                fast++;
+            }else{
+                nums[slow++]=nums[fast];
+                fast++;
+            }
+        }
+        memset(&nums[slow], 0, (nums.size()-slow)*sizeof(int));
+    }
+};
+```
+## [167. 两数之和 II - 输入有序数组](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/)
+```c
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        int left=0,right=numbers.size()-1;
+        while(1){
+            int sum = numbers[left]+numbers[right];
+            if(sum==target){
+                return {left+1,right+1};
+            }else if(sum<target){
+                left++;
+            }else{
+                right--;
+            }
+        }
+
+    }
+};
+```
+## [344. 反转字符串](https://leetcode.cn/problems/reverse-string/)
+
+```c
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+        int left=0,right=s.size()-1;
+        
+        while(right>left){
+           char temp=s[left];
+           s[left] = s[right];
+           s[right] = temp; 
+           right--;
+           left++;
+        }
+    }
+};
+```
+## [303. 区域和检索 - 数组不可变](https://leetcode.cn/problems/range-sum-query-immutable/)
+该题主要是查询费时间，如果用循环，则每次查询时间复杂度O(N)，不行，所以可以在初始化的时候构建前缀表达式，这样后面查询的时候就快了。
+```c
+class NumArray {
+public:
+    NumArray(vector<int>& nums) {
+        pre_sum.resize(nums.size()+1);
+        for(int i=1;i<pre_sum.size();i++){
+            pre_sum[i] = pre_sum[i - 1] + nums[i - 1];
+        }
+    }
+    
+    int sumRange(int left, int right) {
+        return pre_sum[right+1]-pre_sum[left];
+    }
+private:
+    vector<int> pre_sum;
+};
+```
+## [304. 二维区域和检索 - 矩阵不可变](https://leetcode.cn/problems/range-sum-query-2d-immutable/)
+```c
+class NumMatrix {
+private:
+    // 定义：preSum[i][j] 记录 matrix 中子矩阵 [0, 0, i-1, j-1] 的元素和
+    vector<vector<int>> preSum;
+    
+public:
+    NumMatrix(vector<vector<int>>& matrix) {
+        int m = matrix.size(), n = matrix[0].size();
+        if (m == 0 || n == 0) return;
+        // 构造前缀和矩阵
+        preSum = vector<vector<int>>(m + 1, vector<int>(n + 1));
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                // 计算每个矩阵 [0, 0, i, j] 的元素和
+                preSum[i][j] = preSum[i-1][j] + preSum[i][j-1] + matrix[i - 1][j - 1] - preSum[i-1][j-1];
+            }
+        }
+    }
+    
+    // 计算子矩阵 [x1, y1, x2, y2] 的元素和
+    int sumRegion(int x1, int y1, int x2, int y2) {
+        // 目标矩阵之和由四个相邻矩阵运算获得
+        return preSum[x2+1][y2+1] - preSum[x1][y2+1] - preSum[x2+1][y1] + preSum[x1][y1];
+    }
+};
+```
+这类前缀和的题，创建前缀和数组的时候可以把前缀和数组长度开大1，这样后面计算相减的时候可以比较简单，不用考虑边界条件。
+## [1109. 航班预订统计](https://leetcode.cn/problems/corporate-flight-bookings/)
+```c
+class Solution {
+private:
+    vector<int> diff;
+public:
+    void diff_add(vector<int> &booking){
+        diff[booking[0]-1]  += booking[2];
+        if(booking[1]<diff.size())
+            diff[booking[1]]    -= booking[2];
+    }
+    vector<int> diff2normal(vector<int> &diff){
+        vector<int> normal = diff;
+        for(int i=1; i<diff.size(); i++){
+            normal[i] = diff[i]+normal[i-1];
+        }
+        return normal;
+    }
+    vector<int> corpFlightBookings(vector<vector<int>>& bookings, int n) {
+        diff = vector<int>(n,0);
+        for(int i=0; i<bookings.size(); i++){
+            diff_add(bookings[i]);
+        }
+        return diff2normal(diff);
+    }
+};
+```
+使用差分数组，画画图就懂了
+## [1094. 拼车](https://leetcode.cn/problems/car-pooling/)
+```c
+class Solution {
+private:
+    vector<int> diff;
+public:
+    void diff_add(vector<int> &trip){
+        diff[trip[1]]  += trip[0];
+        if(trip[2]<diff.size())
+            diff[trip[2]]    -= trip[0];
+    }
+    vector<int> diff2normal(vector<int> &diff){
+        vector<int> normal = diff;
+        for(int i=1; i<diff.size(); i++){
+            normal[i] = diff[i]+normal[i-1];
+        }
+        return normal;
+    }
+    bool carPooling(vector<vector<int>>& trips, int capacity) {
+        int max = -1;
+        for(int i=0; i<trips.size(); i++){
+            if(trips[i][2]>max)
+                max = trips[i][2];
+        }
+
+        diff.resize(max);
+        
+        for(int i=0; i<trips.size(); i++)
+            diff_add(trips[i]);
+
+        vector<int> normal = diff2normal(diff);
+        for(int i=0; i<normal.size(); i++){
+            if(normal[i]>capacity)
+                return false;
+        }
+        return true;
+
+    }
+};
+```
+## [48. 旋转图像](https://leetcode.cn/problems/rotate-image/)
+二维矩阵顺时针旋转，可以看作先转置，再把列互换。
+```c
+class Solution {
+public:
+    void Trans(vector<vector<int>> &matrix){
+        for(int i=0; i<matrix.size(); i++)
+            for(int j=i; j<matrix[0].size(); j++){
+                swap(matrix[i][j],matrix[j][i]);
+            }
+    }
+    void Mirror(vector<vector<int>>& matrix){
+        for(int i=0; i<matrix[0].size()/2; i++)
+            for(int j=0; j<matrix.size(); j++){
+                swap(matrix[j][i], matrix[j][matrix[0].size()-i-1]);
+            }
+    }
+    void rotate(vector<vector<int>>& matrix) {
+        Trans(matrix);
+        Mirror(matrix);
+    }
+};
+```
+## [59. 螺旋矩阵 II](https://leetcode.cn/problems/spiral-matrix-ii/)
+通过两个标志位行和列，每次遍历一行后，把列-1，遍历一列后，把行-1.这样就可以实现螺旋遍历。
+```cpp
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+    #define mrignt  0
+    #define mdown   1
+    #define mleft   2
+    #define mup     3
+
+        int state = mrignt;
+        int h = n;
+        int z = n;
+
+        int x = 0, y = 0;
+        int start = 1;
+        vector<vector<int>> matrix(n);
+        for(int i=0;i<n;i++)
+            matrix[i].resize(n);
+
+        matrix[0][0]=1;
+        int phase = 1;
+
+        while (1) {
+            switch (state) {
+            case mrignt:
+                if (start == 1) {
+                    start = 0;
+                    for (int i = 0; i < h - 1; i++) {
+                        matrix[x][++y]=++phase;
+                    }
+                }
+                else {
+                    for (int i = 0; i < h; i++) {
+                        matrix[x][++y]=++phase;
+                    }
+                }
+                z--;
+                state = mdown;
+                break;
+            case mdown:
+                for (int i = 0; i < z; i++) {
+                    matrix[++x][y] = ++phase;
+                }
+                state = mleft;
+                h--;
+                break;
+            case mleft:
+                for (int i = 0; i < h; i++) {
+                    matrix[x][--y] = ++phase;
+                }
+                state = mup;
+                z--;
+                break;
+            case mup:
+                for (int i = 0; i < z; i++) {
+                    matrix[--x][y] = ++phase;
+                }
+                state = mrignt;
+                h--;
+                break;
+            }
+            if (h == 0 || z == 0)
+                return matrix;
+        }
+
+    }
+};
+```
+## [76. 最小覆盖子串](https://leetcode.cn/problems/minimum-window-substring/)
+使用滑动窗口，要考虑窗口什么时候放大，什么时候缩小。
+```cpp
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        unordered_map <char,int> need, windows;
+        int left=0, right=0, valid=0, start=0, len=INT_MAX;
+        
+        //初始化需求表
+        for (auto c : t)
+            need[c]++;
+
+        //维护滑动窗口
+        while (right < s.size()) {
+            char c = s[right];
+            right++;
+            if (need.count(c)) {      //如果属于需求，压入滑动窗口
+                windows[c]++;
+                if (windows[c] == need[c])
+                    valid++;    //如果窗口中某字符出现次数等于need中该字符出现次数，valid++
+            }
+
+            while (valid == need.size()) {  //找到子串
+                if (right - left < len) {   //更新最小子串
+                    start = left;
+                    len = right - left;
+                }
+                char c = s[left];           
+                if (need.count(c)) {
+                    windows[c]--;
+                    if (windows[c] < need[c]) {
+                        valid--;
+                    }
+                }
+
+                left++;
+                
+            }
+
+
+        }
+        if (len == INT_MAX)
+            return "";
+        else
+            return s.substr(start,len);
+    }
+};
+```
+需要注意的是，unordered_map中，直接使用[]索引，会添加该索引项，单纯想判断是否存在某项的话，应该用count()方法。
+## [567. 字符串的排列](https://leetcode.cn/problems/permutation-in-string/)
+同样使用滑动窗口，只是一直把窗口大小保持为s1的长度
+```cpp
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        int left = 0, right = 0, valid = 0;
+        unordered_map<char, int> need, windows;
+
+        for (auto c : s1) need[c]++;
+        
+        while (right < s2.size()) {
+            char c = s2[right];
+            if (need.count(c)) {
+                windows[c]++;
+                if (windows[c] == need[c])
+                    valid++;
+            }
+            right++;
+
+            while (right - left >= s1.size()) {
+                char c = s2[left];
+                if (valid == s1.size())
+                    return true;
+                
+                if (need.count(c)) {
+                    windows[c]--;
+                    valid--;
+                }  
+                left++;
+            }
+        
+        }
+        return false;
+    }
+};
+```
+
+## [438. 找到字符串中所有字母异位词](https://leetcode.cn/problems/find-all-anagrams-in-a-string/)
+```cpp
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        vector<int> res;
+        int left=0, right=0, valid=0;
+        unordered_map<char, int> need, windows;
+        for(auto c:p) need[c]++;
+        
+        while(right<s.size()){
+            char c = s[right];
+            if(need.count(c)){
+                windows[c]++;
+                if(need[c]==windows[c])
+                    valid++;
+            }
+
+            right++;
+
+            while(right-left == p.size()){
+                char c = s[left];
+
+                if(valid==need.size())
+                    res.push_back(left);
+
+                left++;
+
+                if(need.count(c)){
+                    if(windows[c]==need[c])
+                        valid--;
+                    windows[c]--;
+                }
+
+
+            }
+        }
+        return res;
+    }
+};
+```
+## [3. 无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
+与前面稍有不同，这个题主要是要考虑清楚，一旦right重复了，left要一直递增到不重复为止，前面的就都废了。
+```cpp
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int left=0, right=0,res=0;
+        unordered_map<char, int> windows;
+
+        while(right<s.size()){
+            char c = s[right];
+            right++;
+            windows[c]++;
+
+            
+            while(windows[c]>1){
+                char d = s[left];
+                left++;
+                windows[d]--;
+            }
+            res = max(res,right-left);
+
+        }
+        return res;
+    }
+};
+```
+## [704. 二分查找](https://leetcode.cn/problems/binary-search/)
+```cpp
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int left=0,mid=0;
+        int right = nums.size() - 1;
+        while(right>=left){
+            mid = left+(right-left)/2;
+            if(nums[mid]==target)
+                return mid;
+            else if(nums[mid]>target)
+                right=mid-1;
+            else if(nums[mid]<target)
+                left=mid+1;
+        }
+        return -1;
+    }
+};
+```
+`int right = nums.size() - 1;`这句含义是搜索区间为左闭右闭区间，可以直接索引区间边界。
+`mid = left+(right-left)/2;`这句含义是找区间中点，不用`(right+left)/2`是因为容易溢出。
+`right=mid-1;`减一是因为前面已经确定过mid不是target，而且是闭区间，所以可以索引mid
