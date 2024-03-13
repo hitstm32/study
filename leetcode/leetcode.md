@@ -735,3 +735,100 @@ public:
     }
 };
 ```
+## [104. 二叉树的最大深度](https://leetcode.cn/problems/maximum-depth-of-binary-tree/)
+最大深度有几种解法，可以前序遍历，找一个外部变量存储最大深度和当前深度，也可以后序遍历，从枝叶部开始返回，每次返回+1并判断左支和右支哪个更深，从而得到最大深度。
+```cpp
+class Solution {
+public:
+    int depth=0;
+    int max;
+    void tranverse(TreeNode* root){
+        if(!root)
+            return;
+        
+        depth++;
+        if((root->left==nullptr)&&(root->right==nullptr))
+            max = depth>max?depth:max;
+        
+        tranverse(root->left);
+        tranverse(root->right);
+        depth--;
+    }
+    int maxDepth(TreeNode* root) {
+        tranverse(root);
+        return max;
+    }
+};
+```
+## [144. 二叉树的前序遍历](https://leetcode.cn/problems/binary-tree-preorder-traversal/)
+```cpp
+class Solution {
+public:
+    vector <int> res;
+    void traverse(TreeNode* root){
+        if(!root)
+            return;
+        res.push_back(root->val);
+        traverse(root->left);
+        traverse(root->right);
+        return;
+    }
+    vector<int> preorderTraversal(TreeNode* root) {
+        traverse(root);
+        return res;
+    }
+};
+```
+## [543. 二叉树的直径](https://leetcode.cn/problems/diameter-of-binary-tree/)
+这道题首先明确直径的含义，直径就是整个叶子节点之间最短距离的最大值，所以第一个思路就是遍历整个二叉树，在节点上再进行遍历，获取左侧枝子的最深深度，和右侧枝子的最深深度，然后更新最大直径。这样慢，慢是因为前序遍历无法直接获取到叶子节点的信息（因为还没遍历到），所以只好采用再调用一个递归函数来获取整个枝子的信息，所以慢：
+```cpp
+class Solution {
+public:
+    int max_width=0;
+    void traverse(TreeNode* root){
+        if(!root)
+            return;
+        
+        int left = max_depth(root->left);
+        int right = max_depth(root->right);
+
+        max_width = max(max_width, left+right);
+
+        traverse(root->left);
+        traverse(root->right);        
+    }
+    int max_depth(TreeNode* root){
+       if(!root)
+        return 0;
+
+        int left_max = max_depth(root->left)+1;
+        int right_max = max_depth(root->right)+1;
+        return max(left_max,right_max); 
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        traverse(root);
+        return max_width;
+    }
+};
+```
+改进办法是利用后序遍历，后序遍历的时候，已经完成了整个枝遍历，所以可以获取到叶子的信息。
+```cpp
+class Solution {
+public:
+    int max_width=0;
+    int traverse(TreeNode* root){
+        if(!root)
+            return 0;
+        int left = traverse(root->left);
+        int right = traverse(root->right);
+
+        max_width = max(max_width, left+right);
+
+        return max(left,right)+1;
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        traverse(root);
+        return max_width;
+    }
+};
+```
