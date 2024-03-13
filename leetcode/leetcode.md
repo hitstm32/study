@@ -663,3 +663,75 @@ public:
 `int right = nums.size() - 1;`这句含义是搜索区间为左闭右闭区间，可以直接索引区间边界。
 `mid = left+(right-left)/2;`这句含义是找区间中点，不用`(right+left)/2`是因为容易溢出。
 `right=mid-1;`减一是因为前面已经确定过mid不是target，而且是闭区间，所以可以索引mid
+
+## [380. O(1) 时间插入、删除和获取随机元素](https://leetcode.cn/problems/insert-delete-getrandom-o1/)
+O1插入，删除很容易想到哈希表，但是如果想获取所及元素O1就不能了，因为哈希表不是顺序容器，没法直接访问，所以需要再开个数组，用来获取随机元素。
+```cpp
+class RandomizedSet {
+public:
+    vector<int> nums;
+    unordered_map <int, int> val2idx; 
+    RandomizedSet() {
+    }
+    
+    bool insert(int val) {
+        if(val2idx.count(val)){
+            return false;
+        }
+        val2idx[val] = nums.size();
+        nums.push_back(val);
+        return true;
+    }
+    
+    bool remove(int val) {
+        if(!val2idx.count(val)){
+            return false;
+        }
+        int idx_val = val2idx[val];
+        val2idx[nums.back()] = idx_val;
+        nums[idx_val] = nums.back();
+        nums.pop_back();
+        val2idx.erase(val);
+        return true;
+    }
+    
+    int getRandom() {
+        return nums[random()%nums.size()];
+    }
+};
+```
+## [710. 黑名单中的随机数](https://leetcode.cn/problems/random-pick-with-blacklist/)
+同样是利用哈希表来实现O1读。这里不用数组，只是实现一个映射在数字末尾虚拟出一个白名单，是因为如果用数组存储一个白名单的话，n大，如果这时候黑名单很小，那白名单就会很大（想想n=1000,blacklist={0}，那白名单size=999）利用率很低，所以不能把白名单存储下来。
+```cpp
+class Solution {
+public:
+    unordered_map<int, int> mapping;
+    int w;
+    Solution(int n, vector<int>& blacklist) {
+        for(auto b:blacklist) mapping[b]=0;
+        int last = n-1;
+        w=n-blacklist.size();
+        for(auto b:blacklist){
+            if(b<n-blacklist.size()){
+                //如果在前部分，就映射
+                while(mapping.count(last)){
+                    //如果目前的last在黑名单，就把last左移
+                    last--;
+                }
+                mapping[b]=last;
+                last--;
+            }else{
+                //在后半部分，不用映射
+            }
+        }
+    }
+    
+    int pick() {
+        int r = random()%w;
+        if(mapping.count(r)){
+            return mapping[r];
+        }
+        return r;
+    }
+};
+```
