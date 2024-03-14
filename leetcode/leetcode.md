@@ -849,4 +849,67 @@ public:
     }
 };
 ```
-反转二叉树，可以用前序遍历，遍历每一个节点，把其子节点交换，但是此方法较慢。
+反转二叉树，可以用前序遍历，遍历每一个节点，把其子节点交换。也可以采用后序遍历，swap后直接返回当前root。
+```cpp
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        if(!root) return nullptr;
+
+        TreeNode* left = invertTree(root->left);
+        TreeNode* right = invertTree(root->right);
+
+        swap(root->left, root->right);
+        return root;
+    }
+};
+```
+## [116. 填充每个节点的下一个右侧节点指针](https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/)
+```cpp
+class Solution {
+public:
+    Node* connect(Node* root) {
+        if(root==nullptr) return root;
+        traverse(root->left,root->right);
+        return root;
+    }
+    void traverse(Node* left, Node* right){
+        if((left==nullptr)||(right==nullptr)) return;
+
+        left->next = right;
+
+        traverse(left->left,left->right);
+        traverse(right->left,right->right);
+        traverse(left->right,right->left);
+    }
+};
+```
+![[Pasted image 20240314094230.png]]
+不仅要对45，67之间链接，还要对56之间连接，所以才写成以上形式。
+## [114. 二叉树展开为链表](https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/)
+这个题用前序遍历不好办，因为不能新建个链表，必须原位更新，可以使用后序遍历，正向思维，先把左子树和右子树分别拉平，再把右子树接到左子树末端，最后把左子树清空。
+```cpp
+class Solution {
+public:
+    void flatten(TreeNode* root) {
+        if(!root)   return;
+        //先把左右子树分别拉平
+        flatten(root->left);
+        flatten(root->right);
+        
+        //先找到左子树末端
+        TreeNode* left_end;
+        left_end = root->left;
+        if(left_end){ //如果左子树不为空，则执行，如果左子树本身为空，就不用管了
+            while(left_end->right){
+                left_end = left_end->right;
+            }
+            //把右子树接到左子树末端
+            left_end->right = root->right;
+            //把左子树移动到右子树，并把左子树清空
+            root->right =root->left;
+            root->left=nullptr;
+        }
+    }
+};
+```
