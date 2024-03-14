@@ -832,3 +832,21 @@ public:
     }
 };
 ```
+## [226. 翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
+```cpp
+class Solution {
+public:
+    void traverse(TreeNode* root){
+        if(!root)   return;
+        
+        swap(root->left,root->right);
+        traverse(root->left);
+        traverse(root->right);
+    }
+    TreeNode* invertTree(TreeNode* root) {
+        traverse(root);
+        return root;
+    }
+};
+```
+反转二叉树，可以用前序遍历，遍历每一个节点，把其子节点交换，但是此方法较慢。
