@@ -913,5 +913,32 @@ public:
     }
 };
 ```
+## [654. 最大二叉树](https://leetcode.cn/problems/maximum-binary-tree/)
+牛逼！独立写出了这个递归，其实思想简单，就考虑当下就可以，最近题没白刷
+```cpp
+class Solution {
+public:
+    TreeNode* traverse(vector<int>& nums, int start, int end){
+        int max=0,max_idx=0;
+        TreeNode *res = new TreeNode();
+        if(start>=end) return nullptr;
+        
+        for(int i=start;i<end;i++)
+            if(nums[i]>=max){
+                max = nums[i];
+                max_idx = i;
+            }
+        
+        TreeNode* left_tree     = traverse(nums, start, max_idx); //构造左子树
+        TreeNode* right_tree    = traverse(nums, max_idx+1, end); //构造右子树
 
-s
+        res->val = max;
+        res->left = left_tree;
+        res->right = right_tree;
+        return res;
+    }
+    TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
+        return traverse(nums, 0, nums.size());
+    }
+};
+```
