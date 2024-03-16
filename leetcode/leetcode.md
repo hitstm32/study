@@ -997,3 +997,70 @@ public:
     }
 };
 ```
+## [106. 从中序与后序遍历序列构造二叉树](https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)
+```cpp
+class Solution {
+public:
+    unordered_map<int, int> in_map;
+    TreeNode* builtTree(vector<int>& inorder, int in_start, int in_end, vector<int>& postorder, int post_start, int post_end){
+        if((post_start>post_end)||(in_start>in_end)) return nullptr;
+        int root_val = postorder[post_end];
+        int in_root_idx = in_map[root_val];
+
+        
+        TreeNode* root_left  = builtTree(inorder,in_start,in_root_idx-1,postorder,post_start,post_start-1+(in_root_idx-in_start));
+        TreeNode* root_right = builtTree(inorder,in_root_idx+1,in_end,postorder,post_start+(in_root_idx-in_start),post_end-1);
+        
+        TreeNode* root = new TreeNode(root_val, root_left, root_right);
+        return root;
+    }
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        for(int i=0;i<inorder.size(); i++)
+            in_map[inorder[i]] = i;
+            
+        return builtTree(inorder,0,inorder.size()-1, postorder, 0, postorder.size()-1);
+    }
+};
+```
+## [222. 完全二叉树的节点个数](https://leetcode.cn/problems/count-complete-tree-nodes/)
+是一颗完全二叉树，可能有奇技淫巧，但是先实现最简单的吧：
+```cpp
+class Solution {
+public:
+    int num=0;
+    int countNodes(TreeNode* root) {
+        if(!root) return 0;
+
+        int a = countNodes(root->left);
+        int b = countNodes(root->right);
+        return a+b+1;
+    }
+};
+```
+改进一下，在递归每个节点时，判断其左右子树的叶子深度是不是一致的，如果一致，说明这个子节点对应的子树是满二叉树，可以直接用指数来求。
+```cpp
+class Solution {
+public:
+    int num=0;
+    int countNodes(TreeNode* root) {
+        if(!root) return 0;
+        int dl=0, dr=0;
+        TreeNode* probe = root;
+        while(probe){
+            dl++;
+            probe = probe->left;
+        }
+        while(probe){
+            dr++;
+            probe = probe->right;
+        }
+        if(dr==dl){
+            return pow(2, dl)-1;//是满二叉树，直接用指数求
+        }else{
+            int a = countNodes(root->left);
+            int b = countNodes(root->right);
+            return a+b+1;
+        }
+    }
+};
+```
