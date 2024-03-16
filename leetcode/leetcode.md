@@ -942,3 +942,33 @@ public:
     }
 };
 ```
+## [105. 从前序与中序遍历序列构造二叉树](https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+这道题的思路就是利用两种遍历模式，首先在前序遍历中找根节点，然后在后序遍历中分成左右子树，注意递归函数传入的参数：
+```cpp
+class Solution {
+public:
+    TreeNode* builtTree(vector<int>& preorder, int pre_start, int pre_end, vector<int>& inorder, int in_start, int in_end){
+        if((pre_start>=pre_end)||(in_start>=in_end)) return nullptr;
+        int root_val = preorder[pre_start];
+        int in_root_idx;
+        for(int i=in_start; i<in_end; i++){
+            if(root_val == inorder[i]){
+                in_root_idx = i;
+            }
+        }
+
+
+
+
+
+        TreeNode* root_left  = builtTree(preorder,pre_start+1,(pre_start+1+(in_root_idx-in_start)),inorder,in_start,in_root_idx);
+        TreeNode* root_right = builtTree(preorder,(pre_start+1+(in_root_idx-in_start)),pre_end,inorder,in_root_idx+1,in_end);
+        
+        TreeNode* root = new TreeNode(root_val, root_left, root_right);
+        return root;
+    }
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        return builtTree(preorder,0,preorder.size(),inorder,0,inorder.size());
+    }
+};
+```
