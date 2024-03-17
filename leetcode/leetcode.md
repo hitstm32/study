@@ -1064,3 +1064,142 @@ public:
     }
 };
 ```
+## [230. 二叉搜索树中第K小的元素](https://leetcode.cn/problems/kth-smallest-element-in-a-bst/)
+二叉搜索树的特性：中序遍历是升序列。
+![[Pasted image 20240317101806.png]]
+比如这就是个二叉搜索树。所以这个题直接中序遍历，找倒数第k小的就行。
+```cpp
+class Solution {
+public:
+    int val=0;
+    int n=0;
+    void traverse(TreeNode* root){
+        if(!root){
+            return;
+        }
+
+        traverse(root->left);
+        if(--n==0){
+            val = root->val;
+        }
+        traverse(root->right);
+    }
+    int kthSmallest(TreeNode* root, int k) {
+        n=k;
+        traverse(root);
+        return val;
+    }
+};
+```
+## [538. 把二叉搜索树转换为累加树](https://leetcode.cn/problems/convert-bst-to-greater-tree/)
+累加树就是把比某节点值大的节点加到这个小节点上：
+![[Pasted image 20240317104619.png]]
+解决办法还是中序遍历，但是不能用“左中右”中序遍历，应该用“右中左”。这样从做大的节点开始遍历，遍历到最小的节点，遍历过程中累加即可。
+```cpp
+class Solution {
+    int adder=0;
+    void traverse(TreeNode* root){
+        if(!root)return;
+        
+        traverse(root->right);
+        adder+=root->val;
+        root->val=adder;
+        traverse(root->left);
+    }
+public:
+    TreeNode* bstToGst(TreeNode* root) {
+        traverse(root);
+        return root;
+    }
+};
+```
+
+## [98. 验证二叉搜索树](https://leetcode.cn/problems/validate-binary-search-tree/)
+有点难，二叉搜索树不仅仅要从左到右逐渐增大，这种情况是不行的：
+![[Pasted image 20240317111933.png]]
+也就是说右子树上的每个节点必须别root大，所以直接在每个节点判断左右子树是不是符合规则不够，需要判断该节点和上上节点的关系，并传递下去。
+```cpp
+class Solution {
+public:
+    bool traverse(TreeNode* root, TreeNode* min, TreeNode* max){
+        if(!root) return true;
+        
+        if(min&&(root->val<=min->val)) return false;
+        if(max&&(root->val>=max->val)) return false;
+
+        return traverse(root->left,min,root)&&traverse(root->right,root, max);
+    }
+    bool isValidBST(TreeNode* root) {
+        return traverse(root, nullptr, nullptr);
+    }
+};
+```
+所以该解法就是把min和max传递下来，让节点不仅和根上一个根节点比较大小，还跟上上个节点比大小。把大小关系传递了下来。
+## [700. 二叉搜索树中的搜索](https://leetcode.cn/problems/search-in-a-binary-search-tree/)
+```cpp
+class Solution {
+public:
+    TreeNode* searchBST(TreeNode* root, int val) {
+        if(!root) return nullptr;
+        if(root->val<val) return searchBST(root->right, val);
+        if(root->val>val) return searchBST(root->left, val);
+        return root;
+    }
+};
+```
+## [701. 二叉搜索树中的插入操作](https://leetcode.cn/problems/insert-into-a-binary-search-tree/)
+插入元素比较简单，就是通过寻找合适的位置，然后在该位置新建一个节点并将root指向该节点。
+```cpp
+class Solution {
+public:
+    TreeNode* insertIntoBST(TreeNode* root, int val) {
+        if(!root){
+            return new TreeNode(val);
+        }else{
+            if(root->val<val){
+                root->right = insertIntoBST(root->right, val);
+            }
+            if(root->val>val){
+                root->left = insertIntoBST(root->left, val);
+            }
+            return root;
+        }
+    }
+};
+```
+# [450. 删除二叉搜索树中的节点](https://leetcode.cn/problems/delete-node-in-a-bst/)
+有点没懂，回头再看看这个题
+```cpp
+class Solution {
+public:
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if(!root) return nullptr;
+        
+        if(root->val==key){
+            if(root->left==nullptr) return root->right;
+            if(root->right==nullptr) return root->left;
+            
+            TreeNode* minNode = findmin(root->right);
+            root->right = deleteNode(root->right, minNode->val);
+            minNode->left = root->left;
+            minNode->right = root->right;
+            root = minNode;
+        }else if(root->val>key){
+            root->left = deleteNode(root->left, key);
+        }else if(root->val<key){
+            root->right = deleteNode(root->right, key);
+        }
+        return root;
+    }
+
+    TreeNode* findmin(TreeNode* root){
+        if(!root) return nullptr;
+        TreeNode* res=root;
+
+        while(res->left){
+            res = res->left;
+        }
+        return res;
+    }
+};
+```
