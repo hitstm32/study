@@ -1203,3 +1203,75 @@ public:
     }
 };
 ```
+## [232. 用栈实现队列](https://leetcode.cn/problems/implement-queue-using-stacks/)
+用两个栈，top的时候把一个栈中的数据在另一个栈中倒一下，把顺序调换过来
+```cpp
+class MyQueue {
+public:
+    stack<int> s1,s2;
+    MyQueue() {
+    }
+    
+    void push(int x) {
+        s1.push(x);
+    }
+
+    int peek() {
+        if(s2.empty()){
+            while(!s1.empty()){
+                s2.push(s1.top());
+                s1.pop();
+            }
+        }
+        return s2.top();        
+    }
+
+    int pop() {
+        int t = peek();
+        s2.pop();
+        return t;
+    }
+    
+    bool empty() {
+        if(s1.empty()&&s2.empty()) return 1;
+        return 0;
+    }
+};
+```
+## [225. 用队列实现栈](https://leetcode.cn/problems/implement-stack-using-queues/)
+```cpp
+class MyStack {
+public:
+    list<int> l1;
+    int num=0;
+    MyStack() {
+    }
+    
+    void push(int x) {
+        l1.push_front(x);
+        num++;
+    }
+    
+    
+    int top() {
+        if(num)
+            return l1.front();
+        else return NULL;
+    }
+
+    int pop() {
+        if(num){
+            int t = l1.front();
+            l1.pop_front();
+            num--;
+            return t;
+        }
+        return NULL;
+    }
+        
+    bool empty() {
+        if(num) return false;
+        return true;
+    }
+};
+```
