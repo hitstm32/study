@@ -1275,3 +1275,218 @@ public:
     }
 };
 ```
+## [797. 所有可能的路径](https://leetcode.cn/problems/all-paths-from-source-to-target/)
+图遍历，思路不复杂，就是每进入一个节点，就压栈，出节点时就出栈，这样当找到目标节点时，栈里村的就是所需路径了。
+```cpp
+class Solution {
+public:
+    vector<vector<int>> res;
+    void traverse(vector<vector<int>>& graph, int s, vector<int> &path){
+        int n = graph.size();
+        path.push_back(s);
+
+        if(s==n-1){
+            res.push_back(path);
+        }
+        
+        for(auto i:graph[s]){
+            traverse(graph, i, path);
+        }
+        path.pop_back();
+
+    }
+
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
+        vector<int> path;
+        traverse(graph, 0, path);
+        return res;
+    }
+};
+```
+## [496. 下一个更大元素 I](https://leetcode.cn/problems/next-greater-element-i/)
+```cpp
+class Solution {
+public:
+    vector<int> res2;
+    stack<int>  stack2;
+    vector<int> res1;
+    unordered_map<int,int> nums2_map;
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        int n = nums2.size();
+        res2.resize(n);
+        res1.resize(nums1.size());
+
+        //遍历nums2，寻找nums2的下一个更大元素
+        for(int i=n-1; i>=0; i--){
+            
+            while(!stack2.empty()){
+                if(nums2[i]<stack2.top()){ //如果找到了右侧第一个最大元素
+                    res2[i] = stack2.top();
+                    break;
+                    //最大元素很大，留着备用，不弹出
+                }else{
+                    //暂时没找到最大元素，那就要把栈里的小元素一一弹出
+                    stack2.pop();
+                }
+            }
+            if(stack2.empty()){
+                res2[i] = -1;
+            }
+
+            //不管大还是小，都压入栈
+            stack2.push(nums2[i]);
+            nums2_map[nums2[i]] = res2[i];
+        }
+
+        for(int i=0; i<nums1.size(); i++){
+            res1[i] = nums2_map[nums1[i]];
+        }
+        return res1;
+    }
+};
+```
+## [739. 每日温度](https://leetcode.cn/problems/daily-temperatures/)
+```cpp
+class Solution {
+public:
+    stack<int> stack1;
+    vector<int> res;
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+        int n = temperatures.size();
+        res.resize(n);
+
+        for(int i=n-1; i>=0; i--){
+            while(!stack1.empty()){
+                if(temperatures[i] < temperatures[stack1.top()]){
+                    //找到了更大元素
+                    res[i] = stack1.top()-i;
+                    break;
+                }else{
+                    stack1.pop();
+                }
+            }
+            if(stack1.empty()){
+                res[i] = 0;
+            }
+            stack1.push(i);
+        }
+        return res;
+    }
+};
+```
+## [503. 下一个更大元素 II](https://leetcode.cn/problems/next-greater-element-ii/)
+基本思想就是搞一个两倍长度的nums数组，和res数组，最后返回res数组的前一半，但是太费内存，简单的解决办法就是把nums遍历两遍，用%访问num即可
+```cpp
+class Solution {
+public:
+    vector<int> res2;
+    stack<int>  stack2;
+    vector<int> nextGreaterElements(vector<int>& nums) {
+        int n = nums.size();
+        res2.resize(n);
+        for(int i=2*n-1; i>=0; i--){
+            
+            while(!stack2.empty()){
+                if(nums[i%n]<stack2.top()){ //如果找到了右侧第一个最大元素
+                    res2[i%n] = stack2.top();
+                    break;
+                    //最大元素很大，留着备用，不弹出
+                }else{
+                    //暂时没找到最大元素，那就要把栈里的小元素一一弹出
+                    stack2.pop();
+                }
+            }
+            if(stack2.empty()){
+                res2[i%n] = -1;
+            }
+
+            //不管大还是小，都压入栈
+            stack2.push(nums[i%n]);
+        } 
+        return res2;
+    }
+};
+```
+## [509. 斐波那契数](https://leetcode.cn/problems/fibonacci-number/)
+```cpp
+//递归
+class Solution {
+public:
+unordered_map<int, int> fib_map;
+    int a=0, b=0;
+    int fib(int n) {
+        if(n==0||n==1) return n;
+        if(fib_map.count(n))
+            return fib_map[n];
+        else
+            fib_map[n] = fib(n-1)+fib(n-2);
+            
+        return fib_map[n];
+    }
+};
+//迭代
+class Solution {
+public:
+unordered_map<int, int> fib_map;
+    int fib(int n) {
+        if(n==0||n==1) return n;
+        vector<int> dp(n+1);
+        dp[0] = 0;
+        dp[1] = 1;
+        for(int i=2; i<=n; i++){
+            dp[i] = dp[i-1]+dp[i-2];            
+        }
+        return dp[n];
+    }
+};
+
+//迭代(空间O1)
+class Solution {
+public:
+unordered_map<int, int> fib_map;
+    int fib(int n) {
+        if(n==0||n==1) return n;
+        int a = 0;
+        int b = 1;
+        int c;
+        for(int i=2; i<=n; i++){
+            c = a+b;
+            a=b;
+            b=c;         
+        }
+        return c;
+    }
+};
+```
+
+## [322. 零钱兑换](https://leetcode.cn/problems/coin-change/)
+```cpp
+class Solution {
+public:
+unordered_map<int, int> memo;
+int coinChange(vector<int>& coins, int amount) {
+    // 题目要求的最终结果是 dp(amount)
+    return dp(coins, amount);
+}
+
+// 定义：要凑出金额 n，至少要 dp(coins, n) 个硬币
+int dp(vector<int>& coins, int amount) {
+    // base case
+    if (amount == 0) return 0;
+    if (amount < 0) return -1;
+    if(memo.count(amount)) return memo[amount];
+    int res = INT_MAX;
+    for (int coin : coins) {
+        // 计算子问题的结果
+        int subProblem = dp(coins, amount - coin);
+        // 子问题无解则跳过
+        if (subProblem == -1) continue;
+        // 在子问题中选择最优解，然后加一
+        res = min(res, subProblem);
+    }
+    memo[amount] = res == INT_MAX ? -1 : res+1;
+    return res == INT_MAX ? -1 : res+1;
+}
+};
+```
+
