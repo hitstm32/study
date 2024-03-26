@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "哈工大操作系统/内存分区与分页.md",
+                "file": "哈工大操作系统/3.3多级页表和快表.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "哈工大操作系统/内存分区与分页.md",
+                "file": "哈工大操作系统/3.3多级页表和快表.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "哈工大操作系统/内存分区与分页.md",
+                "file": "哈工大操作系统/3.3多级页表和快表.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "哈工大操作系统/内存分区与分页.md"
+                "file": "哈工大操作系统/3.3多级页表和快表.md"
               }
             }
           }
@@ -149,6 +149,8 @@
   },
   "active": "0e246f1e6eb98772",
   "lastOpenFiles": [
+    "哈工大操作系统/3.2内存分区与分页.md",
+    "哈工大操作系统/3.3多级页表和快表.md",
     "哈工大操作系统/img/Pasted image 20240322204407.png",
     "哈工大操作系统/img/Pasted image 20240322204126.png",
     "哈工大操作系统/img/Pasted image 20240322164656.png",
@@ -156,7 +158,6 @@
     "哈工大操作系统/img/Pasted image 20240322164327.png",
     "哈工大操作系统/img/Pasted image 20240322162840.png",
     "哈工大操作系统/3.1 内存使用与分段.md",
-    "哈工大操作系统/内存分区与分页.md",
     "leetcode/leetcode.md",
     "哈工大操作系统/img/Pasted image 20240321225700.png",
     "交换分区（swap）.md",
@@ -169,7 +170,6 @@
     "哈工大操作系统",
     "书/Linux内核/12.内存管理.md",
     "25项目/RapidIO.md",
-    "leetcode/img/Pasted image 20240317111933.png",
     "书/Linux内核/10.内核同步方法.md",
     "书/2cde5555451d4b7caafabace506ca1c8/09333f182691468d8ad14bc5780b09f5.pdf",
     "书/2cde5555451d4b7caafabace506ca1c8/92322264910141759df2b0449b97008e.pdf",
