@@ -17,3 +17,4 @@ XIlinx的SRIO IP核提供了三种接口，分别为IOPort，MessagePort和User-
 ![[Pasted image 20240312143546.png]]
 数据传输时序：
 ![[Pasted image 20240312145043.png]]
+
