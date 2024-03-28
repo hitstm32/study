@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "哈工大操作系统/3.4段页结合的实际内存管理.md",
+                "file": "哈工大操作系统/3.6内存换出.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "哈工大操作系统/3.4段页结合的实际内存管理.md",
+                "file": "哈工大操作系统/3.6内存换出.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "哈工大操作系统/3.4段页结合的实际内存管理.md",
+                "file": "哈工大操作系统/3.6内存换出.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "哈工大操作系统/3.4段页结合的实际内存管理.md"
+                "file": "哈工大操作系统/3.6内存换出.md"
               }
             }
           }
@@ -149,18 +149,20 @@
   },
   "active": "573d30b8866942a4",
   "lastOpenFiles": [
-    "哈工大操作系统/img/Pasted image 20240326180407.png",
-    "哈工大操作系统/img/Pasted image 20240326180036.png",
-    "哈工大操作系统/img/Pasted image 20240326180035.png",
-    "哈工大操作系统/img/Pasted image 20240326175709.png",
-    "哈工大操作系统/img/Pasted image 20240326175321.png",
-    "哈工大操作系统/img/Pasted image 20240326175318.png",
-    "哈工大操作系统/img/Pasted image 20240326175141.png",
-    "哈工大操作系统/img/Pasted image 20240326174246.png",
-    "哈工大操作系统/img/Pasted image 20240326172710.png",
-    "哈工大操作系统/3.4段页结合的实际内存管理.md",
+    "25项目/RapidIO.md",
+    "哈工大操作系统/3.6内存换出.md",
+    "哈工大操作系统/img/Pasted image 20240327110442 1.png",
+    "哈工大操作系统/img/Pasted image 20240327110442.png",
+    "哈工大操作系统/img/Pasted image 20240327104926.png",
+    "哈工大操作系统/img/Pasted image 20240327104635.png",
     "哈工大操作系统/3.3多级页表和快表.md",
-    "哈工大操作系统/img/Pasted image 20240326170050.png",
-    "哈工大操作系统/img/Pasted image 20240326170027 1.png"
+    "哈工大操作系统/img/Pasted image 20240327104052.png",
+    "哈工大操作系统/img/Pasted image 20240327103031.png",
+    "哈工大操作系统/img/Pasted image 20240327103028.png",
+    "哈工大操作系统/3.5内存换入-请求调页.md",
+    "哈工大操作系统/img/Pasted image 20240327101657.png",
+    "哈工大操作系统/img/Pasted image 20240327094415.png",
+    "哈工大操作系统/img/Pasted image 20240327094337.png",
+    "哈工大操作系统/3.4段页结合的实际内存管理.md"
   ]
 }
