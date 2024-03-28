@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "哈工大操作系统/3.6内存换出.md",
+                "file": "ML/PyTorch深度学习实践.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "3a99c155896a7da0",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "哈工大操作系统/3.6内存换出.md",
+                "file": "ML/PyTorch深度学习实践.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "哈工大操作系统/3.6内存换出.md",
+                "file": "ML/PyTorch深度学习实践.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "哈工大操作系统/3.6内存换出.md"
+                "file": "ML/PyTorch深度学习实践.md"
               }
             }
           }
@@ -149,20 +148,27 @@
   },
   "active": "573d30b8866942a4",
   "lastOpenFiles": [
-    "25项目/RapidIO.md",
-    "哈工大操作系统/3.6内存换出.md",
-    "哈工大操作系统/img/Pasted image 20240327110442 1.png",
-    "哈工大操作系统/img/Pasted image 20240327110442.png",
-    "哈工大操作系统/img/Pasted image 20240327104926.png",
-    "哈工大操作系统/img/Pasted image 20240327104635.png",
-    "哈工大操作系统/3.3多级页表和快表.md",
-    "哈工大操作系统/img/Pasted image 20240327104052.png",
-    "哈工大操作系统/img/Pasted image 20240327103031.png",
-    "哈工大操作系统/img/Pasted image 20240327103028.png",
+    "未命名.md",
+    "ML/PyTorch深度学习实践.md",
+    "哈工大操作系统/4.2键盘.md",
+    "ML",
+    "哈工大操作系统/img/Pasted image 20240328213359.png",
+    "哈工大操作系统/img/Pasted image 20240328213323.png",
+    "哈工大操作系统/img/Pasted image 20240328213232.png",
+    "哈工大操作系统/img/Pasted image 20240328213103.png",
+    "哈工大操作系统/img/Pasted image 20240328213002.png",
+    "哈工大操作系统/img/Pasted image 20240328212949.png",
+    "哈工大操作系统/img/Pasted image 20240328212829.png",
+    "哈工大操作系统/img/Pasted image 20240328211954.png",
+    "哈工大操作系统/img/Pasted image 20240328211800.png",
+    "哈工大操作系统/img/Pasted image 20240328211759.png",
+    "哈工大操作系统/4.1 IO与显示器.md",
+    "哈工大操作系统/3.6内存换出（swap分区）.md",
     "哈工大操作系统/3.5内存换入-请求调页.md",
-    "哈工大操作系统/img/Pasted image 20240327101657.png",
-    "哈工大操作系统/img/Pasted image 20240327094415.png",
-    "哈工大操作系统/img/Pasted image 20240327094337.png",
-    "哈工大操作系统/3.4段页结合的实际内存管理.md"
+    "哈工大操作系统/3.4段页结合的实际内存管理.md",
+    "哈工大操作系统/3.3多级页表和快表.md",
+    "哈工大操作系统/3.2内存分区与分页.md",
+    "哈工大操作系统/3.1 内存使用与分段.md",
+    "25项目/RapidIO.md"
   ]
 }
