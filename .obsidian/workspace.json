@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ML/PyTorch深度学习实践.md",
+                "file": "ML/反向传播.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "3a99c155896a7da0",
@@ -85,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ML/PyTorch深度学习实践.md",
+                "file": "ML/反向传播.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ML/PyTorch深度学习实践.md",
+                "file": "ML/反向传播.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ML/PyTorch深度学习实践.md"
+                "file": "ML/反向传播.md"
               }
             }
           }
@@ -148,8 +149,15 @@
   },
   "active": "573d30b8866942a4",
   "lastOpenFiles": [
+    "ML/梯度下降法.md",
+    "ML/反向传播.md",
+    "ML/img/Pasted image 20240329101923.png",
+    "ML/img/Pasted image 20240329100258.png",
+    "ML/img/Pasted image 20240329095402.png",
+    "ML/img/Pasted image 20240329091658.png",
+    "ML/img/Pasted image 20240329091642.png",
+    "ML/img",
     "未命名.md",
-    "ML/PyTorch深度学习实践.md",
     "哈工大操作系统/4.2键盘.md",
     "ML",
     "哈工大操作系统/img/Pasted image 20240328213359.png",
@@ -157,11 +165,6 @@
     "哈工大操作系统/img/Pasted image 20240328213232.png",
     "哈工大操作系统/img/Pasted image 20240328213103.png",
     "哈工大操作系统/img/Pasted image 20240328213002.png",
-    "哈工大操作系统/img/Pasted image 20240328212949.png",
-    "哈工大操作系统/img/Pasted image 20240328212829.png",
-    "哈工大操作系统/img/Pasted image 20240328211954.png",
-    "哈工大操作系统/img/Pasted image 20240328211800.png",
-    "哈工大操作系统/img/Pasted image 20240328211759.png",
     "哈工大操作系统/4.1 IO与显示器.md",
     "哈工大操作系统/3.6内存换出（swap分区）.md",
     "哈工大操作系统/3.5内存换入-请求调页.md",
