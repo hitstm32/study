@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "哈工大操作系统/5.4目录解析代码实现.md",
+                "file": "书/Linux设备驱动开发详解/2. Linux内核及内核编程.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "3a99c155896a7da0",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "哈工大操作系统/5.4目录解析代码实现.md",
+                "file": "书/Linux设备驱动开发详解/2. Linux内核及内核编程.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "哈工大操作系统/5.4目录解析代码实现.md",
+                "file": "书/Linux设备驱动开发详解/2. Linux内核及内核编程.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "哈工大操作系统/5.4目录解析代码实现.md"
+                "file": "书/Linux设备驱动开发详解/2. Linux内核及内核编程.md"
               }
             }
           }
@@ -149,10 +148,22 @@
   },
   "active": "573d30b8866942a4",
   "lastOpenFiles": [
+    "书/Linux设备驱动开发详解/1.Linux设备驱动概述及开发环境构建.md",
+    "书/Linux设备驱动开发详解/2. Linux内核及内核编程.md",
+    "书/Linux设备驱动开发详解/未命名 1.md",
+    "书/Linux设备驱动程序.pdf",
+    "书/Linux内核设计与实现.pdf",
+    "ML/pytorch线性回归.md",
+    "书/Linux设备驱动开发详解",
+    "哈工大操作系统/3.1 内存使用与分段.md",
+    "哈工大操作系统/3.3多级页表和快表.md",
+    "哈工大操作系统/3.4段页结合的实际内存管理.md",
+    "哈工大操作系统/5.4目录解析代码实现.md",
+    "哈工大操作系统/img/Pasted image 20240401232132.png",
+    "哈工大操作系统/img/Pasted image 20240401231106.png",
     "哈工大操作系统/img/Pasted image 20240401212216.png",
     "哈工大操作系统/img/Pasted image 20240401212156.png",
     "哈工大操作系统/5.3目录与文件系统.md",
-    "哈工大操作系统/5.4目录解析代码实现.md",
     "哈工大操作系统/img/Pasted image 20240401211434.png",
     "哈工大操作系统/img/Pasted image 20240401211143.png",
     "哈工大操作系统/img/Pasted image 20240401210941.png",
@@ -160,10 +171,6 @@
     "哈工大操作系统/img/Pasted image 20240401204731.png",
     "哈工大操作系统/5.2文件使用磁盘的实现.md",
     "哈工大操作系统/img/Pasted image 20240331145227.png",
-    "哈工大操作系统/img/Pasted image 20240331143515.png",
-    "哈工大操作系统/img/Pasted image 20240331143408.png",
-    "哈工大操作系统/img/Pasted image 20240331143130.png",
-    "ML/pytorch线性回归.md",
     "ML/梯度下降法.md",
     "哈工大操作系统/4.2从生磁盘到文件.md",
     "哈工大操作系统/5.1生磁盘的使用.md",
@@ -176,9 +183,6 @@
     "哈工大操作系统/4.1 IO与显示器.md",
     "哈工大操作系统/3.6内存换出（swap分区）.md",
     "哈工大操作系统/3.5内存换入-请求调页.md",
-    "哈工大操作系统/3.4段页结合的实际内存管理.md",
-    "哈工大操作系统/3.3多级页表和快表.md",
-    "哈工大操作系统/3.2内存分区与分页.md",
-    "哈工大操作系统/3.1 内存使用与分段.md"
+    "哈工大操作系统/3.2内存分区与分页.md"
   ]
 }
