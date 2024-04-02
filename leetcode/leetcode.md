@@ -1490,3 +1490,25 @@ int dp(vector<int>& coins, int amount) {
 };
 ```
 
+## [300. 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/)
+```cpp
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        vector dp_table(nums.size(), 1);
+        
+        for(int i=0; i<nums.size(); i++){
+            for(int j=0; j<i; j++){
+                if(nums[i]>nums[j])
+                   dp_table[i] = max(dp_table[i], dp_table[j] + 1);
+            }
+        }
+
+        int res=0;
+        for(int i=0; i<dp_table.size(); i++){
+            res = max(res, dp_table[i]); 
+        }
+        return res;
+    }
+};
+```
