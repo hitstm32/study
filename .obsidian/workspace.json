@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "哈工大操作系统/2.5内核级线程代码实现.md",
+                "file": "哈工大操作系统/2.7一个实际的schedule函数.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "哈工大操作系统/2.5内核级线程代码实现.md",
+                "file": "哈工大操作系统/2.7一个实际的schedule函数.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "哈工大操作系统/2.5内核级线程代码实现.md",
+                "file": "哈工大操作系统/2.7一个实际的schedule函数.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "哈工大操作系统/2.5内核级线程代码实现.md"
+                "file": "哈工大操作系统/2.7一个实际的schedule函数.md"
               }
             }
           }
@@ -148,24 +148,31 @@
   },
   "active": "573d30b8866942a4",
   "lastOpenFiles": [
-    "哈工大操作系统/img/Pasted image 20240408112255.png",
-    "哈工大操作系统/img/Pasted image 20240408112057.png",
-    "哈工大操作系统/img/Pasted image 20240408111726.png",
-    "哈工大操作系统/img/Pasted image 20240408111547.png",
-    "哈工大操作系统/img/Pasted image 20240408111505.png",
-    "哈工大操作系统/img/Pasted image 20240408111340.png",
-    "哈工大操作系统/img/Pasted image 20240408110853.png",
-    "哈工大操作系统/img/Pasted image 20240408110852.png",
-    "哈工大操作系统/img/Pasted image 20240408110850.png",
-    "哈工大操作系统/img/Pasted image 20240408110743.png",
-    "哈工大操作系统/img/Pasted image 20240408110543.png",
-    "哈工大操作系统/2.4内核级线程.md",
+    "哈工大操作系统/img/Pasted image 20240408235148.png",
+    "哈工大操作系统/img/Pasted image 20240408234726.png",
+    "哈工大操作系统/img/Pasted image 20240408234425.png",
+    "哈工大操作系统/img/Pasted image 20240408232129.png",
     "哈工大操作系统/2.5内核级线程代码实现.md",
-    "哈工大操作系统/2.3用户级线程.md",
-    "哈工大操作系统/2.2多进程图像.md",
-    "哈工大操作系统/3.1 内存使用与分段.md",
+    "哈工大操作系统/2.7一个实际的schedule函数.md",
+    "哈工大操作系统/2.7CPU调度策略.md",
+    "哈工大操作系统/img/Pasted image 20240408213345.png",
+    "哈工大操作系统/img/Pasted image 20240408212601.png",
+    "哈工大操作系统/img/Pasted image 20240408210322.png",
+    "哈工大操作系统/img/Pasted image 20240408205950.png",
+    "哈工大操作系统/img/Pasted image 20240408202819.png",
+    "哈工大操作系统/img/Pasted image 20240408202653.png",
     "项目/tb4117/开发.md",
     "项目/25项目/RapidIO.md",
+    "创业/libiio.md",
+    "毕业/孟毕业论文.md",
+    "哈工大操作系统/3.1 内存使用与分段.md",
+    "哈工大操作系统/3.3多级页表和快表.md",
+    "哈工大操作系统/3.2内存分区与分页.md",
+    "哈工大操作系统/2.6操作系统的那颗“树”.md",
+    "哈工大操作系统/img/Pasted image 20240408112255.png",
+    "哈工大操作系统/2.4内核级线程.md",
+    "哈工大操作系统/2.3用户级线程.md",
+    "哈工大操作系统/2.2多进程图像.md",
     "项目/tb4117",
     "项目/未命名.md",
     "项目",
@@ -180,14 +187,7 @@
     "ML/pytorch线性回归.md",
     "ML/梯度下降法.md",
     "哈工大操作系统/4.2从生磁盘到文件.md",
-    "哈工大操作系统/5.1生磁盘的使用.md",
-    "ML/反向传播.md",
     "ML/img",
-    "未命名.md",
-    "哈工大操作系统/4.2键盘.md",
-    "ML",
-    "哈工大操作系统/4.1 IO与显示器.md",
-    "哈工大操作系统/3.6内存换出（swap分区）.md",
-    "哈工大操作系统/3.5内存换入-请求调页.md"
+    "ML"
   ]
 }
