@@ -13,7 +13,11 @@
             "state": {
               "type": "markdown",
               "state": {
+<<<<<<< HEAD
                 "file": "哈工大操作系统/2.7一个实际的schedule函数.md",
+=======
+                "file": "书/Linux设备驱动开发详解/2. Linux内核及内核编程.md",
+>>>>>>> f6e9687d093a6df839085928a3c135a2b7eb542d
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +73,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "3a99c155896a7da0",
@@ -85,7 +90,11 @@
             "state": {
               "type": "backlink",
               "state": {
+<<<<<<< HEAD
                 "file": "哈工大操作系统/2.7一个实际的schedule函数.md",
+=======
+                "file": "书/Linux设备驱动开发详解/2. Linux内核及内核编程.md",
+>>>>>>> f6e9687d093a6df839085928a3c135a2b7eb542d
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +111,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+<<<<<<< HEAD
                 "file": "哈工大操作系统/2.7一个实际的schedule函数.md",
+=======
+                "file": "书/Linux设备驱动开发详解/2. Linux内核及内核编程.md",
+>>>>>>> f6e9687d093a6df839085928a3c135a2b7eb542d
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,11 @@
             "state": {
               "type": "outline",
               "state": {
+<<<<<<< HEAD
                 "file": "哈工大操作系统/2.7一个实际的schedule函数.md"
+=======
+                "file": "书/Linux设备驱动开发详解/2. Linux内核及内核编程.md"
+>>>>>>> f6e9687d093a6df839085928a3c135a2b7eb542d
               }
             }
           }
@@ -148,6 +165,7 @@
   },
   "active": "573d30b8866942a4",
   "lastOpenFiles": [
+<<<<<<< HEAD
     "哈工大操作系统/img/Pasted image 20240408235148.png",
     "哈工大操作系统/img/Pasted image 20240408234726.png",
     "哈工大操作系统/img/Pasted image 20240408234425.png",
@@ -170,6 +188,22 @@
     "哈工大操作系统/3.2内存分区与分页.md",
     "哈工大操作系统/2.6操作系统的那颗“树”.md",
     "哈工大操作系统/img/Pasted image 20240408112255.png",
+=======
+    "ML/pytorch线性回归.md",
+    "ML/梯度下降法.md",
+    "ML/反向传播.md",
+    "哈工大操作系统/2.5内核级线程代码实现.md",
+    "哈工大操作系统/img/Pasted image 20240408112255.png",
+    "哈工大操作系统/img/Pasted image 20240408112057.png",
+    "哈工大操作系统/img/Pasted image 20240408111726.png",
+    "哈工大操作系统/img/Pasted image 20240408111547.png",
+    "哈工大操作系统/img/Pasted image 20240408111505.png",
+    "哈工大操作系统/img/Pasted image 20240408111340.png",
+    "哈工大操作系统/img/Pasted image 20240408110853.png",
+    "哈工大操作系统/img/Pasted image 20240408110852.png",
+    "哈工大操作系统/img/Pasted image 20240408110850.png",
+    "哈工大操作系统/img/Pasted image 20240408110743.png",
+>>>>>>> f6e9687d093a6df839085928a3c135a2b7eb542d
     "哈工大操作系统/2.4内核级线程.md",
     "哈工大操作系统/2.3用户级线程.md",
     "哈工大操作系统/2.2多进程图像.md",
@@ -184,9 +218,11 @@
     "书/Linux设备驱动开发详解",
     "哈工大操作系统/5.3目录与文件系统.md",
     "哈工大操作系统/5.2文件使用磁盘的实现.md",
-    "ML/pytorch线性回归.md",
-    "ML/梯度下降法.md",
     "哈工大操作系统/4.2从生磁盘到文件.md",
+<<<<<<< HEAD
+=======
+    "哈工大操作系统/5.1生磁盘的使用.md",
+>>>>>>> f6e9687d093a6df839085928a3c135a2b7eb542d
     "ML/img",
     "ML"
   ]
