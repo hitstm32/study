@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "d78e0673d49904da",
+        "id": "7d7dff353ea79bea",
         "type": "tabs",
         "children": [
           {
-            "id": "573d30b8866942a4",
+            "id": "1a0308933d5c103a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "书/Linux设备驱动开发详解/2. Linux内核及内核编程.md",
+                "file": "哈工大操作系统/x86汇编/内存分段的必要性.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "3a99c155896a7da0",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "书/Linux设备驱动开发详解/2. Linux内核及内核编程.md",
+                "file": "哈工大操作系统/x86汇编/内存分段的必要性.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "书/Linux设备驱动开发详解/2. Linux内核及内核编程.md",
+                "file": "哈工大操作系统/x86汇编/内存分段的必要性.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "书/Linux设备驱动开发详解/2. Linux内核及内核编程.md"
+                "file": "哈工大操作系统/x86汇编/内存分段的必要性.md"
               }
             }
           }
@@ -147,8 +146,30 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "573d30b8866942a4",
+  "active": "1a0308933d5c103a",
   "lastOpenFiles": [
+    "书/《汇编语言(第3版) 》王爽著.pdf",
+    "哈工大操作系统/x86汇编/未命名 1.md",
+    "哈工大操作系统/x86汇编/内存分段的必要性.md",
+    "未命名.md",
+    "哈工大操作系统/x86汇编",
+    "哈工大操作系统/1.2揭开钢琴的盖子.md",
+    "CPP/CPP.md",
+    "毕业/孟毕业论文.md",
+    "毕业/img/Pasted image 20240410235021.png",
+    "毕业/img",
+    "创业/libiio.md",
+    "哈工大操作系统/3.6内存换出（swap分区）.md",
+    "书/Linux内核完全注释/6引导启动程序(boot).md",
+    "哈工大操作系统/3.5内存换入-请求调页.md",
+    "书/Linux内核完全注释V5.0.pdf",
+    "书/Linux 内核完全注释 v5.0.pdf",
+    "书/Linux内核完全注释.pdf",
+    "书/Linux内核完全注释",
+    "书/新建文件夹",
+    "书/《Linux内核完全注释》.pdf",
+    "leetcode/leetcode.md",
+    "书/Linux设备驱动开发详解/2. Linux内核及内核编程.md",
     "ML/pytorch线性回归.md",
     "ML/梯度下降法.md",
     "ML/反向传播.md",
@@ -162,7 +183,6 @@
     "哈工大操作系统/img/Pasted image 20240408110853.png",
     "哈工大操作系统/img/Pasted image 20240408110852.png",
     "哈工大操作系统/img/Pasted image 20240408110850.png",
-    "哈工大操作系统/img/Pasted image 20240408110743.png",
     "哈工大操作系统/2.4内核级线程.md",
     "哈工大操作系统/2.3用户级线程.md",
     "哈工大操作系统/2.2多进程图像.md",
@@ -173,21 +193,6 @@
     "项目/未命名.md",
     "项目",
     "哈工大操作系统/2.1 CPU管理的直观想法.md",
-    "leetcode/leetcode.md",
-    "哈工大操作系统/5.4目录解析代码实现.md",
-    "书/Linux设备驱动开发详解/2. Linux内核及内核编程.md",
-    "书/Linux设备驱动开发详解/1.Linux设备驱动概述及开发环境构建.md",
-    "书/Linux设备驱动开发详解",
-    "哈工大操作系统/5.3目录与文件系统.md",
-    "哈工大操作系统/5.2文件使用磁盘的实现.md",
-    "哈工大操作系统/4.2从生磁盘到文件.md",
-    "哈工大操作系统/5.1生磁盘的使用.md",
-    "ML/img",
-    "未命名.md",
-    "哈工大操作系统/4.2键盘.md",
-    "ML",
-    "哈工大操作系统/4.1 IO与显示器.md",
-    "哈工大操作系统/3.6内存换出（swap分区）.md",
-    "哈工大操作系统/3.5内存换入-请求调页.md"
+    "哈工大操作系统/5.4目录解析代码实现.md"
   ]
 }

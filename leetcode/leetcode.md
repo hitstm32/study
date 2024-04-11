@@ -1512,3 +1512,24 @@ public:
     }
 };
 ```
+
+## [53. 最大子数组和](https://leetcode.cn/problems/maximum-subarray/)
+用dp_table，判断是和前面连起来大，还是自己大，选大的作为最大子数组和。
+```cpp
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int dp_last = nums[0];
+        int dp_new = INT_MIN;
+        int res = nums[0];
+
+        for(int i=1; i<nums.size(); i++){
+            dp_new = max(dp_last+nums[i], nums[i]);
+            dp_last = dp_new;
+            res = max(dp_new, res);
+        }
+        return res;
+    }
+};
+```
+# 背包问题有点无聊，之后再做
