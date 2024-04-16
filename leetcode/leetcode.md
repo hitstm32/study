@@ -1533,3 +1533,33 @@ public:
 };
 ```
 # 背包问题有点无聊，之后再做
+
+# [64. 最小路径和](https://leetcode.cn/problems/minimum-path-sum/)
+典型动态规划，递归思路
+```cpp
+class Solution {
+public:
+    vector<vector<int>> mem;
+    int dp(vector<vector<int>>& grid, int i, int j){
+        int a=INT_MAX, b=INT_MAX;
+        if(mem[i][j]!=0) return mem[i][j];
+
+        if(i==0&&j==0){
+            return grid[0][0]; 
+        }
+        if(j!=0){
+            a = dp(grid, i, j-1);
+        }
+        if(i!=0){
+            b = dp(grid, i-1, j);
+        }
+        int res = min(a,b)+grid[i][j];
+        mem[i][j] = res;
+        return res;
+    }
+    int minPathSum(vector<vector<int>>& grid) {
+        mem.resize(grid.size(), vector<int>(grid[0].size()));
+        return dp(grid, grid.size()-1, grid[0].size()-1);
+    }
+};
+```
