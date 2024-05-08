@@ -1,5 +1,12 @@
 {
   "promptDelete": false,
   "vimMode": false,
-  "attachmentFolderPath": "./img"
+  "attachmentFolderPath": "./img",
+  "readableLineLength": true,
+  "useTab": true,
+  "smartIndentList": true,
+  "strictLineBreaks": false,
+  "foldIndent": true,
+  "spellcheck": false,
+  "autoPairBrackets": true
 }
