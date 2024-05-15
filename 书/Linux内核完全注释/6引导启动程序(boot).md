@@ -289,3 +289,27 @@ setup.s主要作用是读取硬件信息，并保存在硬盘里，供操作系�
 * 设置CR0，进入32位保护模式
 * 跳转到head.s运行
 
+![[Pasted image 20240515234331.png]]
+setup.s前面部分是在利用bios中断获取硬件信息，并存入0x90000开始的地方。
+开始把system从0x10000移动到0x00000：
+```c
+	cli			! no interrupts allowed !
+
+! first we move the system to it's rightful place
+
+	mov	ax,#0x0000
+	cld			! 'direction'=0, movs moves forward
+do_move:
+	mov	es,ax		! destination segment
+	add	ax,#0x1000
+	cmp	ax,#0x9000
+	jz	end_move
+	mov	ds,ax		! source segment
+	sub	di,di
+	sub	si,si
+	mov 	cx,#0x8000
+	rep
+	movsw
+	jmp	do_move
+```
+移动完之后，开始设置gdt
