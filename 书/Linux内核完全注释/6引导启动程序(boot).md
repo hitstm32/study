@@ -84,7 +84,7 @@ go:	mov	ax,cs
 ! load the setup-sectors directly after the bootblock.
 ! Note that 'es' is already set up.
 
-load_setup: //开始读入setup.s
+load_setup: //开始读入setup.s,将4个扇区读入es:bx，如果出错，CF会被置高，重读
 	mov	dx,#0x0000		! drive 0, head 0
 	mov	cx,#0x0002		! sector 2, track 0
 	mov	bx,#0x0200		! address = 512, in INITSEG
@@ -96,7 +96,7 @@ load_setup: //开始读入setup.s
 	int	0x13
 	j	load_setup
 
-ok_load_setup:
+ok_load_setup: //已经读取完成，现在获取一下硬盘参数，主要是每磁道扇区数
 
 ! Get disk drive parameters, specifically nr of sectors/track
 
@@ -104,22 +104,22 @@ ok_load_setup:
 	mov	ax,#0x0800		! AH=8 is get drive parameters
 	int	0x13
 	mov	ch,#0x00
-	seg cs
+	seg cs//表示下一条语句的操作数在cs段寄存器所指段中
 	mov	sectors,cx
 	mov	ax,#INITSEG
-	mov	es,ax
+	mov	es,ax//0x13会改变es值，再给他改回来
 
 ! Print some inane message
 
 	mov	ah,#0x03		! read cursor pos
-	xor	bh,bh
-	int	0x10
+	xor	bh,bh //bh置零
+	int	0x10  
 	
 	mov	cx,#24
 	mov	bx,#0x0007		! page 0, attribute 7 (normal)
 	mov	bp,#msg1
 	mov	ax,#0x1301		! write string, move cursor
-	int	0x10
+	int	0x10  //字符显示完成，开始读入system
 
 ! ok, we've written the message, now
 ! we want to load the system (at 0x10000)
@@ -150,7 +150,7 @@ undef_root:
 	jmp undef_root
 root_defined:
 	seg cs
-	mov	root_dev,ax
+	mov	root_dev,ax//把根设备准备好，保存在root_dev里
 
 ! after that (everyting loaded), we jump to
 ! the setup-routine loaded directly after
@@ -170,13 +170,13 @@ track:	.word 0			! current track
 
 read_it:
 	mov ax,es
-	test ax,#0x0fff
+	test ax,#0x0fff  //类似AND指令，如果结果为0，则表明es段地址与64K对齐，ZF=1
 die:	jne die			! es must be at 64kB boundary
 	xor bx,bx		! bx is starting address within segment
 rp_read:
 	mov ax,es
 	cmp ax,#ENDSEG		! have we loaded all yet?
-	jb ok1_read
+	jb ok1_read        //还没读到结尾，就跳转过去继续读
 	ret
 ok1_read:
 	seg cs
@@ -279,3 +279,13 @@ enddata:
 .bss
 endbss:
 ```
+# SETUP.S
+setup.s主要作用是读取硬件信息，并保存在硬盘里，供操作系统使用，具体作用：
+* 读取并保留硬件信息
+* 把system从0x10000移动到0x00000
+* 加载中断描述符表寄存器(idtr)和全局描述符表寄存器(gdtr)
+* 开启A20地址线
+* 设置中断控制芯片8259A，将硬件中断号设置为0x20-0x2f
+* 设置CR0，进入32位保护模式
+* 跳转到head.s运行
+
