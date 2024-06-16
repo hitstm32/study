@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "ddae3baedc2705b9",
+        "id": "0f10e5977b5dadb3",
         "type": "tabs",
         "children": [
           {
-            "id": "32cd11da9222456e",
+            "id": "8fd238bbf81a64ee",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "书/Linux内核完全注释/6引导启动程序(boot).md",
+                "file": "Linux/Linux设备模型.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "书/Linux内核完全注释/6引导启动程序(boot).md",
+                "file": "Linux/Linux设备模型.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "书/Linux内核完全注释/6引导启动程序(boot).md",
+                "file": "Linux/Linux设备模型.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "书/Linux内核完全注释/6引导启动程序(boot).md"
+                "file": "Linux/Linux设备模型.md"
               }
             }
           }
@@ -146,41 +146,47 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "32cd11da9222456e",
+  "active": "8fd238bbf81a64ee",
   "lastOpenFiles": [
-    "书/Linux内核完全注释/img/Pasted image 20240515234331.png",
+    "Linux/Input子系统.md",
+    "Linux/LCD子系统.md",
+    "Linux/Linux设备模型.md",
+    "Linux/同步与互斥.md",
+    "项目/tb4117/系统移植过程.md",
+    "项目/tb4117/Hiki USB.md",
+    "项目/tb4117/APK反编译.md",
+    "项目/tb4117/img/Pasted image 20240610000709.png",
+    "项目/tb4117/img/Pasted image 20240610000708.png",
+    "项目/tb4117/img/Pasted image 20240609205852.png",
+    "项目/tb4117/img/Pasted image 20240609205846.png",
+    "项目/tb4117/img/Pasted image 20240609205602.png",
+    "项目/tb4117/img/Pasted image 20240609205555.png",
+    "项目/tb4117/img/Pasted image 20240609205549.png",
+    "项目/tb4117/img/Pasted image 20240609205543.png",
+    "项目/tb4117/img/Pasted image 20240609205417.png",
+    "项目/tb4117/img/Pasted image 20240609205403.png",
+    "项目/tb4117/img",
+    "项目/tb4117/开发.md",
     "找工作/面试.md",
-    "书/Linux内核完全注释/6引导启动程序(boot).md",
+    "书/Linux内核设计与实现.pdf",
+    "书/Linux内核完全注释/4INIT.md",
+    "哈工大操作系统/2.2多进程图像.md",
+    "哈工大操作系统/2.1 CPU管理的直观想法.md",
+    "哈工大操作系统/1.3操作系统启动（setup.s）.md",
+    "书/Linux内核完全注释/3引导启动程序(boot).md",
+    "书/Linux内核完全注释/1微机组成.md",
+    "书/Linux内核完全注释/2Linux内核体系结构.md",
+    "哈工大操作系统/实验/实验1.md",
+    "哈工大操作系统/实验/img",
+    "哈工大操作系统/实验",
+    "书/《汇编语言(第3版) 》王爽著.pdf",
     "找工作",
     "项目/tb4117/hardware/1_P1.schdoc.schdoc",
     "项目/tb4117/hardware/PCB1.pcbdoc",
     "项目/tb4117/hardware/schematic1/1_P1.schdoc.schdoc",
     "项目/tb4117/hardware/schematic1",
-    "项目/tb4117/hardware/手持热成像/复刻f1c100s_f1c200sLinux/Board1/schematic1/1_P1.schdoc.schdoc",
-    "项目/tb4117/hardware/手持热成像/复刻f1c100s_f1c200sLinux/Board1/schematic1",
-    "项目/tb4117/hardware/手持热成像/复刻f1c100s_f1c200sLinux/Board1/PCB1.pcbdoc",
-    "项目/tb4117/hardware/手持热成像/复刻f1c100s_f1c200sLinux/Board1",
-    "项目/tb4117/hardware/手持热成像/复刻f1c100s_f1c200sLinux",
-    "书/Linux内核完全注释/img/Pasted image 20240505214547.png",
-    "书/Linux内核完全注释/img/Pasted image 20240505214544.png",
-    "书/Linux内核完全注释/img/Pasted image 20240505210817.png",
-    "书/Linux内核完全注释/img/Pasted image 20240505192138.png",
-    "书/Linux内核完全注释/5Linux内核体系结构.md",
-    "书/Linux内核完全注释/2微机组成.md",
     "项目/25项目/RapidIO.md",
-    "书/Linux内核完全注释/img/Pasted image 20240426105405.png",
-    "项目/tb4117/系统移植过程.md",
-    "项目/tb4117/开发.md",
-    "书/Linux内核完全注释/img/Pasted image 20240425112850.png",
-    "书/Linux内核完全注释/img/Pasted image 20240424104148.png",
-    "书/Linux内核完全注释/img/Pasted image 20240424100033.png",
-    "书/Linux内核完全注释/img/Pasted image 20240424094958.png",
-    "Linux/Input子系统.md",
-    "Linux/img/Pasted image 20240423195210.png",
-    "哈工大操作系统/1.3操作系统启动（setup.s）.md",
     "哈工大操作系统/1.2揭开钢琴的盖子.md",
-    "哈工大操作系统/2.1 CPU管理的直观想法.md",
-    "哈工大操作系统/2.2多进程图像.md",
     "哈工大操作系统/3.3多级页表和快表.md",
     "哈工大操作系统/3.1 内存使用与分段.md",
     "leetcode/leetcode.md",

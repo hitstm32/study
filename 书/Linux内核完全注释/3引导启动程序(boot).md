@@ -312,4 +312,44 @@ do_move:
 	movsw
 	jmp	do_move
 ```
-移动完之后，开始设置gdt
+移动完之后，开始设置gdt和idt。gdt和idt先在内存中定义出来，然后把地址load进gdt和idt寄存器。
+```c
+gdt:
+	.word	0,0,0,0		! dummy 第一个gdt项为空
+
+	.word	0x07FF		! 8Mb - limit=2047 (2048*4096=8Mb)
+	.word	0x0000		! base address=0
+	.word	0x9A00		! code read/exec
+	.word	0x00C0		! granularity=4096, 386
+
+	.word	0x07FF		! 8Mb - limit=2047 (2048*4096=8Mb)
+	.word	0x0000		! base address=0
+	.word	0x9200		! data read/write
+	.word	0x00C0		! granularity=4096, 386
+
+idt_48:
+	.word	0			! idt limit=0
+	.word	0,0			! idt base=0L
+
+gdt_48:
+	.word	0x800		! gdt limit=2048, 256 GDT entries
+	.word	512+gdt,0x9	! gdt base = 0X9xxxx//实际上就是90200+gdt
+```
+GDTR结构：
+![[Pasted image 20240516084133.png]]
+然后设置CR0的PE位，进入保护模式：
+```c
+	mov	ax,#0x0001	! protected mode (PE) bit
+	lmsw	ax		! This is it!
+	jmpi	0,8		! jmp offset 0 of segment 8 (cs)跳转到0地址执行
+```
+此处的'8'已经是保护模式下的段选择子了，段选择子的结构如下：
+![[Pasted image 20240516090552.png]]
+linux只支持两种特权级0和3分别为系统级和用户级。且查GDT，所以0，1，2位都为0，INDEX为1，所以为8；
+这样就跳转到了0x00000000处运行，此处存放的是head.s
+当前内存映像：
+![[Pasted image 20240516091335.png]]
+# head.s
+主要作用是重新设置idt和gdt，测试A20是否真开启，开启内存分页，设置页表，检测是否有数学协处理器，在CR0中设置其对应位，head.s运行结束后的内存映像：
+![[Pasted image 20240516100943.png]]
+![[Pasted image 20240516101505.png]]
