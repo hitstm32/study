@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Linux/Linux设备模型.md",
+                "file": "Linux/USB.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Linux/Linux设备模型.md",
+                "file": "Linux/USB.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Linux/Linux设备模型.md",
+                "file": "Linux/USB.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Linux/Linux设备模型.md"
+                "file": "Linux/USB.md"
               }
             }
           }
@@ -148,23 +148,29 @@
   },
   "active": "8fd238bbf81a64ee",
   "lastOpenFiles": [
+    "Linux/img/Pasted image 20240617185333.png",
+    "Linux/img/Pasted image 20240617185122.png",
+    "Linux/img/Pasted image 20240617184704.png",
+    "Linux/img/Pasted image 20240617183216.png",
+    "Linux/img/Pasted image 20240617182844.png",
+    "Linux/img/Pasted image 20240617174558.png",
+    "Linux/img/Pasted image 20240617172629.png",
+    "Linux/img/Pasted image 20240617172625.png",
+    "Linux/img/Pasted image 20240617172324.png",
+    "Linux/img/Pasted image 20240617172119.png",
+    "Linux/img/Pasted image 20240617171756.png",
+    "项目/tb4117/usb抓包分析.md",
+    "Linux/USB.md",
+    "项目/tb4117/Hiki USB.md",
+    "项目/tb4117/系统移植过程.md",
     "Linux/Input子系统.md",
     "Linux/LCD子系统.md",
     "Linux/Linux设备模型.md",
+    "接收机设计/2.灵敏度和中频规划.md",
+    "接收机设计/img",
+    "接收机设计",
     "Linux/同步与互斥.md",
-    "项目/tb4117/系统移植过程.md",
-    "项目/tb4117/Hiki USB.md",
     "项目/tb4117/APK反编译.md",
-    "项目/tb4117/img/Pasted image 20240610000709.png",
-    "项目/tb4117/img/Pasted image 20240610000708.png",
-    "项目/tb4117/img/Pasted image 20240609205852.png",
-    "项目/tb4117/img/Pasted image 20240609205846.png",
-    "项目/tb4117/img/Pasted image 20240609205602.png",
-    "项目/tb4117/img/Pasted image 20240609205555.png",
-    "项目/tb4117/img/Pasted image 20240609205549.png",
-    "项目/tb4117/img/Pasted image 20240609205543.png",
-    "项目/tb4117/img/Pasted image 20240609205417.png",
-    "项目/tb4117/img/Pasted image 20240609205403.png",
     "项目/tb4117/img",
     "项目/tb4117/开发.md",
     "找工作/面试.md",
@@ -183,13 +189,10 @@
     "找工作",
     "项目/tb4117/hardware/1_P1.schdoc.schdoc",
     "项目/tb4117/hardware/PCB1.pcbdoc",
-    "项目/tb4117/hardware/schematic1/1_P1.schdoc.schdoc",
-    "项目/tb4117/hardware/schematic1",
     "项目/25项目/RapidIO.md",
     "哈工大操作系统/1.2揭开钢琴的盖子.md",
     "哈工大操作系统/3.3多级页表和快表.md",
     "哈工大操作系统/3.1 内存使用与分段.md",
-    "leetcode/leetcode.md",
-    "哈工大操作系统/x86汇编/内存分段的必要性.md"
+    "leetcode/leetcode.md"
   ]
 }
