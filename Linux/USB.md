@@ -426,3 +426,79 @@ USB枚举过程中，通过控制传输（control transfer）来实现设备枚�
  * 再次获得设备描述符
  * 获得配置描述符
  * 设置配置，使设备工作于某个配置下
+## libusb使用
+libusb用来实现用户态的驱动程序，降低使用usb的复杂度。
+libusb的接口分为同步和异步
+* 同步：阻塞，启动传输和等待结果在一个函数里
+* 异步：非阻塞，启动传输和等待结果分开
+### 读取鼠标数据
+#### HID协议
+从接口描述符中，确定它是usb鼠标，就可以读取鼠标数据。
+```bash
+Bus 003 Device 004: ID 0e0f:0003 VMware, Inc. Virtual Mouse
+Device Descriptor:
+  bLength                18
+  bDescriptorType         1
+  bcdUSB               1.10
+  bDeviceClass            0 (Defined at Interface level)
+  bDeviceSubClass         0 
+  bDeviceProtocol         0 
+  bMaxPacketSize0         8
+  idVendor           0x0e0f VMware, Inc.
+  idProduct          0x0003 Virtual Mouse
+  bcdDevice            1.03
+  iManufacturer           1 VMware
+  iProduct                2 VMware Virtual USB Mouse
+  iSerial                 0 
+  bNumConfigurations      1
+  Configuration Descriptor:
+    bLength                 9
+    bDescriptorType         2
+    wTotalLength           34
+    bNumInterfaces          1
+    bConfigurationValue     1
+    iConfiguration          1 VMware
+    bmAttributes         0xc0
+      Self Powered
+    MaxPower                0mA
+    Interface Descriptor:
+      bLength                 9
+      bDescriptorType         4
+      bInterfaceNumber        0
+      bAlternateSetting       0
+      bNumEndpoints           1
+      bInterfaceClass         3 Human Interface Device
+      bInterfaceSubClass      1 Boot Interface Subclass
+      bInterfaceProtocol      2 Mouse
+      iInterface              1 VMware
+        HID Device Descriptor:
+          bLength                 9
+          bDescriptorType        33
+          bcdHID               1.10
+          bCountryCode            0 Not supported
+          bNumDescriptors         1
+          bDescriptorType        34 Report
+          wDescriptorLength      46
+         Report Descriptors: 
+           ** UNAVAILABLE **
+      Endpoint Descriptor:
+        bLength                 7
+        bDescriptorType         5
+        bEndpointAddress     0x81  EP 1 IN
+        bmAttributes            3
+          Transfer Type            Interrupt
+          Synch Type               None
+          Usage Type               Data
+        wMaxPacketSize     0x0008  1x 8 bytes
+        bInterval               1
+Device Status:     0x0001
+  Self Powered
+```
+可见，从接口描述符中，可以看到bInterfaceClass为HID，且bInterfaceProtocol为鼠标。Boot Interface Subclass的意思是，在boot阶段(win的bios阶段)就可以识别出鼠标。
+* 端点0：控制，双向传输
+* 端点x：中断传输，输入（相对host）
+发起一个中断传输，即可读取数据。
+![[Pasted image 20240620074646.png]]
+# USB设备驱动模型
+
+分配urb，填充urb

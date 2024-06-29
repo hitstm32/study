@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Linux/USB.md",
+                "file": "ML/多分类问题.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Linux/USB.md",
+                "file": "ML/多分类问题.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Linux/USB.md",
+                "file": "ML/多分类问题.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,18 +118,9 @@
                 "useHierarchy": true
               }
             }
-          },
-          {
-            "id": "f20199a50fbfb059",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "Linux/USB.md"
-              }
-            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -148,23 +139,31 @@
   },
   "active": "8fd238bbf81a64ee",
   "lastOpenFiles": [
-    "Linux/img/Pasted image 20240618212231.png",
-    "Linux/img/Pasted image 20240618211521.png",
-    "Linux/img/Pasted image 20240618205316.png",
-    "Linux/img/Pasted image 20240618204748.png",
-    "Linux/img/Pasted image 20240618195059.png",
-    "Linux/img/Pasted image 20240618161645.png",
-    "Linux/img/Pasted image 20240618161456.png",
-    "Linux/img/Pasted image 20240618161339.png",
-    "Linux/img/Pasted image 20240618114112.png",
-    "Linux/img/Pasted image 20240618113712.png",
-    "Linux/img/Pasted image 20240617185333.png",
+    "ML/img/Pasted image 20240629094359.png",
+    "ML/img/Pasted image 20240629092610.png",
+    "ML/img/Pasted image 20240629092314.png",
+    "ML/img/Pasted image 20240629091722.png",
+    "ML/逻辑斯蒂回归.md",
     "项目/tb4117/usb抓包分析.md",
-    "Linux/USB.md",
+    "书/v4l2_驱动编写指南.pdf",
     "项目/tb4117/Hiki USB.md",
     "项目/tb4117/系统移植过程.md",
-    "Linux/Input子系统.md",
+    "项目/tb4117/开发.md",
     "Linux/LCD子系统.md",
+    "ML/多分类问题.md",
+    "Linux/USB.md",
+    "ML/img/Pasted image 20240627084738.png",
+    "ML/img/Pasted image 20240627084646.png",
+    "ML/img/Pasted image 20240627083946.png",
+    "ML/img/Pasted image 20240627083614.png",
+    "ML/img/Pasted image 20240627083127.png",
+    "ML/img/Pasted image 20240627083001.png",
+    "ML/img/Pasted image 20240627082711.png",
+    "构建和编译/CMAKE.md",
+    "ML/梯度下降法.md",
+    "构建和编译",
+    "ML/反向传播.md",
+    "Linux/Input子系统.md",
     "Linux/Linux设备模型.md",
     "接收机设计/2.灵敏度和中频规划.md",
     "接收机设计/img",
@@ -172,7 +171,6 @@
     "Linux/同步与互斥.md",
     "项目/tb4117/APK反编译.md",
     "项目/tb4117/img",
-    "项目/tb4117/开发.md",
     "找工作/面试.md",
     "书/Linux内核设计与实现.pdf",
     "书/Linux内核完全注释/4INIT.md",
@@ -186,13 +184,6 @@
     "哈工大操作系统/实验/img",
     "哈工大操作系统/实验",
     "书/《汇编语言(第3版) 》王爽著.pdf",
-    "找工作",
-    "项目/tb4117/hardware/1_P1.schdoc.schdoc",
-    "项目/tb4117/hardware/PCB1.pcbdoc",
-    "项目/25项目/RapidIO.md",
-    "哈工大操作系统/1.2揭开钢琴的盖子.md",
-    "哈工大操作系统/3.3多级页表和快表.md",
-    "哈工大操作系统/3.1 内存使用与分段.md",
-    "leetcode/leetcode.md"
+    "找工作"
   ]
 }

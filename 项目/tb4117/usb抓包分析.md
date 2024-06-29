@@ -1,4 +1,4 @@
-启动
+ 启动
 ```bash
 # 加载内核模块 usbmon
 sudo modprobe usbmon
@@ -11,7 +11,7 @@ sudo gpasswd -a $USER usbmon
 
 # 写入规则文件
 sudo vi /etc/udev/rules.d/99-usbmon.rules
-SUBSYSTEM=="usbmon", GROUP="usbmon", MODE="640“
+SUBSYSTEM=="usbmon", GROUP="usbmon", MODE="640"
 ```
 查看USB地址：
 ```bash
@@ -36,4 +36,63 @@ Bus 003 Device 030: ID 2bdf:0101
 >块端点传送大量的数据. 这些端点常常比中断端点大(它们一次可持有更多的字符). 它们是普遍的, 对于需要传送不能有任何数据丢失的数据. 这些传送不被 USB 协议保证来一直使它在特定时间范围内完成. 如果总线上没有足够的空间来发送整个 BULK 报文, 它被分为多次传送到或者从设备. 这些端点普遍在打印机, 存储器, 和网络设备上.
 >ISOCHRONOUS
 >同步端点也传送大量数据, 但是这个数据常常不被保证它完成. 这些端点用在可以处理数据丢失的设备中, 并且更多依赖于保持持续的数据流. 实时数据收集, 例如音频和视频设备, 一直都使用这些端点.
->
+
+
+# 实测数据：
+
+## F01218820（自用）：
+`Bus 003 Device 009: ID 2bdf:0101`
+* USB_Init()
+	* 啥都没传，应该是初始化了本机的usb
+* CUSTOM_GET_DEVICE_COUNT()
+	* 获取一堆字符串，都是些HIK，HikCamera之类的
+	* 获取和设置了一些东西，获取到的数据和设置的数据一模一样
+	* ![[Pasted image 20240621210513.png]]
+	* ![[Pasted image 20240621210541.png]]
+	* ![[Pasted image 20240621210551.png]]
+	* ![[Pasted image 20240621210603.png]]
+	* ![[Pasted image 20240621210625.png]]
+	* ![[Pasted image 20240621210633.png]]
+* CUSTOM_ENUM_DEVICE()
+	* 没收发任何东西，SDK返回设备VID和PID
+* CUSTOM_LOGIN_DEVICE()
+	* 又是一堆字符串获取，和CUSTOM_GET_DEVICE_COUNT一样
+	* ![[Pasted image 20240621211319.png]]
+	* ![[Pasted image 20240621211326.png]]
+	* ![[Pasted image 20240621211335.png]]
+	* ![[Pasted image 20240621211344.png]]
+	* ![[Pasted image 20240621211352.png]]
+* THERMAL_GET_IMAGE_ENHANCEMENT() //设置伪彩之类的
+	* ![[Pasted image 20240621212640.png]]
+	* ![[Pasted image 20240621212720.png]]
+	* ![[Pasted image 20240621212728.png]]
+	* ![[Pasted image 20240621212736.png]]
+	* ![[Pasted image 20240621212753.png]]
+	* ![[Pasted image 20240621212802.png]]
+	* ![[Pasted image 20240621212812.png]]
+	* ![[Pasted image 20240621212823.png]]
+	* ![[Pasted image 20240621212834.png]]
+	* 数据完全依据![[Pasted image 20240621213151.png]]
+* THERMAL_SET_IMAGE_ENHANCEMENT() //设置伪彩等
+	* ![[Pasted image 20240621213241.png]]
+	* ![[Pasted image 20240621213250.png]]
+	* ![[Pasted image 20240621213256.png]]
+	* ![[Pasted image 20240621213304.png]]
+	* 直接把部分结构体数据发出去了，没啥东西。
+* THERMAL_GET_IMAGE_VIDEO_ADJUST()  //调方向
+	* ![[Pasted image 20240621224819.png]]
+	* ![[Pasted image 20240621224829.png]]
+	* ![[Pasted image 20240621224838.png]]
+	* ![[Pasted image 20240621224846.png]]
+	* ![[Pasted image 20240621224855.png]]
+	* ![[Pasted image 20240621224903.png]]
+	* ![[Pasted image 20240621224911.png]]
+	* ![[Pasted image 20240621224920.png]]
+	* ![[Pasted image 20240621224926.png]]
+	* ![[Pasted image 20240621224945.png]]
+* THERMAL_SET_IMAGE_VIDEO_ADJUST()
+	* ![[Pasted image 20240621225027.png]]
+	* ![[Pasted image 20240621225036.png]]
+	* ![[Pasted image 20240621225047.png]]
+	* ![[Pasted image 20240621225057.png]]
+* 
