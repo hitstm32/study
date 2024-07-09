@@ -90,7 +90,7 @@ Bus 003 Device 030: ID 2bdf:0101
 	* ![[Pasted image 20240621224920.png]]
 	* ![[Pasted image 20240621224926.png]]
 	* ![[Pasted image 20240621224945.png]]
-* THERMAL_SET_IMAGE_VIDEO_ADJUST()
+* THEhexRMAL_SET_IMAGE_VIDEO_ADJUST()
 	* ![[Pasted image 20240621225027.png]]
 	* ![[Pasted image 20240621225036.png]]
 	* ![[Pasted image 20240621225047.png]]

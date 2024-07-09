@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "41b0257f08160f51",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "项目/tb4117/usb抓包分析.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ML/多分类问题.md",
+                "file": "项目/tb4117/usb抓包分析.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ML/多分类问题.md",
+                "file": "项目/tb4117/usb抓包分析.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -116,6 +129,16 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "78a791bd6b82b483",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "项目/tb4117/usb抓包分析.md"
               }
             }
           }
@@ -137,8 +160,14 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "8fd238bbf81a64ee",
+  "active": "41b0257f08160f51",
   "lastOpenFiles": [
+    "项目/tb4117/系统移植过程.md",
+    "Linux/USB摄像头驱动.md",
+    "Linux/USB.md",
+    "Linux/img/Pasted image 20240703104331.png",
+    "Linux/img/Pasted image 20240703104310.png",
+    "Linux/img/Pasted image 20240703104308.png",
     "ML/img/Pasted image 20240629094359.png",
     "ML/img/Pasted image 20240629092610.png",
     "ML/img/Pasted image 20240629092314.png",
@@ -147,18 +176,12 @@
     "项目/tb4117/usb抓包分析.md",
     "书/v4l2_驱动编写指南.pdf",
     "项目/tb4117/Hiki USB.md",
-    "项目/tb4117/系统移植过程.md",
     "项目/tb4117/开发.md",
     "Linux/LCD子系统.md",
     "ML/多分类问题.md",
-    "Linux/USB.md",
     "ML/img/Pasted image 20240627084738.png",
     "ML/img/Pasted image 20240627084646.png",
     "ML/img/Pasted image 20240627083946.png",
-    "ML/img/Pasted image 20240627083614.png",
-    "ML/img/Pasted image 20240627083127.png",
-    "ML/img/Pasted image 20240627083001.png",
-    "ML/img/Pasted image 20240627082711.png",
     "构建和编译/CMAKE.md",
     "ML/梯度下降法.md",
     "构建和编译",
@@ -180,7 +203,6 @@
     "书/Linux内核完全注释/3引导启动程序(boot).md",
     "书/Linux内核完全注释/1微机组成.md",
     "书/Linux内核完全注释/2Linux内核体系结构.md",
-    "哈工大操作系统/实验/实验1.md",
     "哈工大操作系统/实验/img",
     "哈工大操作系统/实验",
     "书/《汇编语言(第3版) 》王爽著.pdf",
