@@ -8,31 +8,18 @@
         "type": "tabs",
         "children": [
           {
-            "id": "8fd238bbf81a64ee",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ML/多分类问题.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "41b0257f08160f51",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "项目/tb4117/usb抓包分析.md",
+                "file": "项目/tb4117/系统移植过程.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -98,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "项目/tb4117/usb抓包分析.md",
+                "file": "项目/tb4117/系统移植过程.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "项目/tb4117/usb抓包分析.md",
+                "file": "项目/tb4117/系统移植过程.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "项目/tb4117/usb抓包分析.md"
+                "file": "项目/tb4117/系统移植过程.md"
               }
             }
           }
@@ -162,26 +149,40 @@
   },
   "active": "41b0257f08160f51",
   "lastOpenFiles": [
-    "项目/tb4117/系统移植过程.md",
-    "Linux/USB摄像头驱动.md",
-    "Linux/USB.md",
-    "Linux/img/Pasted image 20240703104331.png",
-    "Linux/img/Pasted image 20240703104310.png",
-    "Linux/img/Pasted image 20240703104308.png",
-    "ML/img/Pasted image 20240629094359.png",
-    "ML/img/Pasted image 20240629092610.png",
-    "ML/img/Pasted image 20240629092314.png",
-    "ML/img/Pasted image 20240629091722.png",
-    "ML/逻辑斯蒂回归.md",
-    "项目/tb4117/usb抓包分析.md",
-    "书/v4l2_驱动编写指南.pdf",
-    "项目/tb4117/Hiki USB.md",
     "项目/tb4117/开发.md",
-    "Linux/LCD子系统.md",
+    "项目/tb4117/Hiki USB.md",
+    "项目/tb4117/系统移植过程.md",
+    "项目/tb4117/libuvc学习.md",
+    "项目/tb4117/img/Pasted image 20240802104750.png",
+    "项目/tb4117/img/Pasted image 20240802104559.png",
+    "设计模式/1、模板方法（template method）.md",
+    "设计模式/2、策略模式.md",
+    "设计模式/3、观察者模式（Observer）.md",
+    "设计模式/5、桥模式.md",
+    "项目/25项目/大动态资源占用.md",
+    "项目/25项目/img/Pasted image 20240731111315.png",
+    "项目/25项目/img/Pasted image 20240731111308.png",
+    "项目/25项目/img/Pasted image 20240731111251.png",
+    "设计模式/4、装饰模式.md",
+    "设计模式/img/Pasted image 20240731004611.png",
+    "设计模式/img/Pasted image 20240731004601.png",
+    "设计模式/img/Pasted image 20240731004231.png",
+    "设计模式/img/Pasted image 20240731004108.png",
+    "设计模式/img/Pasted image 20240731004107.png",
+    "设计模式/img",
     "ML/多分类问题.md",
-    "ML/img/Pasted image 20240627084738.png",
-    "ML/img/Pasted image 20240627084646.png",
-    "ML/img/Pasted image 20240627083946.png",
+    "设计模式/0.1 简介：.md",
+    "项目/tb4117/usb抓包分析.md",
+    "未命名.md",
+    "设计模式",
+    "Linux/USB摄像头驱动.md",
+    "gnuradio/使用技巧.md",
+    "gnuradio/img",
+    "gnuradio",
+    "Linux/USB.md",
+    "ML/逻辑斯蒂回归.md",
+    "书/v4l2_驱动编写指南.pdf",
+    "Linux/LCD子系统.md",
     "构建和编译/CMAKE.md",
     "ML/梯度下降法.md",
     "构建和编译",
@@ -191,21 +192,7 @@
     "接收机设计/2.灵敏度和中频规划.md",
     "接收机设计/img",
     "接收机设计",
-    "Linux/同步与互斥.md",
-    "项目/tb4117/APK反编译.md",
     "项目/tb4117/img",
-    "找工作/面试.md",
-    "书/Linux内核设计与实现.pdf",
-    "书/Linux内核完全注释/4INIT.md",
-    "哈工大操作系统/2.2多进程图像.md",
-    "哈工大操作系统/2.1 CPU管理的直观想法.md",
-    "哈工大操作系统/1.3操作系统启动（setup.s）.md",
-    "书/Linux内核完全注释/3引导启动程序(boot).md",
-    "书/Linux内核完全注释/1微机组成.md",
-    "书/Linux内核完全注释/2Linux内核体系结构.md",
-    "哈工大操作系统/实验/img",
-    "哈工大操作系统/实验",
-    "书/《汇编语言(第3版) 》王爽著.pdf",
-    "找工作"
+    "书/Linux内核设计与实现.pdf"
   ]
 }

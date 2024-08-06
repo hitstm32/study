@@ -17,7 +17,7 @@ SUBSYSTEM=="usbmon", GROUP="usbmon", MODE="640"
 ```bash
 lsusb
 
-# 返回信息（003 总线地址 010 设备ID）
+# 返回信息（003 总线地址 030 设备ID）
 Bus 003 Device 030: ID 2bdf:0101 
 # 所以，可以得到摄像头地址是3:30:x，摄像头包含多个端点，可以以实现控制、数据流传输等功能
 ```
