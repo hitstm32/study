@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "哈工大操作系统/1.3操作系统启动（setup.s）.md",
+                "file": "Linux/IIC/2.驱动框架.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "哈工大操作系统/1.3操作系统启动（setup.s）.md",
+                "file": "Linux/IIC/2.驱动框架.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "哈工大操作系统/1.3操作系统启动（setup.s）.md",
+                "file": "Linux/IIC/2.驱动框架.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "哈工大操作系统/1.3操作系统启动（setup.s）.md"
+                "file": "Linux/IIC/2.驱动框架.md"
               }
             }
           }
@@ -149,9 +149,25 @@
   },
   "active": "41b0257f08160f51",
   "lastOpenFiles": [
-    "哈工大操作系统/2.4内核级线程.md",
-    "哈工大操作系统/2.3用户级线程.md",
+    "Linux/IIC/1.IIC协议.md",
+    "Linux/设备总线模型.md",
+    "Linux/IIC/2.驱动框架.md",
+    "Linux/IIC/img/Pasted image 20240828104700.png",
+    "Linux/IIC/img/Pasted image 20240827160016.png",
+    "Linux/IIC/img",
+    "Linux/IIC",
+    "Linux/img/Pasted image 20240827153110.png",
+    "Linux/img/Pasted image 20240827151831.png",
+    "Linux/img/Pasted image 20240827151816.png",
+    "Linux/img/Pasted image 20240827151324.png",
+    "Linux/img/Pasted image 20240827151209.png",
+    "Linux/img/Pasted image 20240827150814.png",
     "哈工大操作系统/2.5内核级线程代码实现.md",
+    "哈工大操作系统/2.7CPU调度策略.md",
+    "哈工大操作系统/2.7一个实际的schedule函数.md",
+    "哈工大操作系统/2.4内核级线程.md",
+    "哈工大操作系统/1.3操作系统启动（setup.s）.md",
+    "哈工大操作系统/2.3用户级线程.md",
     "哈工大操作系统/2.2多进程图像.md",
     "哈工大操作系统/2.1 CPU管理的直观想法.md",
     "Linux/pinctrl子系统.md",
@@ -166,34 +182,18 @@
     "csapp/1b.02 run-riscv-simulation.md",
     "csapp/img/Pasted image 20240819083803.png",
     "csapp/img/Pasted image 20240819082602.png",
-    "csapp/img/Pasted image 20240819081329.png",
-    "csapp/img/Pasted image 20240819081145.png",
-    "csapp/img/Pasted image 20240819081125.png",
     "哈工大操作系统/3.4段页结合的实际内存管理.md",
     "哈工大操作系统/3.3多级页表和快表.md",
     "哈工大操作系统/3.1 内存使用与分段.md",
     "哈工大操作系统/3.2内存分区与分页.md",
-    "哈工大操作系统/2.7CPU调度策略.md",
-    "哈工大操作系统/2.7一个实际的schedule函数.md",
-    "哈工大操作系统/1.3操作系统启动（setup.s）.md",
     "哈工大操作系统/1.2揭开钢琴的盖子.md",
-    "csapp/img/Pasted image 20240819080450.png",
     "csapp/img",
     "csapp",
-    "项目/tb4117/系统移植过程.md",
-    "项目/tb4117/开发.md",
-    "项目/tb4117/Hiki USB.md",
-    "项目/tb4117/img/Pasted image 20240802104750.png",
-    "项目/tb4117/img/Pasted image 20240802104559.png",
-    "项目/25项目/img/Pasted image 20240731111315.png",
-    "项目/25项目/img/Pasted image 20240731111308.png",
     "设计模式/img",
     "设计模式",
     "gnuradio/img",
     "gnuradio",
     "书/v4l2_驱动编写指南.pdf",
-    "构建和编译",
-    "接收机设计/img",
-    "接收机设计"
+    "构建和编译"
   ]
 }
