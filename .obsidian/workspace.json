@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Linux/IIC/2.驱动框架.md",
+                "file": "项目/tb4117/gui.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Linux/IIC/2.驱动框架.md",
+                "file": "项目/tb4117/gui.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Linux/IIC/2.驱动框架.md",
+                "file": "项目/tb4117/gui.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Linux/IIC/2.驱动框架.md"
+                "file": "项目/tb4117/gui.md"
               }
             }
           }
@@ -149,9 +149,10 @@
   },
   "active": "41b0257f08160f51",
   "lastOpenFiles": [
+    "Linux/IIC/2.驱动框架.md",
+    "项目/tb4117/gui.md",
     "Linux/IIC/1.IIC协议.md",
     "Linux/设备总线模型.md",
-    "Linux/IIC/2.驱动框架.md",
     "Linux/IIC/img/Pasted image 20240828104700.png",
     "Linux/IIC/img/Pasted image 20240827160016.png",
     "Linux/IIC/img",
@@ -186,7 +187,6 @@
     "哈工大操作系统/3.3多级页表和快表.md",
     "哈工大操作系统/3.1 内存使用与分段.md",
     "哈工大操作系统/3.2内存分区与分页.md",
-    "哈工大操作系统/1.2揭开钢琴的盖子.md",
     "csapp/img",
     "csapp",
     "设计模式/img",
