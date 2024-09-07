@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="zh-CN">
+ <head> 
+  <meta charset="utf-8"> 
+  <link rel="canonical" href="https://blog.csdn.net/qq_41839588/article/details/141302551"> 
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+  <meta name="renderer" content="webkit"> 
+  <meta name="force-rendering" content="webkit"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+  <meta name="report" content="{&quot;pid&quot;: &quot;blog&quot;, &quot;spm&quot;:&quot;1001.2101&quot;}">  
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="alternate" media="handheld" href="#"> 
+  <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848"> 
+  <meta name="applicable-device" content="pc"> 
+  <link href="https://g.csdnimg.cn/static/logo/favicon32.ico" rel="shortcut icon" type="image/x-icon"> 
+  <title>嵌入式面经篇十一——操作系统-CSDN博客</title>  
+  <meta name="keywords" content="嵌入式面经篇十一——操作系统"> 
+  <meta name="description" content="文章浏览阅读144次。记录一些招聘公司在招聘嵌入式软件岗位时的一些问题，此文为第十一篇。死锁是指多个进程因竞争资源而造成的一种僵局（互相等待），若无外力作用，这些进程将无法向前推进。原因：①系统资源不足。②资源分配不当。③进程推进的顺序不合适。"> 
+  <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/release/blogv2/dist/pc/css/detail_enter-d0526cbe37.min.css">   
+  <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/release/blogv2/dist/pc/themesSkin/skin3-template/skin3-template-762f7595fd.min.css">    
+  <meta name="toolbar" content="{&quot;type&quot;:&quot;0&quot;,&quot;fixModel&quot;:&quot;1&quot;}">    
+  <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css"> 
+  <style>.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%} .MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%} .MathJax .MJX-monospace {font-family: monospace} .MathJax .MJX-sans-serif {font-family: sans-serif} #MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none} .MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0} .MathJax:focus, body :focus .MathJax {display: inline-table} .MathJax.MathJax_FullWidth {text-align: center; display: table-cell!important; width: 10000em!important} .MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none} img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important} .MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none} .MathJax nobr {white-space: nowrap!important} .MathJax img {display: inline!important; float: none!important} .MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none} .MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden} .MathJax_Processed {display: none!important} .MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none} .MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none} .MathJax_LineBox {display: table!important} .MathJax_LineBox span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0} .MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)} .MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent} #MathJax_Tooltip * {filter: none; opacity: 1; background: transparent} @font-face {font-family: MathJax_Main; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Regular.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Main-bold; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Bold.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Bold.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Main-italic; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Italic.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Italic.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Math-italic; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Math-Italic.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Math-Italic.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Caligraphic; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Regular.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Size1; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Size1-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Size1-Regular.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Size2; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Size2-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Size2-Regular.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Size3; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Size3-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Size3-Regular.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Size4; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Size4-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Size4-Regular.otf?V=2.7.2') format('opentype')} .MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}</style>    
+ </head> 
+ <body class="nodata " style=""> 
+  <div id="toolbarBox" style="min-height: 48px;"></div>    
+  <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/pc/css/blog_code-01256533b5.min.css"> 
+  <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/chart-3456820cac.css"> 
+  <link rel="stylesheet" href="https://g.csdnimg.cn/lib/swiper/6.0.4/css/swiper.css">   
+  <div class="main_father clearfix  justify-content-center mainfather-concision" style="height:100%;"> 
+   <div class="container clearfix container-concision" id="mainBox" style="width:100%">  
+    <main style="width:100%">  
+     <div class="blog-content-box"> 
+      <div class="article-header-box"> 
+       <div class="article-header"> 
+        <div class="article-title-box"> 
+         <h1 class="title-article" id="articleContentId">嵌入式面经篇十一——操作系统</h1> 
+        </div> 
+        <div class="article-info-box"> 
+         <div class="article-bar-top"> 
+          <img class="article-type-img" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Foriginal.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""> 
+          <div class="bar-content"> 
+           <a class="follow-nickName " href="https://blog.csdn.net/qq_41839588" target="_blank" rel="noopener" title="须尽欢~~">须尽欢~~</a> 
+           <img class="article-time-img article-heard-img" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewCurrentTime2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""> 
+           <span class="time">于&nbsp;2024-08-21 10:45:36&nbsp;发布</span> 
+           <div class="read-count-box"> 
+            <img class="article-read-img article-heard-img" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FarticleReadEyes2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""> 
+            <span class="read-count">阅读量144</span> 
+            <a id="blog_detail_zk_collection" class="un-collection" data-report-click="{&quot;mod&quot;:&quot;popu_823&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4232&quot;,&quot;ab&quot;:&quot;new&quot;}"> <img class="article-collect-img article-heard-img un-collect-status isdefault" style="display:inline-block" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FtobarCollect2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""> <img class="article-collect-img article-heard-img collect-status isactive" style="display:none" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FtobarCollectionActive2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""> <span class="name">收藏</span> <span class="get-collection"> </span> </a> 
+            <div class="read-count-box is-like"> 
+             <img class="article-read-img article-heard-img" style="display:none" id="is-like-imgactive-new" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewHeart2023Active.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""> 
+             <img class="article-read-img article-heard-img" style="display:block" id="is-like-img-new" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewHeart2023Black.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""> 
+             <span class="read-count" id="blog-digg-num">点赞数 1 </span> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="blog-tags-box"> 
+          <div class="tags-box artic-tag-box"> 
+           <span class="label">分类专栏：</span> 
+           <a class="tag-link" href="https://blog.csdn.net/qq_41839588/category_12755939.html" target="_blank" rel="noopener">嵌入式软件面经</a> 
+           <span class="label">文章标签：</span> 
+           <a rel="noopener" data-report-query="spm=1001.2101.3001.4223" data-report-click="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;linux&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;linux\&quot;}&quot;}" data-report-view="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;linux&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;linux\&quot;}&quot;}" class="tag-link" href="https://so.csdn.net/so/search/s.do?q=linux&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=" target="_blank">linux</a> 
+           <a rel="noopener" data-report-query="spm=1001.2101.3001.4223" data-report-click="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;嵌入式软件&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;嵌入式软件\&quot;}&quot;}" data-report-view="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;嵌入式软件&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;嵌入式软件\&quot;}&quot;}" class="tag-link" href="https://so.csdn.net/so/search/s.do?q=%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=" target="_blank">嵌入式软件</a> 
+          </div> 
+         </div> 
+         <div class="slide-content-box"> 
+          <div class="article-copyright"> 
+           <div class="creativecommons">
+             版权声明：本文为博主原创文章，遵循
+            <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。 
+           </div> 
+           <div class="article-source-link">
+             本文链接：
+            <a href="https://blog.csdn.net/qq_41839588/article/details/141302551" target="_blank">https://blog.csdn.net/qq_41839588/article/details/141302551</a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="operating"> 
+          <a class="href-article-edit slide-toggle">版权</a> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="blogHuaweiyunAdvert"></div>   
+      <article class="baidu_pl"> 
+       <div id="article_content" class="article_content clearfix"> 
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/kdoc_html_views-1a98987dfd.css"> 
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-044f2cf1dc.css"> 
+        <div id="content_views" class="markdown_views prism-atom-one-light"> 
+         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"> 
+          <path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path> 
+         </svg> 
+         <p></p> 
+         <div class="toc"> 
+          <h4>文章目录</h4> 
+          <ul>
+           <li><a href="#_4" rel="nofollow">前言</a></li>
+           <li><a href="#_9" rel="nofollow">一、操作系统</a></li>
+           <li>
+            <ul>
+             <li><a href="#1Linux__10" rel="nofollow">1、Linux 系统的组成部分？</a></li>
+             <li><a href="#2Linux__12" rel="nofollow">2、Linux 内核的组成部分？</a></li>
+             <li><a href="#3_MMU__15" rel="nofollow">3、内存管理 MMU 的作用？</a></li>
+             <li><a href="#4_20" rel="nofollow">4、常见的操作系统进程调度策略有哪些？</a></li>
+             <li><a href="#5_41" rel="nofollow">5、满足短作业优先又不会发生饥饿现象的调度算法是？</a></li>
+             <li><a href="#6_IO__43" rel="nofollow">6、 I/O 子系统层次结构</a></li>
+             <li><a href="#7_45" rel="nofollow">7、逻辑地址、线性地址、物理地址、总线地址、虚拟地址的区别？</a></li>
+             <li><a href="#8_51" rel="nofollow">8、操作系统的内存分配一般有哪几种方式，各有什么优缺点？</a></li>
+             <li><a href="#9_55" rel="nofollow">9、用户空间与内核空间有哪些通信方式？</a></li>
+             <li><a href="#10_readwrite_API_57" rel="nofollow">10、用户进程调用 read()/write() API时，内核做了哪些事情？</a></li>
+             <li><a href="#11_59" rel="nofollow">11、系统调用的作用？</a></li>
+             <li><a href="#12BootLoaderLinux__62" rel="nofollow">12、BootLoader、Linux 内核、根文件系统的关系？</a></li>
+             <li><a href="#13BootLoader__66" rel="nofollow">13、BootLoader 的启动过程大多可以分为哪两个阶段？</a></li>
+             <li><a href="#14Linux__69" rel="nofollow">14、Linux 下查看内存使用情况的命令？</a></li>
+             <li><a href="#15_Linux__gcc__76" rel="nofollow">15、在 Linux 里面用 gcc 编译程序时，分为哪四个阶段？</a></li>
+             <li><a href="#16_82" rel="nofollow">16、什么是死锁？产生死锁的原因是什么？</a></li>
+             <li><a href="#17_86" rel="nofollow">17、死锁的四个必要条件是什么？</a></li>
+             <li><a href="#18_93" rel="nofollow">18、死锁的处理方法？</a></li>
+             <li><a href="#19_97" rel="nofollow">19、怎样预防死锁？</a></li>
+             <li><a href="#20_103" rel="nofollow">20、硬链接与软链接的区别？</a></li>
+             <li><a href="#21_108" rel="nofollow">21、虚拟内存是什么？</a></li>
+             <li><a href="#22_110" rel="nofollow">22、内存零头、外零头、内零头？</a></li>
+             <li><a href="#2364__114" rel="nofollow">23、64 位的计算机有哪些优点？</a></li>
+             <li><a href="#24_117" rel="nofollow">24、中断分为哪两种？</a></li>
+             <li><a href="#25Linux__120" rel="nofollow">25、Linux 系统的挂起、待机、休眠？</a></li>
+             <li><a href="#26Linux__124" rel="nofollow">26、Linux 关机、重启的命令有哪些？</a></li>
+             <li><a href="#27Linuxusrtmpetc_129" rel="nofollow">27、Linux目录结构，/usr、/tmp、/etc目录的作用？</a></li>
+             <li><a href="#28_135" rel="nofollow">28、简述实时操作系统和非实时操作系统的区别？</a></li>
+             <li><a href="#29_138" rel="nofollow">29、常用的实时操作系统有哪些？非实时呢？</a></li>
+             <li><a href="#30Linux__141" rel="nofollow">30、Linux 内核的调度策略有哪些？</a></li>
+             <li><a href="#31_145" rel="nofollow">31、块与页有什么关系？</a></li>
+             <li><a href="#32CPUMMUcache_147" rel="nofollow">32、简述处理器在读内存过程中，CPU、MMU、cache、内存如何协同工作？</a></li>
+             <li><a href="#33ARM_CPU__152" rel="nofollow">33、ARM CPU 上的地址转换涉及哪三个概念？</a></li>
+             <li><a href="#34MMU__MMU__MMU__MMU__CPU__156" rel="nofollow">34、MMU 的和不用 MMU 的操作系统有哪些？带 MMU 的和不带 MMU 的 CPU 有哪些？</a></li>
+             <li><a href="#35_uboot__cache_159" rel="nofollow">35、为什么 uboot 要关掉 cache？</a></li>
+             <li><a href="#36_mmap__161" rel="nofollow">36、内核函数 mmap 的实现原理？</a></li>
+             <li><a href="#37_Linux__166" rel="nofollow">37、缺省的 Linux 系统中，从后台启动进程，应在命令的结尾加上&amp;</a></li>
+             <li><a href="#38ps__top__167" rel="nofollow">38、ps 跟 top 有什么区别？</a></li>
+             <li><a href="#39_171" rel="nofollow">39、请写出下列常用命令？</a></li>
+            </ul> </li>
+          </ul> 
+         </div> 
+         <p></p> 
+         <hr> 
+         <h2><a id="_4"></a>前言</h2> 
+         <p>记录一些招聘公司在招聘嵌入式软件岗位时的一些问题，此文为第十一篇。</p> 
+         <hr> 
+         <h2><a id="_9"></a>一、操作系统</h2> 
+         <h3><a id="1Linux__10"></a>1、Linux 系统的组成部分？</h3> 
+         <p>Linux 内核、Linux 文件系统、Linux shell、Linux 应用程序。</p> 
+         <h3><a id="2Linux__12"></a>2、Linux 内核的组成部分？</h3> 
+         <ul>
+          <li>第一种分类方式：内存管理子系统、进程管理子系统、文件管理子系统、I/O 管理子系统。</li>
+          <li>第二种分类方式：进程调度（SCHED）、进程间通信（IPC）、内存管理（MM）、虚拟文件系统（VFS）、网络接口（NET）</li>
+         </ul> 
+         <h3><a id="3_MMU__15"></a>3、内存管理 MMU 的作用？</h3> 
+         <ul>
+          <li>地址映射。</li>
+          <li>内存分配和回收。</li>
+          <li>内存保护。</li>
+          <li>内存扩充。</li>
+         </ul> 
+         <h3><a id="4_20"></a>4、常见的操作系统进程调度策略有哪些？</h3> 
+         <p>答：</p> 
+         <ul>
+          <li>先来先服务（FCFS）。</li>
+          <li>短进程优先（SPF）。</li>
+          <li>高响应比优先（HRN）。</li>
+          <li>时间片轮转（RR）。</li>
+          <li>多级反馈队列（RRWMF）。</li>
+          <li>最高优先权优先（FPF）。</li>
+         </ul> 
+         <p>解读：</p> 
+         <ul>
+          <li>先来先服务（FCFS）：每次调度是从就绪队列中选择一个最先进入该队列的进程，为之分配处理机，使之投入运行。该进程一直运行到完成或发生某事件而阻塞后才放弃处理机。</li>
+          <li>短进程优先（SPF）：从就绪队列中选出一个估计运行时间最短的进程，将处理机分配给它，使它立即执行并一直执行到完成，或发生某事件而被阻塞放弃处理机时再重新调度。</li>
+          <li>高响应比优先（HRN）：在短作业优先的基础上，使作业的优先级随着等待时间的增加而以速率 a 提高，则长作业在等待一定的时间后，必然有机会分配到处理机。</li>
+          <li>时间片轮转（RR）：将所有的就绪进程按先来先服务的原则排成一个队列，每次调度时，把CPU 分配给队首进程，并令其执行一个时间片，时间到了之后将它送往就绪队列的末尾。接着调度下一个队首进程……如此循环。</li>
+          <li>多级反馈队列（RRWMF）： 
+           <ul>
+            <li>设置多个就绪队列，并为各个队列赋予不同的优先级。第一个队列的优先级最高，第二个队列次之，其余各队列的优先权逐个降低。该算法赋予各个队列中进程执行时间片的大小也各不相同，在优先权愈高的队列中，为每个进程所规定的执行时间片就愈小。例如，第二个队列的时间片要比第一个队列的时间片长一倍，第 i + 1 个队列的时间片要比第 i 个队列的时间片长一倍。</li>
+            <li>当一个新进程进入内存后，首先将它放入第一队列的末尾，按 FCFS 原则排队等待调度。当轮到该进程执行时，如它能在该时间片内完成，便可准备撤离系统；如果它在一个时间片结束时尚未完成，调度程序便将该进程转入第二队列的末尾，再同样地按 FCFS 原则等待调度执行；如果它在第二队列中运行一个时间片后仍未完成，再依次将它放入第三队列，如此下去，当一个长进程从第一队列依次降到第n队列后，在第 n 队列便采取按时间片轮转的方式运行。</li>
+            <li>仅当第一队列空闲时，调度程序才调度第二队列中的进程运行；仅当第 1～(i-1) 队列均空时，才会调度第 i 队列中的进程运行。如果处理机正在第 i 队列中为某进程服务时，又有新进程进入优先权较高的队列(第1～(i-1)中的任何一个队列)，则此时新进程将抢占正在运行进程的处理机，即由调度程序把正在运行的进程放回到第i队列的末尾，把处理机分配给新到的高优先权进程。</li>
+           </ul> </li>
+          <li>最高优先权优先（FPF）：把处理机分配给就绪队列中优先权最高的进程，这时，又可进一步把该算法分成如下两种： 
+           <ul>
+            <li>非抢占式优先权算法：系统一旦把处理机分配给就绪队列中优先权最高的进程后，该进程便一直执行下去，直至完成；或因发生某事件使该进程放弃处理机时，系统方可再将处理机重新分配给另一优先权最高的进程。这种调度算法主要用于批处理系统中，也可用于某些对实时性要求不严的实时系统中。</li>
+            <li>抢占式优先权调度算法：系统同样是把处理机分配给优先权最高的进程，使之执行。但在其执行期间，只要又出现了另一个其优先权更高的进程，进程调度程序就立即停止当前进程（原优先权最高的进程）的执行，重新将处理机分配给新到的优先权最高的进程。</li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="5_41"></a>5、满足短作业优先又不会发生饥饿现象的调度算法是？</h3> 
+         <p>高响应比优先。</p> 
+         <h3><a id="6_IO__43"></a>6、 I/O 子系统层次结构</h3> 
+         <p>从上到下依次是用户层 I/O 软件，设备独立性软件，设备驱动程序，中断处理程序。</p> 
+         <h3><a id="7_45"></a>7、逻辑地址、线性地址、物理地址、总线地址、虚拟地址的区别？</h3> 
+         <ul>
+          <li>逻辑地址：与内存段相关的偏移地址部分。例如，在 C 语言获取指针变量的值，就是逻辑地址，不和绝对的物理地址相关。</li>
+          <li>线性地址：线性地址 = 逻辑地址 + 基地址。</li>
+          <li>物理地址：如果启用了分页机制，那么线性地址使用页表项变换后就是物理地址。如果没有启用分页机制，那么线性地址就是物理地址。</li>
+          <li>总线地址：x86 下的 I/O 地址，ARM 下的物理地址。（在 x86 下，外设的 I/O 地址是独立的，即有专门的指令访问外设 I/O，I/O 地址就是“总线地址”，而 RAM 地址就是“物理地址”。在 ARM 下，I/O 和 RAM 统一编址，但 linux为了统一各个平台，仍然保留这个概念，总线地址其实就是物理地址。）</li>
+          <li>虚拟地址：MMU 虚拟出来的地址。</li>
+         </ul> 
+         <h3><a id="8_51"></a>8、操作系统的内存分配一般有哪几种方式，各有什么优缺点？</h3> 
+         <ul>
+          <li>分页存储管理：优点是不需要连续的内存空间，且内存利用率高（只有很小的页内碎片）；缺点是不易于实现内存共享与保护。</li>
+          <li>分段存储管理：优点是易于实现段内存共享和保护；缺点是每段都需要连续的内存空间，且内存利用率较低（会产生外部碎片）。</li>
+          <li>段页式存储管理：优点是不需要连续的内存空间，内存利用率高（只有很小的页内碎片），且易于实现段内存共享和保护；缺点是管理软件复杂性较高，需要的硬件以及占用的内存也有所增加，使得执行速度下降。</li>
+         </ul> 
+         <h3><a id="9_55"></a>9、用户空间与内核空间有哪些通信方式？</h3> 
+         <p><img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fi-blog.csdnimg.cn%2Fdirect%2Fb7b90920a2ff431c9fc61bb5ad6af395.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="在这里插入图片描述"></p> 
+         <h3><a id="10_readwrite_API_57"></a>10、用户进程调用 read()/write() API时，内核做了哪些事情？</h3> 
+         <p>用户进程调用 read()/write() 后进入内核空间 -&gt; 调用内核的 sys_read()/sys_write() 函数 -&gt; 内核函数进一步调用 fop.read()/fop.write() 指向的函数，也就是驱动程序里具体的读写函数。</p> 
+         <h3><a id="11_59"></a>11、系统调用的作用？</h3> 
+         <ul>
+          <li>为应用程序提供访问硬件资源的统一接口，以至于应用程序不必关心具体的硬件操作细节。</li>
+          <li>对系统内核进行保护，保证系统的稳定和安全，因为系统调用规定了用户进程进入内核的具体方式以及所能访问的数据范围。</li>
+         </ul> 
+         <h3><a id="12BootLoaderLinux__62"></a>12、BootLoader、Linux 内核、根文件系统的关系？</h3> 
+         <ul>
+          <li>系统一上电，就执行 BootLoader 来初始化处理器及外设，将系统的软硬件环境带到一个合适的状态。</li>
+          <li>然后将 Linux 内核、根文件系统从非易失性存储器读取到内存中并执行 Linux 内核。</li>
+          <li>Linux 内核完成初始化之后就挂载某个文件系统作为根文件系统。</li>
+         </ul> 
+         <h3><a id="13BootLoader__66"></a>13、BootLoader 的启动过程大多可以分为哪两个阶段？</h3> 
+         <ul>
+          <li>第一阶段是汇编的，完成一些依赖于 CPU 体系结构的初始化，并调用第二阶段的代码。</li>
+          <li>第二阶段是 C 语言的，进一步完成硬件初始化，建立内存映射，并将内核映像和根文件系统读取到内存中，然后调用内核。</li>
+         </ul> 
+         <h3><a id="14Linux__69"></a>14、Linux 下查看内存使用情况的命令？</h3> 
+         <ul>
+          <li>ps -aux</li>
+          <li>free</li>
+          <li>vmstat</li>
+          <li>top</li>
+          <li>cat/proc/meminfo</li>
+         </ul> 
+         <h3><a id="15_Linux__gcc__76"></a>15、在 Linux 里面用 gcc 编译程序时，分为哪四个阶段？</h3> 
+         <ul>
+          <li>预处理：引入头文件、进行宏替换、处理条件编译指令、去除注释、添加行号。</li>
+          <li>编译：进行语法分析等，并生成汇编代码.s。</li>
+          <li>汇编：将汇编代码转成二进制代码.o（目标文件）。</li>
+          <li>链接：将有关的目标文件彼此连接为可执行代码。分为静态链接（将库文件代码搬迁到可执行文件中，后缀是.a）和动态链接（在执行的时候转到库文件代码执行，后缀是.so）。</li>
+         </ul> 
+         <h3><a id="16_82"></a>16、什么是死锁？产生死锁的原因是什么？</h3> 
+         <ul>
+          <li>死锁是指多个进程因竞争资源而造成的一种僵局（互相等待），若无外力作用，这些进程将无法向前推进。</li>
+          <li>原因：①系统资源不足。②资源分配不当。③进程推进的顺序不合适。</li>
+         </ul> 
+         <h3><a id="17_86"></a>17、死锁的四个必要条件是什么？</h3> 
+         <ul>
+          <li>互斥条件：一个资源每次只能被一个进程使用，其他进程只能等待。</li>
+          <li>请求与保持条件：进程已经获得至少一个资源，但又提出了新的资源请求，而该资源已被其他进程占有，此时该进程被阻塞，但对已获得资源依然保持不放。</li>
+          <li>不可剥夺条件：进程所获得的资源不能被其他进程剥夺，只能被自己释放。</li>
+          <li>循环等待条件：若干进程形成首尾相接循环等待资源的关系。</li>
+         </ul> 
+         <p>注意：以上四个条件缺一不可。</p> 
+         <h3><a id="18_93"></a>18、死锁的处理方法？</h3> 
+         <ul>
+          <li>预防死锁：通过设置一些限制条件，去破坏产生死锁的必要条件。</li>
+          <li>避免死锁：在资源分配过程中，使用某种方法避免系统进入不安全的状态，从而避免发生死锁。</li>
+          <li>检测和解除死锁：允许死锁的发生，但是通过系统的检测之后，采取一些措施，将死锁清除掉。</li>
+         </ul> 
+         <h3><a id="19_97"></a>19、怎样预防死锁？</h3> 
+         <ul>
+          <li>破坏“请求与保持条件”： 
+           <ul>
+            <li>静态分配，即每个进程在开始执行时就申请它所需要的全部资源：</li>
+            <li>动态分配，即每个进程在申请所需要的资源时它本身不占用系统资源。</li>
+           </ul> </li>
+          <li>破坏“不可剥夺条件”：一个进程在阻塞等待期间，其占有的资源被隐式释放后被其他进程使用，而阻塞等待的资源只有获得所有需要的资源才能重新启动。</li>
+          <li>破坏“循环等待条件”：采用资源的有序分配，将所有资源进行编号，紧缺的资源采用比较大的编号，一个进程只有获得较小编号的资源才可以申请较大编号的资源。</li>
+         </ul> 
+         <h3><a id="20_103"></a>20、硬链接与软链接的区别？</h3> 
+         <ul>
+          <li>链接：是给系统中已有的某个文件指定另外一个可用于访问它的名称，链接也可以指向目录。即使我们删除这个链接，也不会破坏原来的文件或目录。</li>
+          <li>硬链接：引用的是文件在文件系统中的物理索引（inode），当你移动或删除原文件时，硬链接不会被破坏。硬链接只能引用同一文件系统中的文件。</li>
+          <li>软链接：就是新建一个文件（inode），这个文件专门用来指向别的文件（类似Windows中的快捷方式），若移动或删除原文件，则相应的软链接不可用。软链接可以跨文件系统，也可以对一个不存在的文件名或目录名进行链接。</li>
+         </ul> 
+         <h3><a id="21_108"></a>21、虚拟内存是什么？</h3> 
+         <p>虚拟内存是内存管理的一种技术，使得应用程序认为自己拥有连续的内存空间，而实际上它对应的物理内存是不连续的，甚至还有一部分对应着外部磁盘存储器，在需要时再进行数据交换。</p> 
+         <h3><a id="22_110"></a>22、内存零头、外零头、内零头？</h3> 
+         <ul>
+          <li>内存零头：操作系统在内存分配时产生的一些无法利用的内存碎片。</li>
+          <li>外零头：内存中存在着一些内存碎片，但这些内存碎片不归任何进程所有。段式存储管理会产生外零头，其中段的大小是程序逻辑确定的，大小不定。</li>
+          <li>内零头：内存中存在着一些内存碎片，而这些内存碎片是归属于某个进程的。页式存储管理会产生内零头，其中页的大小是由系统确定的，大小固定。</li>
+         </ul> 
+         <h3><a id="2364__114"></a>23、64 位的计算机有哪些优点？</h3> 
+         <ul>
+          <li>可以进行更大范围的整数计算。</li>
+          <li>可以支持更大的内存，虚拟内存空间大小一般为2^48（256TB）。64 位的 Linux 一般使用 48 位表示虚拟内存空间地址，40 位表示物理内存地址。</li>
+         </ul> 
+         <h3><a id="24_117"></a>24、中断分为哪两种？</h3> 
+         <ul>
+          <li>异步中断：也叫外部中断，由 CPU 外设产生的电信号，其发生时间不可预估。其引入是为了支持 CPU 和设备之间的并行操作。</li>
+          <li>同步中断：也叫内部中断、异常，由 CPU 内部产生的电信号，<font color="red">其特点是当前指令执行完才产生中断</font>。其引入是为了表示 CPU 执行时本身出现的问题。</li>
+         </ul> 
+         <h3><a id="25Linux__120"></a>25、Linux 系统的挂起、待机、休眠？</h3> 
+         <ul>
+          <li>挂起：CPU、内存工作，而硬盘、显示器等外部设备停止工作。</li>
+          <li>待机：只对内存供电，CPU、外设停止工作。</li>
+          <li>休眠：CPU、内存停止工作，内存中的数据保存在硬盘中，外部设备也停止工作。</li>
+         </ul> 
+         <h3><a id="26Linux__124"></a>26、Linux 关机、重启的命令有哪些？</h3> 
+         <ul>
+          <li>关机命令：halt、shutdown -h 时间、init0、poweroff</li>
+          <li>重启命令：reboot、shutdown -r 时间、init6</li>
+         </ul> 
+         <p>注意：shutdown 可以安全地关闭或重启 Linux 系统，它在系统关闭之前给系统上所有登录用户提示一条警告信息，还允许用户设置一个缓冲时间。</p> 
+         <h3><a id="27Linuxusrtmpetc_129"></a>27、Linux目录结构，/usr、/tmp、/etc目录的作用？</h3> 
+         <ul>
+          <li>Linux 目录结构：<br> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fi-blog.csdnimg.cn%2Fdirect%2Ff75b44d9b173446e88ead11fa9f734c8.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="在这里插入图片描述"></li>
+          <li>/usr：是 Unix Software Resource 的缩写，也就是 Unix 操作系统软件资源所放置的目录，而不是用户数据。</li>
+          <li>/tmp：让一般使用者或者是正在执行的程序暂时放置档案的地方。</li>
+          <li>/etc：系统主要的设定档案几乎都放置于这个目录，例如人员的账号密码档案、各种服务器的起始档案。一般是供给使用者查阅的，只有root用户有权限修改。FHS建议不要放置可执行档案在这个目录中。</li>
+         </ul> 
+         <h3><a id="28_135"></a>28、简述实时操作系统和非实时操作系统的区别？</h3> 
+         <ul>
+          <li>实时操作系统：是可抢占式内核，响应外部事件尽可能快且响应时间具有确定性。有硬实时操作系统和软实时操作系统，硬实时操作系统的抖动（时间偏差）比软实时操作系统小。</li>
+          <li>非实时操作系统：非可抢占式内核，响应外部事的时间没有保证。</li>
+         </ul> 
+         <h3><a id="29_138"></a>29、常用的实时操作系统有哪些？非实时呢？</h3> 
+         <ul>
+          <li>实时：Vxworks、μCOS、eCOS、QNX、MQX、Nucleus、FREERTOS、RTLinux、RTEMS、RT-Thread。</li>
+          <li>软实时或非实时：WinCE、Linux。</li>
+         </ul> 
+         <h3><a id="30Linux__141"></a>30、Linux 内核的调度策略有哪些？</h3> 
+         <ul>
+          <li>SCHED_OTHER 分时调度策略；</li>
+          <li>SCHED_FIFO 实时调度策略，先到先服务。</li>
+          <li>SCHED_RR 实时调度策略，时间片轮转。</li>
+         </ul> 
+         <h3><a id="31_145"></a>31、块与页有什么关系？</h3> 
+         <p>操作系统经常与硬盘和内存这两种存储设备进行通信，块是操作系统读写硬盘的最小单位，页是操作系统读写内存的最小单位。</p> 
+         <h3><a id="32CPUMMUcache_147"></a>32、简述处理器在读内存过程中，CPU、MMU、cache、内存如何协同工作？</h3> 
+         <ul>
+          <li>CPU 内核发出 VA 向 TLB 请求页表项，它缓存最近查找过的 VA 对应的页表项，如果 TLB 中刚好缓存了该 VA 对应的页表项则直接返回给 CPU；否则就由 MMU 去物理内存中读出页表项保存在 TLB 中，同时返回给 CPU 内核。（TLB 可以减少访问物理内存的次数）</li>
+          <li>MMU 首先检查页表项中的权限位，如果没有访问权限，就引发一个异常给 CPU 内核；有权限则检查是否允许缓存（页表项中不仅保存着物理页面的基地址，还保存着权限和是否允许 cache 的标志）。</li>
+          <li>如果不允许 cache 则 MMU 直接发出 PA 从物理内存中读取数据到 CPU 内核。</li>
+          <li>如果允许 cache，则 MMU 以 VA 为索引到 cache 中查找是否缓存了要读取的数据，如果是则直接返回给 CPU 内核；如果不是则 MMU 发出 PA 从物理内存中读取数据并缓存到 cache 中，同时返回给 CPU 内核。</li>
+         </ul> 
+         <h3><a id="33ARM_CPU__152"></a>33、ARM CPU 上的地址转换涉及哪三个概念？</h3> 
+         <ul>
+          <li>虚拟地址（VA）：CPU 内核对外发出 VA。</li>
+          <li>变换后的虚拟地址（MVA, Modified Virtual Address）：VA 被变换为 MVA 供 cache 和 MMU 使用，由硬件自动完成。如果 VA &lt; 32M，则需要使用 PID 来转换为 MVA(VA | (PID &lt;&lt; 25))，目的是当两个进程的虚拟地址空间有重叠时，把重叠的 VA 映射到不同的 PA 上去，减少切换进程的代价，</li>
+          <li>物理地址（PA）：最后使用 PA 读写实际设备。</li>
+         </ul> 
+         <h3><a id="34MMU__MMU__MMU__MMU__CPU__156"></a>34、MMU 的和不用 MMU 的操作系统有哪些？带 MMU 的和不带 MMU 的 CPU 有哪些？</h3> 
+         <ul>
+          <li>用 MMU 的操作系统有：Windows、MacOS、Linux、Android；不用 MMU 的操作系统有：FreeRTOS、VxWorks、UCOS。</li>
+          <li>带 MMU 的 CPU 有：Cortex-A 系列、ARM9、ARM11 系列；不带 MMU 的 CPU 有：Cortex-M 系列（STM32 就是使用 M 系列内核）。</li>
+         </ul> 
+         <h3><a id="35_uboot__cache_159"></a>35、为什么 uboot 要关掉 cache？</h3> 
+         <p>cache 主要用来加快 CPU 读取内存中指令的速度，但在 CPU 初始化时，内存并未准备就绪，直接进行数据读取，势必导致指令取址异常。</p> 
+         <h3><a id="36_mmap__161"></a>36、内核函数 mmap 的实现原理？</h3> 
+         <p>答：</p> 
+         <ul>
+          <li>mmap 函数能够实现把一个文件映射到一个内存区域，使得我们可以像读写内存一样读写文件，比单纯地调用 read/write 函数要快上许多。我们可以把内存中的内容拷贝到一个文件中实现内存备份，也可以把文件映射到内存来恢复某些服务。</li>
+         </ul> 
+         <p>解读：实现共享内存是 mmap 函数的主要应用之一，mmap 系统调用使得进程之间通过映射同一个普通文件实现共享内存，是一种进程间通信方式。</p> 
+         <h3><a id="37_Linux__166"></a>37、缺省的 Linux 系统中，从后台启动进程，应在命令的结尾加上&amp;</h3> 
+         <h3><a id="38ps__top__167"></a>38、ps 跟 top 有什么区别？</h3> 
+         <ul>
+          <li>ps 看到的是命令执行瞬间的进程信息；而 top 可以实时地持续监视，不断更新进程状态。</li>
+          <li>ps 只是查看进程信息，而 top 还可以监视系统性能，如 CPU 负载、内存消耗。</li>
+          <li>另外 top 还可以操作进程，如改变优先级（命令r）和关闭进程（命令k）。</li>
+         </ul> 
+         <h3><a id="39_171"></a>39、请写出下列常用命令？</h3> 
+         <p><img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fi-blog.csdnimg.cn%2Fdirect%2F2360392c56484e5b9228d38b1129804a.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="在这里插入图片描述"></p> 
+         <hr> 
+         <p><mark>我的qq：2442391036，欢迎交流！</mark></p> 
+         <hr> 
+        </div> 
+        <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/markdown_views-f23dff6052.css" rel="stylesheet"> 
+        <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/style-c216769e99.css" rel="stylesheet"> 
+       </div> 
+       <div id="treeSkill"></div> 
+      </article>  
+     </div> 
+     <div class="directory-boxshadow-dialog" style="display:none;"> 
+      <div class="directory-boxshadow-dialog-box"> 
+      </div> 
+      <div class="vip-limited-time-offer-box-new" id="vip-limited-time-offer-box-new"> 
+       <img class="limited-img limited-img-new" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fvip-limited-close-newWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551"> 
+       <div class="vip-limited-time-top">
+         确定要放弃本次机会？ 
+       </div> 
+       <span class="vip-limited-time-text">福利倒计时</span> 
+       <div class="limited-time-box-new"> 
+        <span class="time-hour"></span> 
+        <i>:</i> 
+        <span class="time-minite"></span> 
+        <i>:</i> 
+        <span class="time-second"></span> 
+       </div> 
+       <div class="limited-time-vip-box"> 
+        <p> <img class="coupon-img" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fvip-limited-close-roup.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551"> <span class="def">立减 ¥</span> <span class="active limited-num"></span> </p> 
+        <span class="">普通VIP年卡可用</span> 
+       </div> 
+       <a class="limited-time-btn-new" href="https://mall.csdn.net/vip" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.9621&quot;}" data-report-query="spm=1001.2101.3001.9621">立即使用</a> 
+      </div> 
+     </div>     
+     <a id="commentBox" name="commentBox"></a>         
+    </main>     
+   </div> 
+   <div class="recommend-right align-items-stretch clearfix" id="rightAside" data-type="recommend"> 
+    <aside class="recommend-right_aside"> 
+     <div id="recommend-right"> 
+      <div class="flex-column aside-box groupfile" id="groupfile"> 
+       <div class="groupfile-div"> 
+        <h3 class="aside-title">目录</h3> 
+        <div class="align-items-stretch group_item"> 
+         <div class="pos-box"> 
+          <div class="scroll-box"> 
+           <div class="toc-box"></div> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="aside-box kind_person d-flex flex-column"> 
+       <h3 class="aside-title">分类专栏</h3> 
+       <div class="align-items-stretch kindof_item" id="kind_person_column"> 
+        <div class="aside-content"> 
+         <ul> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12755939.html" data-report-click="{&quot;mod&quot;:&quot;popu_826&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4230&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12755939.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756724.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 嵌入式软件面经 </span> <span class="pay-tag">付费</span> </a> <span class="special-column-num">11篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12659202.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12659202.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756927.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> imx6ull </span> </a> <span class="special-column-num">2篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12306316.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12306316.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756757.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 软件安装 </span> </a> <span class="special-column-num">9篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12305826.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12305826.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756918.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 服务器 </span> </a> <span class="special-column-num">6篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12613050.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12613050.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756926.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> GNU Radio </span> </a> <span class="special-column-num">25篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12504031.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12504031.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20190918140053667.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 雷达通信一体化 </span> </a> <span class="special-column-num">6篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12279858.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12279858.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756738.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 荔枝派 </span> </a> <span class="special-column-num">18篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12470736.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12470736.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756757.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> OFDM </span> </a> <span class="special-column-num">11篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12392658.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12392658.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756738.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 通信原理 </span> </a> <span class="special-column-num">11篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12480915.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12480915.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756780.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 信号处理 </span> </a> <span class="special-column-num">4篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12554367.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12554367.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756930.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> USRP </span> </a> <span class="special-column-num">8篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12284519.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12284519.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756724.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> LabVIEW </span> </a> <span class="special-column-num">11篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12636128.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12636128.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756923.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> STM32 </span> </a> <span class="special-column-num">1篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12600659.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12600659.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756724.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> REDHAWK </span> </a> <span class="special-column-num">7篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12584912.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12584912.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756919.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> linux内核 </span> </a> <span class="special-column-num">3篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12556087.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12556087.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756930.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> Qt </span> </a> <span class="special-column-num">3篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12427382.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12427382.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756927.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 音视频开发 </span> </a> <span class="special-column-num">30篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12485453.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12485453.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756916.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 代码随记 </span> </a> <span class="special-column-num">2篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12474416.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12474416.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756757.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 雷达系统设计MATLAB仿真 </span> </a> <span class="special-column-num">6篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12445346.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12445346.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756918.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> zynq-7020 </span> </a> <span class="special-column-num">5篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12459416.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12459416.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756757.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> system generator </span> </a> <span class="special-column-num">4篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12442281.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12442281.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756928.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> python </span> </a> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12289495.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12289495.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756780.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> linux系统编程 </span> </a> <span class="special-column-num">7篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12398415.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12398415.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756780.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 云IDE </span> </a> <span class="special-column-num">1篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12325880.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12325880.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756922.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> linux设备驱动程序 </span> </a> <span class="special-column-num">5篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12305832.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12305832.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756919.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> ubuntu </span> </a> <span class="special-column-num">3篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12371843.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12371843.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756927.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> NI采集卡 </span> </a> <span class="special-column-num">1篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12281337.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12281337.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756754.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> Git </span> </a> <span class="special-column-num">9篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12337204.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12337204.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756925.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> Bellhop </span> </a> <span class="special-column-num">3篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12298114.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12298114.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756913.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 设计模式 </span> </a> <span class="special-column-num">7篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12305836.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12305836.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756757.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> NB-IoT </span> </a> <span class="special-column-num">2篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12305829.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12305829.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756928.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> i.mx287 </span> </a> <span class="special-column-num">2篇</span> </li> 
+         </ul> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </aside> 
+   </div> 
+   <div class="recommend-right1  align-items-stretch clearfix" id="rightAsideConcision" data-type="recommend"> 
+    <aside class="recommend-right_aside"> 
+     <div id="recommend-right-concision"> 
+      <div class="flex-column aside-box groupfile" id="groupfileConcision"> 
+       <div class="groupfile-div1"> 
+        <h3 class="aside-title">目录</h3> 
+        <div class="align-items-stretch group_item"> 
+         <div class="pos-box"> 
+          <div class="scroll-box"> 
+           <div class="toc-box"></div> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </aside> 
+   </div> 
+  </div> 
+  <div class="mask-dark"></div> 
+  <div class="skin-boxshadow"></div> 
+  <div class="directory-boxshadow"></div> 
+  <div class="comment-side-box-shadow comment-side-tit-close" id="commentSideBoxshadow"> 
+   <div class="comment-side-content"> 
+    <div class="comment-side-tit"> 
+     <span class="comment-side-tit-count">评论</span> 
+     <img class="comment-side-tit-close" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcloseBt.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551">
+    </div>  
+    <div id="pcFlodCommentSideBox" class="pc-flodcomment-sidebox"> 
+     <div class="comment-fold-tit">
+      <span id="lookUnFlodComment" class="back"><img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcommentArrowLeftWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""></span>被折叠的&nbsp;
+      <span class="count"></span>&nbsp;条评论 
+      <a href="https://blogdev.blog.csdn.net/article/details/122245662" class="tip" target="_blank">为什么被折叠?</a> 
+      <a href="https://bbs.csdn.net/forums/FreeZone" class="park" target="_blank"> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FiconPark.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551">到【灌水乐园】发言</a> 
+     </div> 
+     <div class="comment-fold-content"></div> 
+     <div id="lookBadComment" class="look-bad-comment side-look-comment"> 
+      <a class="look-more-comment">查看更多评论<img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcommentArrowDownWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""></a> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="comment-rewarddialog-box"> 
+    <div class="form-box"> 
+     <div class="title-box">
+       添加红包 
+      <a class="btn-form-close"></a> 
+     </div> 
+     <form id="commentRewardForm"> 
+      <div class="ipt-box"> 
+       <label for="txtName">祝福语</label> 
+       <div class="ipt-btn-box"> 
+        <input type="text" name="name" id="txtName" autocomplete="off" maxlength="50"> 
+        <a class="btn-ipt btn-random"></a> 
+       </div> 
+       <p class="notice">请填写红包祝福语或标题</p> 
+      </div> 
+      <div class="ipt-box"> 
+       <label for="txtSendAmount">红包数量</label> 
+       <div class="ipt-txt-box"> 
+        <input type="text" name="sendAmount" maxlength="4" id="txtSendAmount" placeholder="请填写红包数量(最小10个)" autocomplete="off"> 
+        <span class="after-txt">个</span> 
+       </div> 
+       <p class="notice">红包个数最小为10个</p> 
+      </div> 
+      <div class="ipt-box"> 
+       <label for="txtMoney">红包总金额</label> 
+       <div class="ipt-txt-box error"> 
+        <input type="text" name="money" maxlength="5" id="txtMoney" placeholder="请填写总金额(最低5元)" autocomplete="off"> 
+        <span class="after-txt">元</span> 
+       </div> 
+       <p class="notice">红包金额最低5元</p> 
+      </div> 
+      <div class="balance-info-box"> 
+       <label>余额支付</label> 
+       <div class="balance-info">
+         当前余额
+        <span class="balance">3.43</span>元 
+        <a href="https://i.csdn.net/#/wallet/balance/recharge" class="link-charge" target="_blank">前往充值 &gt;</a> 
+       </div> 
+      </div> 
+      <div class="opt-box"> 
+       <div class="pay-info">
+         需支付：
+        <span class="price">10.00</span>元 
+       </div> 
+       <button type="button" class="ml-auto btn-cancel">取消</button> 
+       <button type="button" class="ml8 btn-submit" disabled="true">确定</button> 
+      </div> 
+     </form> 
+    </div> 
+   </div> 
+   <div class="rr-guide-box"> 
+    <div class="rr-first-box"> 
+     <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FguideRedReward02.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""> 
+     <button class="btn-guide-known next">下一步</button> 
+    </div> 
+    <div class="rr-second-box"> 
+     <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FguideRedReward03.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""> 
+     <button class="btn-guide-known known">知道了</button> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="redEnvolope" id="redEnvolope"> 
+   <div class="env-box"> 
+    <div class="env-container"> 
+     <div class="pre-open" id="preOpen"> 
+      <div class="top"> 
+       <header> 
+        <img class="clearTpaErr" :src="redpacketAuthor.avatar" alt="" src="https://ziquyun.com/main/csdn/img?url=&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551"> 
+        <div class="author">
+         成就一亿技术人!
+        </div> 
+       </header> 
+       <div class="bot-icon"></div> 
+      </div> 
+      <footer> 
+       <div class="red-openbtn open-start"></div> 
+       <div class="tip">
+         领取后你会自动成为博主和红包主的粉丝 
+        <a class="rule" target="_blank">规则</a> 
+       </div> 
+      </footer> 
+     </div> 
+     <div class="opened" id="opened"> 
+      <div class="bot-icon"> 
+       <header> 
+        <a class="creatorUrl" href="" target="_blank"> <img class="clearTpaErr" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fprofile-avatar.csdnimg.cn%2Fdefault.jpg%212&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""> </a> 
+        <div class="author"> 
+         <div class="tt">
+          hope_wisdom
+         </div> 发出的红包 
+        </div> 
+       </header> 
+      </div> 
+      <div class="receive-box"> 
+       <header></header> 
+       <div class="receive-list"> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="close-btn"></div> 
+   </div> 
+  </div> 
+  <div id="rewardNew" class="reward-popupbox-new"> 
+   <p class="rewad-title">打赏作者<span class="reward-close"><img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcloseBt.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551"></span></p> 
+   <dl class="profile-box"> 
+    <dd> 
+     <a href="https://blog.csdn.net/qq_41839588" data-report-click="{&quot;mod&quot;:&quot;popu_379&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588&quot;,&quot;ab&quot;:&quot;new&quot;}"> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fprofile-avatar.csdnimg.cn%2F576b49ba9bd04bd8b8a16191c209eb93_qq_41839588.jpg%211&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" class="avatar_pic"> </a> 
+    </dd> 
+    <dt> 
+     <p class="blog-name">须尽欢~~</p> 
+     <p class="blog-discript">你的鼓励将是我创作的最大动力</p> 
+    </dt> 
+   </dl> 
+   <div class="reward-box-new"> 
+    <div class="reward-content">
+     <div class="reward-right"></div>
+    </div> 
+   </div> 
+   <div class="money-box"> 
+    <span class="choose-money choosed" data-id="1">¥1</span> 
+    <span class="choose-money " data-id="2">¥2</span> 
+    <span class="choose-money " data-id="4">¥4</span> 
+    <span class="choose-money " data-id="6">¥6</span> 
+    <span class="choose-money " data-id="10">¥10</span> 
+    <span class="choose-money " data-id="20">¥20</span> 
+   </div> 
+   <div class="sure-box"> 
+    <div class="sure-box-money"> 
+     <div class="code-box"> 
+      <div class="code-num-box"> 
+       <span class="code-name">扫码支付：</span>
+       <span class="code-num">¥1</span> 
+      </div> 
+      <div class="code-img-box"> 
+       <div class="renovate"> 
+        <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-time-out.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551"> 
+        <span>获取中</span> 
+       </div> 
+      </div> 
+      <div class="code-pay-box"> 
+       <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewWeiXin.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""> 
+       <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewZhiFuBao.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""> 
+       <span>扫码支付</span> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="sure-box-blance"> 
+     <p class="tip">您的余额不足，请更换扫码支付或<a target="_blank" data-report-click="{&quot;mod&quot;:&quot;1597646289_003&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4302&quot;}" href="https://i.csdn.net/#/wallet/balance/recharge?utm_source=RewardVip" class="go-invest">充值</a></p> 
+     <p class="is-have-money"><a class="reward-sure">打赏作者</a></p> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="pay-code"> 
+   <div class="pay-money">
+    实付
+    <span class="pay-money-span" data-nowprice="" data-oldprice="">元</span>
+   </div> 
+   <div class="content-blance">
+    <a class="blance-bt" href="javascript:;">使用余额支付</a>
+   </div> 
+   <div class="content-code"> 
+    <div id="payCode" data-id=""> 
+     <div class="renovate"> 
+      <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-time-out.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551"> 
+      <span>点击重新获取</span> 
+     </div> 
+    </div> 
+    <div class="pay-style">
+     <span><img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fweixin.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551"></span>
+     <span><img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fzhifubao.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551"></span>
+     <span><img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fjingdong.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551"></span>
+     <span class="text">扫码支付</span>
+    </div> 
+   </div> 
+   <div class="bt-close"> 
+    <svg t="1567152543821" class="icon" viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10924" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12"> 
+     <defs> 
+      <style type="text/css"></style> 
+     </defs> 
+     <path d="M512 438.378667L806.506667 143.893333a52.032 52.032 0 1 1 73.6 73.621334L585.621333 512l294.485334 294.485333a52.074667 52.074667 0 0 1-73.6 73.642667L512 585.621333 217.514667 880.128a52.053333 52.053333 0 1 1-73.621334-73.642667L438.378667 512 143.893333 217.514667a52.053333 52.053333 0 1 1 73.621334-73.621334L512 438.378667z" fill="" p-id="10925"></path> 
+    </svg> 
+   </div> 
+   <div class="pay-balance"> 
+    <input type="radio" class="pay-code-radio" data-type="details"> 
+    <span class="span">钱包余额</span> 
+    <span class="balance" style="color:#FC5531;font-size:14px;">0</span> 
+    <div class="pay-code-tile"> 
+     <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-help.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""> 
+     <div class="pay-code-content"> 
+      <div class="span"> 
+       <p class="title">抵扣说明：</p> 
+       <p> 1.余额是钱包充值的虚拟货币，按照1:1的比例进行支付金额的抵扣。<br> 2.余额无法直接购买下载，可以购买VIP、付费专栏及课程。</p> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <a class="pay-balance-con" href="https://i.csdn.net/#/wallet/balance/recharge" target="_blank"><img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Frecharge.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141302551" alt=""><span>余额充值</span></a> 
+  </div> 
+  <div style="display:none;">  
+  </div> 
+  <div class="keyword-dec-box" id="keywordDecBox"></div>       
+  <link rel="stylesheet" href="https://g.csdnimg.cn/lib/cboxEditor/1.1.6/embed-editor.min.css"> 
+  <link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.6.12/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-light.css">                 
+ </body>
+</html>

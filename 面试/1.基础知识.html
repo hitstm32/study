@@ -1,0 +1,1569 @@
+<!doctype html>
+<html lang="zh-CN">
+ <head> 
+  <meta charset="utf-8"> 
+  <link rel="canonical" href="https://blog.csdn.net/qq_41839588/article/details/141105141"> 
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+  <meta name="renderer" content="webkit"> 
+  <meta name="force-rendering" content="webkit"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+  <meta name="report" content="{&quot;pid&quot;: &quot;blog&quot;, &quot;spm&quot;:&quot;1001.2101&quot;}">  
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="alternate" media="handheld" href="#"> 
+  <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848"> 
+  <meta name="applicable-device" content="pc"> 
+  <link href="https://g.csdnimg.cn/static/logo/favicon32.ico" rel="shortcut icon" type="image/x-icon"> 
+  <title>嵌入式面经篇一-CSDN博客</title>  
+  <meta name="keywords" content="嵌入式面经篇一"> 
+  <meta name="description" content="文章浏览阅读906次，点赞18次，收藏16次。记录一些招聘公司在招聘嵌入式软件岗位时的一些问题，此文为第一篇。野指针是指向已释放或无效内存的指针。这类指针的存在可能导致不可预测的程序行为，包括数据损坏、程序崩溃和安全漏洞。野指针通常由以下几种情况产生：释放后未置空：当内存被释放后，如通过 free() 或 delete，指向该内存的指针仍然保留着原来的地址。这种指针称为野指针。由于原内存可能被操作系统重新分配或用于其他用途，通过野指针进行的任何操作都是未定义的，并且可能是危险的。"> 
+  <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/release/blogv2/dist/pc/css/detail_enter-d0526cbe37.min.css">   
+  <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/release/blogv2/dist/pc/themesSkin/skin3-template/skin3-template-762f7595fd.min.css">    
+  <meta name="toolbar" content="{&quot;type&quot;:&quot;0&quot;,&quot;fixModel&quot;:&quot;1&quot;}">    
+  <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css"> 
+  <style>.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%} .MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%} .MathJax .MJX-monospace {font-family: monospace} .MathJax .MJX-sans-serif {font-family: sans-serif} #MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none} .MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0} .MathJax:focus, body :focus .MathJax {display: inline-table} .MathJax.MathJax_FullWidth {text-align: center; display: table-cell!important; width: 10000em!important} .MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none} img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important} .MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none} .MathJax nobr {white-space: nowrap!important} .MathJax img {display: inline!important; float: none!important} .MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none} .MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden} .MathJax_Processed {display: none!important} .MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none} .MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none} .MathJax_LineBox {display: table!important} .MathJax_LineBox span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0} .MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)} .MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent} #MathJax_Tooltip * {filter: none; opacity: 1; background: transparent} @font-face {font-family: MathJax_Main; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Regular.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Main-bold; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Bold.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Bold.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Main-italic; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Italic.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Italic.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Math-italic; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Math-Italic.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Math-Italic.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Caligraphic; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Regular.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Size1; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Size1-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Size1-Regular.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Size2; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Size2-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Size2-Regular.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Size3; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Size3-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Size3-Regular.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Size4; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Size4-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Size4-Regular.otf?V=2.7.2') format('opentype')} .MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}</style>    
+ </head> 
+ <body class="nodata " style=""> 
+  <div id="toolbarBox" style="min-height: 48px;"></div>    
+  <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/pc/css/blog_code-01256533b5.min.css"> 
+  <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/chart-3456820cac.css"> 
+  <link rel="stylesheet" href="https://g.csdnimg.cn/lib/swiper/6.0.4/css/swiper.css">   
+  <div class="main_father clearfix  justify-content-center mainfather-concision" style="height:100%;"> 
+   <div class="container clearfix container-concision" id="mainBox" style="width:100%">  
+    <main style="width:100%">  
+     <div class="blog-content-box"> 
+      <div class="article-header-box"> 
+       <div class="article-header"> 
+        <div class="article-title-box"> 
+         <h1 class="title-article" id="articleContentId">嵌入式面经篇一</h1> 
+        </div> 
+        <div class="article-info-box"> 
+         <div class="up-time">
+          最新推荐文章于&nbsp;2024-08-18 16:24:46&nbsp;发布
+         </div> 
+         <div class="article-bar-top"> 
+          <img class="article-type-img" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Foriginal.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""> 
+          <div class="bar-content"> 
+           <a class="follow-nickName " href="https://blog.csdn.net/qq_41839588" target="_blank" rel="noopener" title="须尽欢~~">须尽欢~~</a> 
+           <img class="article-time-img article-heard-img" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewCurrentTime2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""> 
+           <span class="time blog-postTime" data-time="2024-08-11 23:06:39">最新推荐文章于&nbsp;2024-08-18 16:24:46&nbsp;发布</span> 
+           <div class="read-count-box"> 
+            <img class="article-read-img article-heard-img" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FarticleReadEyes2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""> 
+            <span class="read-count">阅读量906</span> 
+            <a id="blog_detail_zk_collection" class="un-collection" data-report-click="{&quot;mod&quot;:&quot;popu_823&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4232&quot;,&quot;ab&quot;:&quot;new&quot;}"> <img class="article-collect-img article-heard-img un-collect-status isdefault" style="display:inline-block" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FtobarCollect2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""> <img class="article-collect-img article-heard-img collect-status isactive" style="display:none" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FtobarCollectionActive2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""> <span class="name">收藏</span> <span class="get-collection"> 16 </span> </a> 
+            <div class="read-count-box is-like"> 
+             <img class="article-read-img article-heard-img" style="display:none" id="is-like-imgactive-new" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewHeart2023Active.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""> 
+             <img class="article-read-img article-heard-img" style="display:block" id="is-like-img-new" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewHeart2023Black.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""> 
+             <span class="read-count" id="blog-digg-num">点赞数 18 </span> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="blog-tags-box"> 
+          <div class="tags-box artic-tag-box"> 
+           <span class="label">分类专栏：</span> 
+           <a class="tag-link" href="https://blog.csdn.net/qq_41839588/category_12755939.html" target="_blank" rel="noopener">嵌入式软件面经</a> 
+           <span class="label">文章标签：</span> 
+           <a rel="noopener" data-report-query="spm=1001.2101.3001.4223" data-report-click="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;嵌入式&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;嵌入式\&quot;}&quot;}" data-report-view="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;嵌入式&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;嵌入式\&quot;}&quot;}" class="tag-link" href="https://so.csdn.net/so/search/s.do?q=%E5%B5%8C%E5%85%A5%E5%BC%8F&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=" target="_blank">嵌入式</a> 
+           <a rel="noopener" data-report-query="spm=1001.2101.3001.4223" data-report-click="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;c/c++&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;c/c++\&quot;}&quot;}" data-report-view="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;c/c++&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;c/c++\&quot;}&quot;}" class="tag-link" href="https://so.csdn.net/so/search/s.do?q=c%2Fc%2B%2B&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=" target="_blank">c/c++</a> 
+          </div> 
+         </div> 
+         <div class="slide-content-box"> 
+          <div class="article-copyright"> 
+           <div class="creativecommons">
+             版权声明：本文为博主原创文章，遵循
+            <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。 
+           </div> 
+           <div class="article-source-link">
+             本文链接：
+            <a href="https://blog.csdn.net/qq_41839588/article/details/141105141" target="_blank">https://blog.csdn.net/qq_41839588/article/details/141105141</a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="operating"> 
+          <a class="href-article-edit slide-toggle">版权</a> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="blogHuaweiyunAdvert"></div>   
+      <article class="baidu_pl"> 
+       <div id="article_content" class="article_content clearfix"> 
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/kdoc_html_views-1a98987dfd.css"> 
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-044f2cf1dc.css"> 
+        <div id="content_views" class="markdown_views prism-atom-one-light"> 
+         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"> 
+          <path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path> 
+         </svg> 
+         <p></p> 
+         <div class="toc"> 
+          <h4>文章目录</h4> 
+          <ul>
+           <li><a href="#_4" rel="nofollow">前言</a></li>
+           <li><a href="#_8" rel="nofollow">一、大疆</a></li>
+           <li>
+            <ul>
+             <li><a href="#1_9" rel="nofollow">1、谈谈你对多线程与多进程的理解？</a></li>
+             <li><a href="#2_30" rel="nofollow">2、线程，进程间通信方式</a></li>
+             <li><a href="#3_48" rel="nofollow">3、有名管道与匿名管道区别？</a></li>
+             <li><a href="#4_61" rel="nofollow">4、说一下条件变量怎么实现？</a></li>
+             <li><a href="#5PV_76" rel="nofollow">5、信号量机制怎么实现的？该机制可以用于进程间通信吗？信号量机制中PV操作是原⼦操作吗？</a></li>
+             <li><a href="#6linux_88" rel="nofollow">6、linux中断流程，谈谈你对中断上下文的理解</a></li>
+             <li><a href="#7_C__107" rel="nofollow">7、来谈⼀下 C++ 中多态</a></li>
+             <li><a href="#8_161" rel="nofollow">8、纯虚函数与虚函数有哪些区别</a></li>
+             <li><a href="#9_205" rel="nofollow">9、虚函数是怎么实现的？虚函数表存在哪个地方？</a></li>
+             <li><a href="#10_249" rel="nofollow">10、怎么访问类中私有变量，友元是单向的还是双向的？友元可以继承吗？</a></li>
+             <li><a href="#11_287" rel="nofollow">11、你怎么理解引用与指针，为什么有了指针还需要引用？</a></li>
+             <li><a href="#12_315" rel="nofollow">12、谈一下你对操作系统的理解，为什么有操作系统</a></li>
+             <li><a href="#13_330" rel="nofollow">13、什么时候会进行进程调度，如何实现的进程调度</a></li>
+             <li><a href="#14_341" rel="nofollow">14、如何实现进程调度？</a></li>
+            </ul> </li>
+           <li><a href="#_353" rel="nofollow">二、奥比中光</a></li>
+           <li>
+            <ul>
+             <li><a href="#1volatile__354" rel="nofollow">1、volatile 关键字的作用是什么？</a></li>
+             <li><a href="#2_380" rel="nofollow">2、动态分配内存函数形参应该传递什么？</a></li>
+             <li><a href="#3_419" rel="nofollow">3、进程同步方法？死锁原因？</a></li>
+             <li><a href="#4_452" rel="nofollow">4、什么情况会导致内存泄漏？</a></li>
+             <li><a href="#5_483" rel="nofollow">5、变量在内存中的存储方式？</a></li>
+             <li><a href="#6_503" rel="nofollow">6、谈一谈结构体对齐</a></li>
+            </ul> </li>
+           <li><a href="#_531" rel="nofollow">三、芯动科技</a></li>
+           <li>
+            <ul>
+             <li><a href="#1Arm__bl__532" rel="nofollow">1、Arm 汇编中 bl 的意思</a></li>
+             <li><a href="#2static_C_556" rel="nofollow">2、static 修饰的C语言变量存放在哪里，有什么作用</a></li>
+             <li><a href="#3C_586" rel="nofollow">3、C语言变量有几种储存方式</a></li>
+             <li><a href="#4_639" rel="nofollow">4、变量未初始化值是多少</a></li>
+             <li><a href="#5_674" rel="nofollow">5、什么是野指针</a></li>
+             <li><a href="#6_717" rel="nofollow">6、外设和处理器交互的方式</a></li>
+            </ul> </li>
+          </ul> 
+         </div> 
+         <p></p> 
+         <hr> 
+         <h2><a id="_4"></a>前言</h2> 
+         <p>记录一些招聘公司在招聘嵌入式软件岗位时的一些问题，此文为第一篇。</p> 
+         <hr> 
+         <h2><a id="_8"></a>一、大疆</h2> 
+         <h3><a id="1_9"></a>1、谈谈你对多线程与多进程的理解？</h3> 
+         <p>答：多线程与多进程是两种常见的并发执行技术，广泛应用于程序设计中，以提高执行效率和资源利用率。</p> 
+         <ul>
+          <li>多进程 
+           <ul>
+            <li>定义：进程是操作系统分配资源的基本单位，每个进程都拥有自己的独立内存空间和系统资源。</li>
+            <li>优点： 
+             <ul>
+              <li>隔离性强：每个进程拥有独立的内存空间，一个进程崩溃不会直接影响到其他进程。</li>
+              <li>安全性：由于内存隔离，进程间不会直接影响，减少了数据错误和安全风险。</li>
+             </ul> </li>
+            <li>缺点： 
+             <ul>
+              <li>资源消耗大：每个进程需要独立的内存和系统资源，切换成本高。</li>
+              <li>通信复杂：进程间通信（IPC）需要特定的技术和方法，如管道、消息队列、共享内存等。</li>
+             </ul> </li>
+           </ul> </li>
+          <li>多线程 
+           <ul>
+            <li>定义：线程是进程内的一个执行序列，是操作系统能够进行运算调度的最小单位，它们共享父进程的内存空间和资源。</li>
+            <li>优点： 
+             <ul>
+              <li>资源共享：线程之间可以直接共享内存和文件等资源，通信更简便。</li>
+              <li>效率高：线程的创建和切换的资源消耗和时间成本远低于进程。</li>
+             </ul> </li>
+            <li>缺点： 
+             <ul>
+              <li>安全性问题：共享资源可能导致数据不一致，需要额外的同步和锁定机制。</li>
+              <li>稳定性差：一个线程崩溃可能影响整个进程的稳定性。</li>
+             </ul> </li>
+           </ul> </li>
+          <li>应用场景 
+           <ul>
+            <li>多进程：适用于任务间需要隔离的情况，如在不同服务之间分配资源，或者在可靠性和安全性要求较高的场合。</li>
+            <li>多线程：适合于资源使用要求高效且任务间共享大量数据的场景，如服务器的并发处理，或者高频率的任务调度。</li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="2_30"></a>2、线程，进程间通信方式</h3> 
+         <ul>
+          <li>线程间通信（线程间的通信通常比较简单，因为所有线程共享相同的内存地址空间。主要的通信方式包括：） 
+           <ul>
+            <li>共享内存：线程可以直接访问同一进程内的共享数据。<strong>但这种方式需要处理同步问题</strong>，防止多个线程同时修改同一数据导致数据不一致。</li>
+            <li>锁机制： 
+             <ul>
+              <li>互斥锁（Mutex）：确保同一时间只有一个线程访问特定的内存或资源。</li>
+              <li>读写锁：允许多个读操作同时进行，但写操作需要独占访问。</li>
+             </ul> </li>
+            <li>条件变量：允许线程在某些条件下挂起操作，直到其他线程更改条件并通知它继续。</li>
+            <li>信号量：用于控制对共享资源的访问数量，可以解决生产者-消费者问题等。</li>
+           </ul> </li>
+          <li>进程间通信（进程间通信由于涉及到不同的内存空间，方式更为多样和复杂：） 
+           <ul>
+            <li>管道（Pipe）： 
+             <ul>
+              <li>匿名管道：只能用于具有亲缘关系的进程间通信（如父子进程），单向数据流。</li>
+              <li>命名管道（FIFO）：可以在无亲缘关系的进程间进行双向通信，但通信效率不如匿名管道。</li>
+             </ul> </li>
+            <li>信号（Signal）：用于处理异步事件，一个进程可以给另一个进程发送信号，受信号影响的进程可进行相应处理。</li>
+            <li>消息队列：允许一个或多个进程向队列中写入或读取消息。消息存储在内核中，直到被接收。</li>
+            <li>共享内存：最快的 IPC 方式，多个进程可以访问同一块内存区域。需要同步机制以避免竞争条件。</li>
+            <li>套接字（Socket）：支持不同机器间的进程通信。适用于网络通信和本地通信。</li>
+            <li>信号量（Semaphores）：主要用于同步多个进程对共享资源的访问。</li>
+            <li>内存映射（Memory-mapped files）：使用文件或设备的内存映射区域作为进程间共享数据的方式。</li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="3_48"></a>3、有名管道与匿名管道区别？</h3> 
+         <ul>
+          <li>匿名管道 
+           <ul>
+            <li>连接方式：只能用于有亲缘关系的进程之间，如父子进程。这是因为它们是在进程创建时由父进程向子进程继承的。</li>
+            <li>生命周期：存在于进程的生命周期内，一般用于进程的短暂通信。</li>
+            <li>通信方式：通常是半双工的，即数据只能单向流动，要么从父进程到子进程，要么反之。</li>
+            <li>文件系统：匿名管道不在文件系统中显示，它们由操作系统直接管理。</li>
+            <li>创建和使用：通常通过操作系统 API（如 UNIX 的 pipe() 函数）直接创建和使用。</li>
+           </ul> </li>
+          <li>有名管道 
+           <ul>
+            <li>连接方式：可以在任何两个进程之间使用，无论它们之间是否有亲缘关系。这使得有名管道更加灵活。</li>
+            <li>生命周期：可以长期存在于系统中，不依赖于任何特定的进程。有名管道在文件系统中以文件的形式存在，即使创建它的进程已经终止，其他进程仍然可以通过文件名访问它。</li>
+            <li>通信方式：通常是全双工的，支持数据的双向流动。</li>
+            <li>文件系统：作为特殊文件存在于文件系统中，可以像操作普通文件一样对其进行创建、连接和删除。</li>
+            <li>创建和使用：通过特定的系统调用（如 UNIX 系统的 mkfifo 命令）创建，进程可以通过打开这个文件来读取或写入数据。</li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="4_61"></a>4、说一下条件变量怎么实现？</h3> 
+         <p>在 Linux 中，条件变量是一种同步原语，通常与互斥锁（mutexes）一起使用来实现线程间的协调。条件变量允许线程在某些预设条件尚未满足时阻塞自己，直到其他线程改变条件并显式地通知条件变量。这种机制特别适合于生产者-消费者问题和其他需要线程协调的场景。</p> 
+         <ul>
+          <li>Linux 中的条件变量实现 
+           <ul>
+            <li>初始化： 使用 <code>pthread_cond_init()</code> 函数初始化条件变量。也可以使用静态初始化的方式 <code>PTHREAD_COND_INITIALIZER</code>。</li>
+            <li>等待条件（Waiting on the Condition）： 
+             <ul>
+              <li>线程通过调用 <code>pthread_cond_wait()</code> 或 <code>pthread_cond_timedwait()</code> 来等待特定的条件满足。在调用这些函数时，线程必须已经获得了与条件变量配合使用的互斥锁。</li>
+              <li><code>pthread_cond_wait()</code> 会自动释放互斥锁，并使线程进入阻塞状态。当条件变量被通知（或广播）时，线程被唤醒，然后自动重新获取互斥锁。</li>
+             </ul> </li>
+            <li>通知条件（Signaling the Condition）： 
+             <ul>
+              <li>另一个线程可以调用 <code>pthread_cond_signal()</code> 或 <code>pthread_cond_broadcast()</code> 来通知一个或所有等待条件变量的线程。</li>
+              <li><code>pthread_cond_signal()</code> 唤醒等待该条件变量的至少一个线程，而 <code>pthread_cond_broadcast()</code> 唤醒等待该条件变量的所有线程。</li>
+             </ul> </li>
+            <li>销毁条件变量：使用 <code>pthread_cond_destroy()</code> 函数销毁条件变量，释放其所占用的资源。</li>
+           </ul> </li>
+          <li>实现细节（在内部实现上，条件变量通常涉及到以下几个关键组件：） 
+           <ul>
+            <li>等待队列：系统维护一个等待队列，所有等待条件变量的线程都会被加入到这个队列中。</li>
+            <li>互斥锁解锁和重锁机制：当线程调用 <code>pthread_cond_wait</code> 时，系统会自动释放互斥锁，并在线程被唤醒并返回前自动重新获取互斥锁。</li>
+            <li>状态变量：通常需要配合条件变量使用一些状态变量来表示真实的条件状态，确保即使发生虚假唤醒（spurious wakeup），线程也能正确处理其逻辑。</li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="5PV_76"></a>5、信号量机制怎么实现的？该机制可以用于进程间通信吗？信号量机制中PV操作是原⼦操作吗？</h3> 
+         <p>信号量是一种重要的同步机制，用于控制对共享资源的访问，可以确保多个线程或进程在访问共享资源时不会发生冲突，被广泛应用于操作系统中的进程或线程同步。</p> 
+         <ul>
+          <li>信号量的实现 
+           <ul>
+            <li>在 Linux 系统中，信号量可以通过 POSIX 信号量或 System V 信号量来实现。 
+             <ul>
+              <li>POSIX 信号量：这是一种较新的实现，提供了良好的跨平台支持。使用函数 <code>sem_init()</code> 来创建，<code>sem_wait()</code> 和 <code>sem_post()</code> 来执行等待（P 操作，即减少操作）和释放（V 操作，即增加操作）。</li>
+              <li>System V 信号量：这是一种更古老的实现，提供了一组较为复杂的控制功能，如信号量集合，它允许一次操作多个信号量。</li>
+             </ul> </li>
+           </ul> </li>
+          <li>信号量用于进程间通信 
+           <ul>
+            <li>信号量虽然主要用于同步，但也可以间接用于进程间通信（IPC）。<font color="blue">信号量可以控制多个进程对共享资源的访问顺序，从而允许它们按照特定的顺序执行操作，间接地传递信息</font>。例如，两个进程可以使用信号量来协调对共享内存的访问，其中一个进程写入数据后通过信号量通知另一个进程数据已经准备好。</li>
+           </ul> </li>
+          <li>PV 操作是否为原子操作 
+           <ul>
+            <li>信号量的 P 操作（<code>sem_wait()</code>）和 V 操作（<code>sem_post()</code>）是设计为原子操作的。这意味着在多线程或多进程环境中，当一个线程或进程在执行这些操作时，不会被其他线程或进程中断。原子性是通过操作系统内核来保证的，确保每次只有一个线程或进程能够修改信号量的值。 
+             <ul>
+              <li>P 操作（<code>sem_wait()</code>）：如果信号量的值大于零，它会减少信号量的值（表示资源被占用）并继续执行。如果信号量的值为零，则调用线程或进程将被阻塞，直到信号量的值不为零。</li>
+              <li>V 操作（<code>sem_post()</code>）：增加信号量的值（表示释放资源）并唤醒等待该信号量的一个或多个线程或进程。</li>
+             </ul> </li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="6linux_88"></a>6、linux中断流程，谈谈你对中断上下文的理解</h3> 
+         <p>在 Linux 操作系统中，中断是硬件或软件发出的信号，提示处理器暂停当前正在执行的任务，转而处理紧急事件。中断机制是现代操作系统中处理外部事件的核心技术。对于中断的理解涉及到多个层面，包括中断的类型、处理流程，以及中断上下文的特点。</p> 
+         <ul>
+          <li>中断的类型 
+           <ul>
+            <li>硬件中断：由硬件设备产生，如键盘输入、网络数据到达等。</li>
+            <li>软件中断：由软件指令产生，如系统调用。</li>
+            <li>异常：如除零错误、内存访问违规等。</li>
+           </ul> </li>
+          <li>中断处理流程（中断处理通常分为两个主要阶段：中断服务例程（ISR）和底半部（Bottom Half）处理。） 
+           <ul>
+            <li>中断请求（IRQ）：当硬件设备需要 CPU 注意时，它通过发送信号到一个中断控制器来生成中断请求。中断控制器决定是否发送信号到 CPU，取决于中断的优先级和当前状态。</li>
+            <li>中断服务例程（ISR）： 
+             <ul>
+              <li>保存上下文：当中断发生时，CPU 首先保存当前任务的状态，包括寄存器等关键信息。</li>
+              <li>执行ISR：执行特定的中断服务例程来处理中断。这一阶段应尽可能快速完成，避免长时间占用 CPU。</li>
+             </ul> </li>
+            <li>任务切换：中断处理完毕后，根据优先级和调度策略选择下一个要执行的任务，并恢复其上下文继续执行。</li>
+           </ul> </li>
+          <li>中断上下文（中断上下文指的是在处理中断时，操作系统的运行环境和状态。它与常规的进程上下文有几个关键区别：） 
+           <ul>
+            <li>无进程上下文：中断上下文不属于任何一个用户进程。当中断发生时，当前的进程执行被中断，处理器跳转到中断服务程序（Interrupt Service Routine, ISR）执行。在中断上下文中，系统不会保存进程的上下文信息，因此无法执行与具体进程相关的操作，如调度其他进程或访问用户空间内存。</li>
+            <li>不可阻塞：在中断上下文中，代码不能睡眠或阻塞，因为中断服务程序必须尽快完成。阻塞会导致系统陷入死锁状态，因为中断上下文无法被调度出去，系统就无法继续运行。</li>
+            <li>优先级高：中断上下文具有高优先级，系统在处理中断时会关闭部分或全部中断，以防止嵌套过多的中断处理。这意味着中断处理程序的执行通常会打断其他较低优先级的任务，从而快速响应事件。</li>
+            <li>简短执行：中断处理程序应该尽可能快地执行完毕，以减少对系统其他部分的影响。如果中断处理程序执行时间过长，可能导致其他中断的延迟处理，影响系统整体性能。因此，复杂的处理通常会被推迟到中断下半部（例如软中断、tasklet、工作队列）执行。</li>
+           </ul> </li>
+          <li>底半部处理<br> 由于中断处理需要快速完成，一些不那么紧急的任务会被推迟到中断服务之后处理，这部分称为底半部（如任务队列、软中断或工作队列）。这样可以有效地分离紧急处理和次要处理，优化系统响应时间和效率。</li>
+         </ul> 
+         <h3><a id="7_C__107"></a>7、来谈⼀下 C++ 中多态</h3> 
+         <p>在 C++ 中，多态是面向对象编程的核心概念之一，允许对象以接口的共通形式表现出多种形态。在 C++ 中，多态主要分为两种类型：静态多态（编译时多态）和动态多态（运行时多态）。这两种多态的实现和用途有所不同，但都是通过提供统一的接口来处理不同类型的对象。</p> 
+         <ul>
+          <li>①、静态多态 
+           <ul>
+            <li>静态多态主要通过函数重载和模板实现，其决定机制发生在编译时。 
+             <ul>
+              <li>i. 函数重载 
+               <ul>
+                <li>在同一作用域内定义几个函数名相同但参数列表不同的函数。</li>
+                <li>编译器根据函数调用时的参数类型来决定具体调用哪个函数。</li>
+                <li>示例<pre style="max-height:100%"><code class="prism language-cpp"><span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token punctuation">{
+                    <!-- --></span>
+  cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Printing int: "</span> <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token keyword">double</span> f<span class="token punctuation">)</span> <span class="token punctuation">{
+                    <!-- --></span>
+  cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Printing float: "</span> <span class="token operator">&lt;&lt;</span> f <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> </li>
+               </ul> </li>
+              <li>ii. 模板： 
+               <ul>
+                <li>使用模板可以写出与类型无关的代码，编译器根据传入的实际类型生成相应的函数。</li>
+                <li>示例：<pre style="max-height:100%"><code class="prism language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> <span class="token class-name">T</span><span class="token operator">&gt;</span>
+<span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span>T arg<span class="token punctuation">)</span> <span class="token punctuation">{
+                    <!-- --></span>
+  cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Printing: "</span> <span class="token operator">&lt;&lt;</span> arg <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> </li>
+               </ul> </li>
+             </ul> </li>
+           </ul> </li>
+          <li>②、动态多态 
+           <ul>
+            <li>动态多态是通过虚函数（Virtual Functions）和继承实现的，其决定机制发生在运行时。 
+             <ul>
+              <li>i. 虚函数： 
+               <ul>
+                <li>在基类中声明函数为虚函数（使用 virtual 关键字），允许在派生类中对其进行重写（Override）。</li>
+                <li>如果派生类提供了虚函数的新实现，那么通过基类指针或引用调用该函数时，将动态决定调用哪个版本的函数。</li>
+                <li>示例：<pre style="max-height:100%"><code class="prism language-cpp"><span class="token keyword">class</span> <span class="token class-name">Base</span> <span class="token punctuation">{
+                    <!-- --></span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+  <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+                    <!-- --></span> <span class="token comment">// Virtual function</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Base class show function called."</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">Base</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+                    <!-- --></span><span class="token punctuation">}</span> <span class="token comment">// Virtual destructor for proper cleanup</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Derived</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Base</span></span> <span class="token punctuation">{
+                    <!-- --></span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+  <span class="token keyword">void</span> <span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span> <span class="token punctuation">{
+                    <!-- --></span> <span class="token comment">// Override the base class function</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Derived class show function called."</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre> </li>
+               </ul> </li>
+              <li>ii. 虚析构函数 
+               <ul>
+                <li>当删除派生类的对象时，应该声明基类的析构函数为虚函数，以确保正确地调用派生类的析构函数，避免资源泄漏。</li>
+                <li>示例中的 <code>virtual ~Base() {}</code> 确保了析构过程的正确性。</li>
+               </ul> </li>
+             </ul> </li>
+           </ul> </li>
+          <li>③、用途和优点 
+           <ul>
+            <li>代码复用和扩展：多态允许程序员编写可扩展的代码，例如编写操作基类对象的函数，然后自动应用于任何派生类对象。</li>
+            <li>接口隔离：基类可以定义一个接口，派生类可以以不同方式实现这个接口，但对使用者隐藏实现细节，只暴露统一的接口。</li>
+            <li>动态绑定：动态多态的运行时绑定允许系统更灵活地处理不同类型的对象，提高了程序的可维护性和扩展性。</li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="8_161"></a>8、纯虚函数与虚函数有哪些区别</h3> 
+         <p>在 C++ 中，虚函数和纯虚函数都是实现多态的关键机制，但它们之间存在一些基本的区别，这些区别主要涉及到它们的定义、用途和对派生类的影响。</p> 
+         <ul>
+          <li>虚函数（Virtual Function） 
+           <ul>
+            <li>定义：虚函数在基类中用 virtual 关键字声明，并可以在派生类中重写。虚函数可以有自己的实现。</li>
+            <li>用途：虚函数允许派生类根据需要重写基类中的方法，但不强制要求派生类提供一个新的实现。</li>
+            <li>多态实现：如果通过基类指针或引用调用虚函数，则会根据对象的实际类型来调用相应的函数版本，这是“动态绑定”或“晚绑定”的一个典型例子。</li>
+            <li>示例：<pre style="max-height:100%"><code class="prism language-cpp"><span class="token keyword">class</span> <span class="token class-name">Base</span> <span class="token punctuation">{
+                <!-- --></span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">display</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+                <!-- --></span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Display of Base"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Derived</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Base</span></span> <span class="token punctuation">{
+                <!-- --></span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">void</span> <span class="token function">display</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span> <span class="token punctuation">{
+                <!-- --></span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Display of Derived"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre> </li>
+           </ul> </li>
+          <li>纯虚函数（Pure Virtual Function） 
+           <ul>
+            <li>定义：纯虚函数在基类中用 virtual 关键字声明，并在声明的末尾使用 = 0 来指明这是一个纯虚函数。纯虚函数通常不提供实现。</li>
+            <li>用途：<font color="red">纯虚函数的主要目的是定义一个接口，强制要求派生类必须提供该函数的具体实现。</font>这样的类称为抽象类，不能被实例化。</li>
+            <li>多态实现：纯虚函数保证了派生类必须重写此函数，确保了基类指针或引用调用时能够正确地执行到派生类的实现。</li>
+            <li>示例：<pre style="max-height:100%"><code class="prism language-cpp"><span class="token keyword">class</span> <span class="token class-name">AbstractBase</span> <span class="token punctuation">{
+                <!-- --></span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">display</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>  <span class="token comment">// 纯虚函数</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ConcreteDerived</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">AbstractBase</span></span> <span class="token punctuation">{
+                <!-- --></span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">void</span> <span class="token function">display</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span> <span class="token punctuation">{
+                <!-- --></span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Display of ConcreteDerived"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre> </li>
+           </ul> </li>
+          <li>主要区别 
+           <ul>
+            <li>强制实现：虚函数允许派生类选择是否重写；而纯虚函数则强制派生类必须提供一个实现。</li>
+            <li>实例化能力：包含纯虚函数的类（抽象类）不能被实例化，这意味着你不能创建这种类的对象。虚函数所在的类可以被实例化。</li>
+            <li>设计意图：虚函数适用于那些已有默认行为，但允许派生类根据需要进行改变的情况；纯虚函数则用于设计接口，当基类的行为无法确定或不应该由基类定义时使用。</li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="9_205"></a>9、虚函数是怎么实现的？虚函数表存在哪个地方？</h3> 
+         <p>C++ 中虚函数的实现机制是通过一个特别的表结构——虚函数表（Virtual Table, 简称 VTable）来实现的。这是一个在编译时期构建的表，用于支持运行时的动态方法调用，即我们所说的动态绑定。下面是虚函数和虚函数表的实现细节以及它们的存放位置。</p> 
+         <ul>
+          <li>虚函数表的实现 
+           <ul>
+            <li>虚函数表（VTable）： 
+             <ul>
+              <li>每个含有虚函数的类都会有一个对应的虚函数表。这个表是一个存储函数指针的数组，每个指针指向对应的虚函数的实现。</li>
+              <li>当类中声明了虚函数时，编译器会在类的每个对象中添加一个隐藏的指针，称为虚指针（vptr），指向这个类的虚函数表。</li>
+             </ul> </li>
+            <li>虚指针（vptr） 
+             <ul>
+              <li>虚指针是对象内存布局中的第一个成员，指向一个静态的虚函数表。</li>
+              <li>当通过基类指针调用虚函数时，运行时通过虚指针访问虚函数表，根据偏移量找到对应的虚函数执行。</li>
+             </ul> </li>
+            <li>构造和析构： 
+             <ul>
+              <li>构造函数和析构函数中有特殊的代码，用来设置对象的虚指针指向正确的虚函数表。</li>
+              <li>如果存在继承关系，派生类对象的虚指针会在构造期间从指向基类的虚函数表变为指向派生类的虚函数表。</li>
+             </ul> </li>
+           </ul> </li>
+          <li>虚函数表的位置 
+           <ul>
+            <li>虚函数表通常存在于程序的<strong>只读数据段</strong>（.rodata section），这是一个在程序运行时不会被修改的内存区域。每个类有一个单独的虚函数表： 
+             <ul>
+              <li>内存共享：由于虚函数表是静态的，同一个类的所有对象共享同一虚函数表，这节省了内存。</li>
+              <li>程序启动时初始化：虚函数表在程序启动时就已经初始化好了，确保了调用的正确性。</li>
+             </ul> </li>
+           </ul> </li>
+          <li>示例<pre style="max-height:100%"><code class="prism language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Base</span> <span class="token punctuation">{
+              <!-- --></span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+              <!-- --></span> cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Base func"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+              <!-- --></span> cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Base func2"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Derived</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Base</span></span> <span class="token punctuation">{
+              <!-- --></span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span> <span class="token punctuation">{
+              <!-- --></span> cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Derived func"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span> <span class="token punctuation">{
+              <!-- --></span> cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Derived func2"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+              <!-- --></span>
+    Base<span class="token operator">*</span> b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Derived</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    b<span class="token operator">-&gt;</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Calls Derived::func()</span>
+    b<span class="token operator">-&gt;</span><span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Calls Derived::func2()</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> 
+           <ul>
+            <li>在这个示例中： 
+             <ul>
+              <li>Base 类有一个虚函数表，包含 func 和 func2。</li>
+              <li>Derived 类有自己的虚函数表，也包含 func 和 func2，但这些函数指向 Derived 中的重写方法。</li>
+              <li>每个 Derived 类的对象会有一个指向 Derived 虚函数表的虚指针。</li>
+             </ul> </li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="10_249"></a>10、怎么访问类中私有变量，友元是单向的还是双向的？友元可以继承吗？</h3> 
+         <p>在 C++ 中，私有成员（包括变量和函数）通常是不能直接被类外的代码访问的，这是封装的一个重要特性。然而，C++ 提供了几种方法来允许特定的外部函数或类访问类的私有成员，主要是通过友元（friend）关系和访问器（getter）方法。</p> 
+         <ul>
+          <li>访问私有变量的方法 
+           <ul>
+            <li>①、访问器（Getter）和修改器（Setter）： 
+             <ul>
+              <li>类可以提供公共的访问器和修改器来允许对私有变量的有限访问和修改，这是最常用的方法。</li>
+              <li>示例<pre style="max-height:100%"><code class="prism language-cpp"><span class="token keyword">class</span> <span class="token class-name">MyClass</span> <span class="token punctuation">{
+                  <!-- --></span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> value<span class="token punctuation">;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{
+                  <!-- --></span> <span class="token keyword">return</span> value<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">setValue</span><span class="token punctuation">(</span><span class="token keyword">int</span> v<span class="token punctuation">)</span> <span class="token punctuation">{
+                  <!-- --></span> value <span class="token operator">=</span> v<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre> </li>
+             </ul> </li>
+            <li>②、友元函数和友元类： 
+             <ul>
+              <li>友元函数或友元类可以被声明为类的“友元”，这使得它们可以访问类的所有私有和保护成员。</li>
+              <li>友元声明仅需要在类定义中明确指定。</li>
+              <li>示例：</li>
+             </ul> <pre style="max-height:100%"><code class="prism language-cpp"><span class="token keyword">class</span> <span class="token class-name">MyClass</span> <span class="token punctuation">{
+                <!-- --></span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> value<span class="token punctuation">;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">friend</span> <span class="token keyword">void</span> <span class="token function">friendFunction</span><span class="token punctuation">(</span>MyClass <span class="token operator">&amp;</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">friendFunction</span><span class="token punctuation">(</span>MyClass <span class="token operator">&amp;</span>obj<span class="token punctuation">)</span> <span class="token punctuation">{
+                <!-- --></span>
+    <span class="token comment">// 可以访问 MyClass 的私有成员</span>
+    cout <span class="token operator">&lt;&lt;</span> obj<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> </li>
+           </ul> </li>
+          <li>友元的单向性和继承性 
+           <ul>
+            <li>单向性： 
+             <ul>
+              <li>友元关系是单向的，而不是双向的。如果类 A 声明类 B 为友元，类 B 可以访问 A 的私有成员，但类 A 不能访问类 B 的私有成员，除非 B 也声明 A 为友元。</li>
+              <li>友元关系不是相互的，必须显式声明。</li>
+             </ul> </li>
+            <li>继承性： 
+             <ul>
+              <li>友元关系不可继承。如果类 B 是类 A 的友元，B 的派生类 C 并不自动成为 A 的友元。C 必须单独被声明为 A 的友元才能访问 A 的私有成员。</li>
+              <li>这意味着每个新类都需要明确声明其友元关系，即使这些类是现有友元类的派生类。</li>
+             </ul> </li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="11_287"></a>11、你怎么理解引用与指针，为什么有了指针还需要引用？</h3> 
+         <ul>
+          <li>引用（Reference） 
+           <ul>
+            <li>引用在 C++ 中作为一个变量的别名存在。它们必须在声明时被初始化，并且一旦绑定到一个对象，就不能再绑定到另一个对象。</li>
+            <li>不可变性： 
+             <ul>
+              <li>引用在初始化后不能改变绑定，它们始终指向第一次被赋予的对象。</li>
+             </ul> </li>
+            <li>使用方式： 
+             <ul>
+              <li>引用的使用更接近于普通变量，没有特殊的语法（如解引用操作）。</li>
+              <li>引用可以用来定义函数的参数和返回值，使得函数调用和返回更加自然和高效。</li>
+             </ul> </li>
+            <li>安全性： 
+             <ul>
+              <li>用比指针更安全，因为引用保证了引用的对象必须存在（除非程序本身存在未定义行为，如引用未初始化的变量）。</li>
+             </ul> </li>
+           </ul> </li>
+          <li>指针（Pointer） 
+           <ul>
+            <li>指针是包含内存地址的变量，可以指向一个对象，也可以指向内存中的任意位置。指针在运行时可以改变所指向的对象。 
+             <ul>
+              <li>灵活性： 
+               <ul>
+                <li>指针可以重新指向不同的对象。</li>
+                <li>指针可以是 nullptr，表示它不指向任何对象。</li>
+               </ul> </li>
+              <li>使用复杂度： 
+               <ul>
+                <li>指针需要使用特殊的语法（* 用于解引用，-&gt; 用于访问成员）。</li>
+                <li>指针的管理（包括内存管理）比引用复杂，容易出错（如野指针和内存泄漏问题）。</li>
+               </ul> </li>
+             </ul> </li>
+           </ul> </li>
+          <li>为什么需要引用？ 
+           <ul>
+            <li>尽管指针提供了强大的功能和灵活性，引用的引入解决了某些特定场景下的需求： 
+             <ul>
+              <li>语义清晰： 
+               <ul>
+                <li>引用提供了一种更加严格的方式来表达“非空的别名”这一概念，适用于不需要重新赋值的场景。</li>
+                <li>引用使得代码更易于理解和维护，尤其是在函数参数和返回值的传递中。</li>
+               </ul> </li>
+              <li>操作简便： 
+               <ul>
+                <li>使用引用可以避免编写解引用代码，使得代码看起来更像是操作普通变量。</li>
+                <li>在处理数组和动态数据结构时，引用可以简化代码，提高效率。</li>
+               </ul> </li>
+              <li>支持运算符重载和复制构造： 
+               <ul>
+                <li>在 C++ 中，运算符重载和复制构造函数通常使用引用来实现，因为这些场景下需要对象存在且不可为空。</li>
+               </ul> </li>
+             </ul> </li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="12_315"></a>12、谈一下你对操作系统的理解，为什么有操作系统</h3> 
+         <p>操作系统（OS）是计算机系统中最基础的软件，它管理计算机硬件资源，提供软件运行时环境，并为用户和应用程序提供必要的接口。操作系统的核心功能是作为用户程序和计算机硬件之间的中介，确保计算机的有效、安全和高效运行。</p> 
+         <ul>
+          <li>操作系统的主要职责包括： 
+           <ul>
+            <li>资源管理：操作系统负责管理计算机的所有硬件资源，包括处理器、内存、硬盘和输入输出设备等。操作系统通过资源调度策略来有效地分配这些资源，确保多个应用程序和用户可以高效、公平地共享系统资源。</li>
+            <li>提供用户界面：操作系统通过提供命令行或图形用户界面（GUI）使用户能够与计算机交互。这些界面简化了用户操作，使非专业用户也能容易地使用计算机系统。</li>
+            <li>执行程序管理：操作系统负责程序的加载、执行、暂停和终止。它通过创建和管理进程或线程，实现了多任务和并发执行，提高了系统的效率和响应速度。</li>
+            <li>文件管理：操作系统提供了文件的创建、删除、存储和访问等功能。它通过文件系统组织数据，保证数据的安全性和可靠性，并使得用户和程序能够方便地存取文件。</li>
+            <li>设备驱动：操作系统通过设备驱动程序来控制硬件设备。每种设备都需要相应的驱动程序，使操作系统能够统一管理和使用这些硬件。</li>
+            <li>系统安全与稳定性：操作系统负责系统的安全策略，防止未授权的访问和数据损坏。同时，操作系统还需要具备错误检测和恢复功能，以保证系统的稳定运行。</li>
+           </ul> </li>
+          <li>为什么需要操作系统？ 
+           <ul>
+            <li>抽象：操作系统为复杂的硬件提供了一个简单的抽象界面。程序员可以不必关心硬件细节，例如如何读写磁盘扇区或发送网络数据包。</li>
+            <li>便利性：操作系统通过提供用户友好的界面和功能丰富的系统调用，使得使用计算机更加便捷。</li>
+            <li>效率：操作系统能够优化资源的使用，如通过多任务处理提高CPU利用率，或通过内存管理提升内存使用效率。</li>
+            <li>资源共享：支持多用户或多任务环境中资源的共享和保护，确保系统的公平性和安全性。</li>
+            <li>扩展性和开放性：支持新硬件和新技术的集成，允许系统随着技术的发展而扩展。</li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="13_330"></a>13、什么时候会进行进程调度，如何实现的进程调度</h3> 
+         <ul>
+          <li>进程调度通常在以下几种情况下发生： 
+           <ul>
+            <li>多任务切换：当当前执行的进程的时间片用完，操作系统需要挑选另一个进程继续执行。</li>
+            <li>I/O 请求或完成： 
+             <ul>
+              <li>当进程进行 I/O 操作时，通常会被阻塞（等待 I/O 完成），此时调度器会挑选另一个进程执行。</li>
+              <li>当 I/O 操作完成，等待 I/O 的进程可能会变为就绪状态，调度器可能会决定切换到这个进程。</li>
+             </ul> </li>
+            <li>创建或终止进程： 
+             <ul>
+              <li>新创建的进程加入就绪队列，可能会被调度。</li>
+              <li>当进程终止时，调度器必须选择另一个进程运行。</li>
+             </ul> </li>
+            <li>从等待状态变为就绪状态：当进程等待的事件发生（例如收到信号），使得进程从等待状态转为就绪状态，调度器可能会介入进行调度。</li>
+            <li>优先级变更：当进程的优先级被动态调整（例如，优先级继承或反馈机制），调度器可能根据新的优先级进行重新调度。</li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="14_341"></a>14、如何实现进程调度？</h3> 
+         <ul>
+          <li>进程调度的实现涉及调度算法和调度机制。调度算法决定了哪个进程获得CPU，而调度机制则负责实现算法的决策。 
+           <ul>
+            <li>调度算法 
+             <ul>
+              <li>先来先服务（FCFS, First-Come, First-Served）：最简单的调度算法，按照进程到达就绪队列的顺序进行调度。</li>
+              <li>短作业优先（SJF, Shortest Job First）：总是选择预计运行时间最短的进程进行调度。它的变体是最短剩余时间优先（SRTF），它是抢占式的。</li>
+              <li>轮转调度（Round Robin, RR）：每个进程被分配一个固定时间的时间片。如果时间片用完，即使进程未完成，调度器也会切换到下一个进程。</li>
+              <li>优先级调度：根据进程的优先级决定调度。优先级高的进程先被调度。在抢占式优先级调度中，更高优先级的进程随时可以抢占低优先级进程的执行。</li>
+              <li>多级队列调度：将进程根据类型分入不同的就绪队列，每个队列可以有自己的调度算法。例如，前台交互进程和后台批处理进程可能使用不同的调度策略。</li>
+             </ul> </li>
+            <li>调度机制 
+             <ul>
+              <li>上下文切换：当调度器选择另一个进程运行时，系统需要保存当前进程的状态（上下文），并加载新选定进程的上下文。</li>
+              <li>中断和陷阱：系统调用或硬件中断可以触发调度器介入，进行进程切换。</li>
+              <li>调度器激活：在上述触发事件发生时，调度器被激活，重新评估并选择最适合的进程执行。</li>
+             </ul> </li>
+           </ul> </li>
+         </ul> 
+         <h2><a id="_353"></a>二、奥比中光</h2> 
+         <h3><a id="1volatile__354"></a>1、volatile 关键字的作用是什么？</h3> 
+         <p>在 C 和 C++ 中，volatile 关键字是一个类型修饰符，用于告诉编译器不应对标记为 volatile 的变量进行优化，因为这些变量的值可能会在程序的控制之外发生变化。使用 volatile 声明的目的是确保代码的行为在存在某些特定类型的变量变化时保持正确和预期的。</p> 
+         <ul>
+          <li>主要用途和效果包括： 
+           <ul>
+            <li>硬件访问：当程序需要直接与硬件交互时，硬件的寄存器值可能会独立于任何程序控制的因素而改变。例如，硬件状态寄存器的值可能会因为硬件事件（如中断）而变化。</li>
+            <li>操作系统内核：在开发操作系统内核时，volatile 可用于访问由多个任务或系统外部事件修改的内存位置。</li>
+            <li>中断服务例程：在中断服务例程中，变量可能由中断引起的代码所修改，主线程需要访问这些变量以获取最新值。</li>
+            <li>多线程应用：在多线程环境下，一个线程可能修改另一个线程需要访问的变量。虽然 volatile 并不提供线程同步（不是线程安全的），它确保变量的读写操作不会被编译器优化掉，从而保证每次访问都是直接从内存中进行。</li>
+           </ul> </li>
+          <li>示例说明<pre style="max-height:100%"><code class="prism language-c"><span class="token keyword">volatile</span> <span class="token keyword">int</span> status<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">interrupt_handler</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+              <!-- --></span>
+    status <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// 设置状态</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+              <!-- --></span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>status <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{
+              <!-- --></span>
+        <span class="token comment">// 等待中断发生</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 处理中断后的动作</span>
+<span class="token punctuation">}</span>
+</code></pre> 
+           <ul>
+            <li>在这个例子中，如果 status 变量没有被声明为 volatile，编译器可能会认为 status 在循环中不会改变，并可能优化掉对 status 的重复检查，导致循环变成一个无限循环。声明为 volatile 确保每次循环时都会重新从内存地址中读取 status 的值。</li>
+           </ul> </li>
+          <li>关键点 
+           <ul>
+            <li>非同步机制：volatile 关键字不能替代多线程程序中的锁（如互斥锁）或其他同步机制（如条件变量）。它只是告诉编译器不要优化从该变量的读取和写入，保证程序可以看到外部对变量的修改。</li>
+            <li>编译器行为：volatile 修饰的变量每次用到时都直接从内存读取，不会被缓存在寄存器中，这确保了程序对外部变化的即时响应。</li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="2_380"></a>2、动态分配内存函数形参应该传递什么？</h3> 
+         <p>在 C++ 中，如果需要在函数中动态分配内存，并希望这块内存能在函数调用后仍然存在（即函数外部也能访问这块内存），通常有两种主要的传递方式：通过指针的指针（pointer to pointer）和通过引用指针（reference to pointer）。这两种方式都允许在函数内部修改传入的指针，从而使得外部调用者能够访问在函数内部分配的内存。</p> 
+         <ul>
+          <li>通过指针的指针 
+           <ul>
+            <li>这种方式涉及到传递指针变量的地址给函数。这样，函数就能修改指针变量本身，以指向新分配的内存。</li>
+            <li>示例代码：<pre style="max-height:100%"><code class="prism language-cpp"><span class="token keyword">void</span> <span class="token function">allocateMemory</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token operator">*</span> ptr<span class="token punctuation">)</span> <span class="token punctuation">{
+                <!-- --></span>
+    <span class="token operator">*</span>ptr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 分配内存</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+                <!-- --></span>
+    <span class="token keyword">int</span><span class="token operator">*</span> array <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span> <span class="token comment">// 初始化指针</span>
+    <span class="token function">allocateMemory</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 分配内存</span>
+    <span class="token comment">// 使用 array</span>
+    <span class="token keyword">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">;</span> <span class="token comment">// 释放内存</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> 
+             <ul>
+              <li>在这个例子中，allocateMemory 函数接收一个指向指针的指针，因此能够修改 main 函数中的 array 指针使其指向新分配的内存。</li>
+             </ul> </li>
+           </ul> </li>
+          <li>通过引用指针 
+           <ul>
+            <li>通过引用传递指针可以简化语法，避免在调用函数时使用地址运算符。</li>
+            <li>示例代码<pre style="max-height:100%"><code class="prism language-cpp"><span class="token keyword">void</span> <span class="token function">allocateMemory</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token operator">&amp;</span> ptr<span class="token punctuation">)</span> <span class="token punctuation">{
+                <!-- --></span>
+    ptr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 分配内存</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+                <!-- --></span>
+    <span class="token keyword">int</span><span class="token operator">*</span> array <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span> <span class="token comment">// 初始化指针</span>
+    <span class="token function">allocateMemory</span><span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 分配内存</span>
+    <span class="token comment">// 使用 array</span>
+    <span class="token keyword">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">;</span> <span class="token comment">// 释放内存</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> 
+             <ul>
+              <li>在这个例子中，allocateMemory 函数接收一个引用到指针的参数，允许直接修改外部的指针。这种方法更加直观和易于管理。</li>
+             </ul> </li>
+           </ul> </li>
+          <li>选择哪种方式？ 
+           <ul>
+            <li>指针的指针：这种方法在 C 风格的代码中更常见，尤其是在涉及到接口或与 C 语言库的交互时。</li>
+            <li>引用指针：这是 C++ 推荐的方式，因为它更简洁，减少了代码中错误的机会，尤其是在涉及到指针操作时。</li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="3_419"></a>3、进程同步方法？死锁原因？</h3> 
+         <p>进程同步的目的是为了确保多个进程可以顺利、有序地共享资源或数据。这是操作系统设计中的核心部分，关系到系统的稳定性和效率。</p> 
+         <ul>
+          <li>以下是一些常见的进程同步方法： 
+           <ul>
+            <li>互斥锁（Mutex）: 
+             <ul>
+              <li>互斥锁确保同一时间只有一个进程可以访问共享资源。当一个进程访问某资源时，它会锁定这个资源，其他进程必须等待直到资源被解锁。</li>
+             </ul> </li>
+            <li>信号量（Semaphore）: 
+             <ul>
+              <li>信号量是一个计数器，用于控制对共享资源的访问。信号量可以允许多个进程同时访问相同的资源，其数量由信号量的初始值决定。</li>
+             </ul> </li>
+            <li>条件变量（Condition Variables）: 
+             <ul>
+              <li>条件变量用于线程之间的同步，允许某些线程在特定条件不满足时挂起，直到其他线程改变条件并通知它们。</li>
+             </ul> </li>
+            <li>消息传递（Message Passing）: 
+             <ul>
+              <li>进程通过发送和接收消息来进行同步。这种方法不需要共享内存，适用于分布式系统。</li>
+             </ul> </li>
+            <li>事件（Events）: 
+             <ul>
+              <li>事件通知机制使得一个进程可以等待特定事件的发生，从而进行同步。</li>
+             </ul> </li>
+            <li>管道和文件: 
+             <ul>
+              <li>管道是一种半双工的通信方式，数据只能单向流动，可用于进程间的数据传输和同步。</li>
+              <li>文件也可以作为共享资源，用于进程间的同步。</li>
+             </ul> </li>
+           </ul> </li>
+          <li>死锁原因 
+           <ul>
+            <li>死锁是多个进程在执行过程中因争夺资源而造成的一种僵局，每个进程都在等待其他进程释放资源。死锁的发生通常有以下四个必要条件： 
+             <ul>
+              <li>互斥条件: 资源不能被多个进程共享，只能由一个进程使用。</li>
+              <li>占有并等待: 一个进程至少持有一个资源，并等待获取额外的资源，这些资源被其他已经阻塞的进程占有。</li>
+              <li>不可抢占: 资源不能被强制从一个进程中抢占，只能由持有它的进程显式释放。</li>
+              <li>循环等待: 发生死锁时，必须有一个进程—资源的循环等待链，即进程集合{P1, P2, …, Pn}中的 P1 等待 P2 持有的资源，P2 等待 P3 持有的资源，依此类推，Pn 等待 P1 持有的资源。</li>
+             </ul> </li>
+           </ul> </li>
+          <li>预防和解决死锁的方法 
+           <ul>
+            <li>预防死锁: 
+             <ul>
+              <li>破坏上述四个条件中的一个或多个。</li>
+              <li>例如，采用一次性分配所有资源的策略，或允许资源的抢占。</li>
+             </ul> </li>
+            <li>避免死锁: 
+             <ul>
+              <li>动态分析资源分配和进程状态，避免进入不安全状态。</li>
+              <li>使用银行家算法等算法来预防死锁。</li>
+             </ul> </li>
+            <li>检测死锁: 
+             <ul>
+              <li>定期检查资源分配图，寻找循环等待的存在。</li>
+             </ul> </li>
+            <li>死锁恢复: 
+             <ul>
+              <li>进程终止或资源抢占。选择牺牲一些进程来解决死锁，或强制释放某些资源。</li>
+             </ul> </li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="4_452"></a>4、什么情况会导致内存泄漏？</h3> 
+         <p>内存泄漏发生在程序中已分配的内存未能正确释放，导致随着程序运行时间的增长，越来越多的内存继续被占用，最终可能导致程序或系统性能降低甚至崩溃。内存泄漏是一种常见的资源管理错误，特别是在使用手动内存管理的编程语言中，如 C 和 C++。以下是一些常见情况，这些情况可能会导致内存泄漏：</p> 
+         <ul>
+          <li>未释放动态分配的内存 
+           <ul>
+            <li>在使用动态内存分配函数（如 C 中的 malloc, calloc, realloc 和 C++ 中的 new）后，如果没有相应地调用释放函数（如 C 中的 free 和 C++ 中的 delete 或 delete[]），分配的内存将不会返回给内存池。</li>
+            <li>示例<pre style="max-height:100%"><code class="prism language-cpp"><span class="token keyword">int</span><span class="token operator">*</span> <span class="token function">allocateMemory</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+                <!-- --></span>
+    <span class="token keyword">int</span><span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">100</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 动态分配内存</span>
+    <span class="token keyword">return</span> ptr<span class="token punctuation">;</span> <span class="token comment">// 返回指针</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// 如果在调用 allocateMemory 后没有使用 delete[] 来释放内存，将会导致泄漏。</span>
+</code></pre> </li>
+           </ul> </li>
+          <li>数据结构错误 
+           <ul>
+            <li>错误的数据结构设计或使用错误，如链表、树等复杂数据结构在删除节点时没有正确释放节点内存。</li>
+            <li>示例<pre style="max-height:100%"><code class="prism language-cpp"><span class="token keyword">struct</span> <span class="token class-name">Node</span> <span class="token punctuation">{
+                <!-- --></span>
+    <span class="token keyword">int</span> value<span class="token punctuation">;</span>
+    Node<span class="token operator">*</span> next<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">deleteList</span><span class="token punctuation">(</span>Node<span class="token operator">*</span> head<span class="token punctuation">)</span> <span class="token punctuation">{
+                <!-- --></span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>head<span class="token punctuation">)</span> <span class="token punctuation">{
+                <!-- --></span>
+        Node<span class="token operator">*</span> temp <span class="token operator">=</span> head<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+        <span class="token keyword">delete</span> head<span class="token punctuation">;</span> <span class="token comment">// 假设此处没有正确设置 head = temp;</span>
+        head <span class="token operator">=</span> temp<span class="token punctuation">;</span> <span class="token comment">// 如果遗漏这行，会导致部分节点内存未被释放</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> </li>
+           </ul> </li>
+          <li>避免和检测内存泄漏 
+           <ul>
+            <li>使用智能指针：在 C++ 中使用 std::unique_ptr, std::shared_ptr 等智能指针自动管理内存。</li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="5_483"></a>5、变量在内存中的存储方式？</h3> 
+         <p>变量在内存中的存储方式是理解编程和内存管理的关键部分。在现代计算机架构中，变量的存储通常涉及几个关键的内存区域：栈（Stack）、堆（Heap）、全局/静态存储区（Global/Static Storage）和代码区（Code Segment）。下面详细介绍每个区域以及变量在这些区域中的存储方式。</p> 
+         <ul>
+          <li>栈（Stack） 
+           <ul>
+            <li>栈是一种遵循后进先出（LIFO）原则的内存结构，主要用于存储局部变量和函数调用的管理数据（如返回地址和局部变量）。每当一个函数被调用时，它的返回地址和参数被推送到栈上。该函数的局部变量也在栈上分配内存。</li>
+            <li>特点：分配和回收自动、速度快。</li>
+            <li>用途：存储函数参数、返回数据和局部变量。</li>
+            <li>限制：空间有限，适用于存储生命周期短且大小确定的数据。</li>
+           </ul> </li>
+          <li>堆（Heap） 
+           <ul>
+            <li>堆是用于动态内存分配的区域，由程序在运行时显式管理（在 C/C++ 中使用 malloc/new 和 free/delete）。与栈不同，堆上的内存分配和释放是由程序员控制的，不会自动管理。</li>
+            <li>特点：灵活，可以动态分配任意大小的内存块。</li>
+            <li>用途：存储生命周期不确定或需要在多个函数间共享的数据。</li>
+            <li>限制：管理复杂，易出错（如内存泄漏、碎片化）。</li>
+           </ul> </li>
+          <li>全局/静态存储区（Global/Static Storage） 
+           <ul>
+            <li>这部分内存用于存储全局变量、静态变量和常量。这些变量的生命周期贯穿整个程序运行期，从程序开始执行时初始化，到程序结束时才被销毁。</li>
+            <li>特点：初始化一次，直到程序结束。</li>
+            <li>用途：存储需要在函数调用之间保持状态的数据或控制程序配置和行为的参数。</li>
+           </ul> </li>
+          <li>代码区（Code Segment） 
+           <ul>
+            <li>代码区是存储程序执行代码的内存区域。这部分内存通常是只读的，用来存放编译后的程序代码。</li>
+            <li>特点：只读，尝试修改通常会导致程序崩溃。</li>
+            <li>用途：存储程序的实际执行指令。</li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="6_503"></a>6、谈一谈结构体对齐</h3> 
+         <p>在 C 和 C++ 中，结构体对齐是指在内存中排列结构体成员的方式，以符合特定平台的内存访问要求。这主要涉及两个方面：对齐边界（alignment boundary）和填充字节（padding）。正确的结构体对齐可以优化内存访问速度，防止在某些硬件上可能出现的性能下降或错误。</p> 
+         <ul>
+          <li>对齐边界 
+           <ul>
+            <li>结构体对齐的基本规则是，结构体的每个成员应该从其自然对齐边界开始放置。自然对齐边界通常是该数据类型大小的最小公倍数。例如： 
+             <ul>
+              <li>char 类型通常从任何地址开始都可以。</li>
+              <li>short 类型（假设为 2 字节）的变量地址应该是 2 的倍数。</li>
+              <li>int 类型（假设为 4 字节）的变量地址应该是 4 的倍数。</li>
+              <li>double 类型（假设为 8 字节）的变量地址应该是 8 的倍数。</li>
+             </ul> </li>
+           </ul> </li>
+          <li>填充字节 
+           <ul>
+            <li>为了满足对齐要求，编译器可能会在结构体成员之间插入额外的未使用空间（填充字节）。这样做是为了确保每个成员都在其对齐边界上开始，从而提高访问速度。</li>
+            <li>示例<pre style="max-height:100%"><code class="prism language-c"><span class="token keyword">struct</span> <span class="token class-name">Example</span> <span class="token punctuation">{
+                <!-- --></span>
+    <span class="token keyword">char</span> a<span class="token punctuation">;</span>    <span class="token comment">// 占用 1 字节</span>
+    <span class="token keyword">int</span> b<span class="token punctuation">;</span>     <span class="token comment">// 占用 4 字节</span>
+    <span class="token keyword">char</span> c<span class="token punctuation">;</span>    <span class="token comment">// 占用 1 字节</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre> 
+             <ul>
+              <li>对于大多数编译器和平台，该结构体的内存布局可能如下： 
+               <ul>
+                <li>char a 占用第一个字节。</li>
+                <li>接下来是 3 字节的填充，以确保 int b 从 4 字节边界开始。</li>
+                <li>int b 占用接下来的 4 字节。</li>
+                <li>char c 占用紧跟在 int b 后面的字节。</li>
+                <li>可能还会有更多填充字节，以确保整个结构体的大小是最大成员大小（4 字节）的倍数。</li>
+               </ul> </li>
+             </ul> </li>
+           </ul> </li>
+          <li>结构体总大小 
+           <ul>
+            <li>结构体的总大小不仅是内部成员大小的简单总和，还包括必要的填充。此外，整个结构体的对齐通常是其最大成员的对齐。</li>
+           </ul> </li>
+          <li>控制对齐 
+           <ul>
+            <li>在 C 和 C++ 中，可以使用特定的编译器指令来控制结构体的对齐方式。例如，GCC 提供了 <code>__attribute__((aligned(n)))</code>，而 Microsoft Visual C++ 提供了 <code>#pragma pack(n)</code>，这些可以用来指定一个更小的或更大的对齐边界。</li>
+           </ul> </li>
+         </ul> 
+         <h2><a id="_531"></a>三、芯动科技</h2> 
+         <h3><a id="1Arm__bl__532"></a>1、Arm 汇编中 bl 的意思</h3> 
+         <p>在 ARM 汇编语言中，BL 指令是一个非常重要的指令，它的全称是 “Branch with Link”。<font color="blue">BL 指令用于函数调用，在将控制权转移给函数（即分支到一个新地址去执行代码）的同时，保存返回地址</font>。这样，被调用的函数完成执行后，可以通过这个保存的地址返回到原来的程序中继续执行。</p> 
+         <ul>
+          <li>工作原理 
+           <ul>
+            <li>当执行 BL 指令时，ARM 处理器会做两件事： 
+             <ul>
+              <li>保存返回地址：将当前指令的下一条指令的地址（即 BL 指令之后的地址）保存到链接寄存器（Link Register，LR），通常是 R14 寄存器。这是为了在函数执行完毕后能够知道从哪里返回。</li>
+              <li>分支到目标地址：将程序计数器（Program Counter，PC）设置为 BL 指令指定的目标地址，从而跳转到该地址开始执行代码。这个目标地址通常是函数的起始地址。</li>
+             </ul> </li>
+           </ul> </li>
+          <li>示例 
+           <ul>
+            <li>假设有以下 ARM 汇编代码片段：<pre style="max-height:100%"><code class="prism language-c">_main<span class="token operator">:</span>
+    BL _function  <span class="token punctuation">;</span> 调用名为 function 的函数
+    <span class="token punctuation">;</span> 返回点，执行其他指令
+_function<span class="token operator">:</span>
+    <span class="token punctuation">;</span> 执行一些操作
+    BX LR         <span class="token punctuation">;</span> 返回到调用点
+</code></pre> 
+             <ul>
+              <li>在这个例子中，BL _function 指令会： 
+               <ul>
+                <li>将 _main 中 BL _function 指令后面的那条指令的地址存入 LR。</li>
+                <li>跳转到 _function 标签所在的地址开始执行函数代码。</li>
+                <li>函数执行完毕后，通过 BX LR 指令跳回到 LR 寄存器保存的地址继续执行。</li>
+               </ul> </li>
+             </ul> </li>
+           </ul> </li>
+          <li>用途 
+           <ul>
+            <li>BL 指令通常用于： 
+             <ul>
+              <li>函数调用：在任何需要执行子程序（函数）的地方。</li>
+              <li>生成可重入代码：由于 BL 指令保存返回地址，它允许函数被多次调用并返回到正确的位置，支持递归调用等复杂控制流。</li>
+             </ul> </li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="2static_C_556"></a>2、static 修饰的C语言变量存放在哪里，有什么作用</h3> 
+         <p>在 C 语言中，static 关键字是一个非常有用的修饰符，可用于变量和函数。它影响变量或函数的存储持续性、作用域和初始化时间。以下是 static 修饰符对变量的影响和它们存放的位置：</p> 
+         <ul>
+          <li>存放位置 
+           <ul>
+            <li>static 修饰的变量通常存放在程序的数据段中，特别是在一个称为静态存储区的部分。这个区域是专门用来存储生命周期贯穿整个程序运行期的数据，包括： 
+             <ul>
+              <li>全局变量（无论是否被 static 修饰）</li>
+              <li>静态变量（包括静态局部变量和静态全局变量）</li>
+             </ul> </li>
+           </ul> </li>
+          <li>作用 
+           <ul>
+            <li>生命周期：static 变量的生命周期为整个程序执行期间。一旦被初始化，它们就会存在，直到程序终止。</li>
+            <li>作用域： 
+             <ul>
+              <li>当 static 用于局部变量时，它改变了该变量的作用域。这意味着变量虽然在函数内部定义，但它不会在函数调用结束时销毁，而是保持其值直到下次函数调用。</li>
+              <li>当 static 用于全局变量或函数时，它将变量或函数的作用域限制在声明它的文件内，即使在其他文件中声明了外部引用（通过 extern 关键字），也无法访问或链接到这些 static 全局变量或函数。</li>
+             </ul> </li>
+            <li>初始化：static 变量（无论是全局还是局部）都在程序启动时（在 main() 函数执行前）初始化为零（除非显式初始化为其他值）。这一点不同于非静态局部变量，非静态局部变量在每次进入定义它的代码块时都会重新初始化。</li>
+           </ul> </li>
+          <li>示例<pre style="max-height:100%"><code class="prism language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+
+<span class="token keyword">void</span> <span class="token function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+              <!-- --></span>
+    <span class="token keyword">static</span> <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// 静态局部变量</span>
+    count<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"count = %d\n"</span><span class="token punctuation">,</span> count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+              <!-- --></span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{
+              <!-- --></span>
+        <span class="token function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 每次调用function()，count 的值都会增加</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> 
+           <ul>
+            <li>在这个示例中，函数 function 中的静态局部变量 count 在第一次调用 function 时被初始化为 0，并在每次函数调用时保持其值。输出将显示 count 的值从 1 递增到 5，即使变量 count 是在函数内部定义的，它的值也在函数调用之间持续存在。</li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="3C_586"></a>3、C语言变量有几种储存方式</h3> 
+         <p><img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fi-blog.csdnimg.cn%2Fdirect%2F845278d817e347678971551717154bda.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="在这里插入图片描述"></p> 
+         <p>在 C 语言中，变量的存储方式主要由其声明中的存储类别说明符决定，这些存储类别说明符定义了变量的作用域（变量可以被访问的代码区域）、链接属性（变量是否可以被其他文件或模块访问）以及生命周期（变量存在的时间长度）。C 语言中主要有四种存储类别：</p> 
+         <ul>
+          <li> <p>自动存储（Automatic）</p> 
+           <ul>
+            <li>关键字：auto（虽然很少显式使用，因为这是局部变量的默认存储类别）</li>
+            <li>作用域：局部作用域，只在定义它们的函数或代码块内可见。</li>
+            <li>生命周期：仅在控制流位于声明变量的代码块内时存在。每次进入该块时创建，离开时销毁。</li>
+            <li>示例：<pre style="max-height:100%"><code class="prism language-c"><span class="token keyword">void</span> <span class="token function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+                <!-- --></span>
+    <span class="token keyword">int</span> local_var<span class="token punctuation">;</span>  <span class="token comment">// 默认为 auto 类型</span>
+<span class="token punctuation">}</span>
+</code></pre> </li>
+           </ul> </li>
+          <li> <p>寄存器存储（Register）</p> 
+           <ul>
+            <li>关键字：register</li>
+            <li>作用域：局部作用域。</li>
+            <li>生命周期：与自动存储变量相同。</li>
+            <li>用途：建议编译器尽可能将变量存储在 CPU 寄存器中，而非 RAM，以加速变量的访问和修改。编译器可以忽略这个建议。</li>
+            <li>示例：<pre style="max-height:100%"><code class="prism language-c"><span class="token keyword">void</span> <span class="token function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+                <!-- --></span>
+    <span class="token keyword">register</span> <span class="token keyword">int</span> fast_var<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> </li>
+           </ul> </li>
+          <li> <p>静态存储（Static）</p> 
+           <ul>
+            <li>关键字：static</li>
+            <li>作用域： 
+             <ul>
+              <li>如果用于局部变量，该变量具有局部作用域，但不会在函数调用结束时被销毁，而是持续存在直到程序结束。</li>
+              <li>如果用于全局变量，限制该变量的作用域仅在定义它的文件内。</li>
+             </ul> </li>
+            <li>示例<pre style="max-height:100%"><code class="prism language-c"><span class="token keyword">void</span> <span class="token function">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+                <!-- --></span>
+    <span class="token keyword">static</span> <span class="token keyword">int</span> persistent_var <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    persistent_var<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">int</span> file_scope_var<span class="token punctuation">;</span>  <span class="token comment">// 只在本文件内可见</span>
+</code></pre> </li>
+           </ul> </li>
+          <li> <p>外部存储（External or Global）</p> 
+           <ul>
+            <li>关键字：extern</li>
+            <li>作用域：全局作用域。</li>
+            <li>生命周期：整个程序执行期间。</li>
+            <li>用途：用于在一个文件中声明一个变量，而定义和初始化则在另一个文件中进行。这允许不同的文件共享变量。</li>
+            <li>示例：<pre style="max-height:100%"><code class="prism language-c"><span class="token comment">// 在 file1.c 中</span>
+<span class="token keyword">int</span> global_var <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 在 file2.c 中</span>
+<span class="token keyword">extern</span> <span class="token keyword">int</span> global_var<span class="token punctuation">;</span>
+</code></pre> </li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="4_639"></a>4、变量未初始化值是多少</h3> 
+         <p>在 C 语言中，未初始化变量的值是不确定的，这取决于变量的类型和存储位置。</p> 
+         <ul>
+          <li>自动（局部非静态）变量 
+           <ul>
+            <li>自动变量（即那些定义在函数内部且未被 static 关键字修饰的变量）如果未初始化，它们的初始值是未定义的。这意味着它们的内容是随机的，取决于内存中该位置之前的残留数据。访问这些未初始化的变量的值是危险的，因为这可能导致不可预测的程序行为。</li>
+            <li>示例<pre style="max-height:100%"><code class="prism language-c"><span class="token keyword">int</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+                <!-- --></span>
+    <span class="token keyword">int</span> x<span class="token punctuation">;</span>  <span class="token comment">// 未初始化的局部变量</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 输出结果未定义，可能是任何值</span>
+<span class="token punctuation">}</span>
+</code></pre> </li>
+           </ul> </li>
+          <li>静态变量（包括全局变量） 
+           <ul>
+            <li>静态变量和全局变量，无论是否在函数内定义，如果未初始化，它们会自动被初始化为零。这包括全局静态变量、局部静态变量和普通的全局变量。这种行为由 C 语言的标准规定，目的是为了保证变量在使用前有一个确定的值。</li>
+            <li>示例<pre style="max-height:100%"><code class="prism language-c"><span class="token keyword">int</span> global_var<span class="token punctuation">;</span>  <span class="token comment">// 未初始化的全局变量，默认初始化为 0</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> static_var<span class="token punctuation">;</span>  <span class="token comment">// 未初始化的静态变量，同样默认初始化为 0</span>
+
+<span class="token keyword">int</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+                <!-- --></span>
+    <span class="token keyword">static</span> <span class="token keyword">int</span> local_static_var<span class="token punctuation">;</span>  <span class="token comment">// 未初始化的局部静态变量，也会被初始化为 0</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d %d %d\n"</span><span class="token punctuation">,</span> global_var<span class="token punctuation">,</span> static_var<span class="token punctuation">,</span> local_static_var<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 输出 0 0 0</span>
+<span class="token punctuation">}</span>
+</code></pre> </li>
+           </ul> </li>
+          <li>堆内存 
+           <ul>
+            <li>通过 malloc 或相关函数分配的内存块，如果未手动初始化，其内容同样是未定义的。这些内存区域通常包含任意的数据（通常是垃圾数据），除非使用 calloc（它会初始化内存为零）或手动将数据写入分配的内存。</li>
+            <li>示例<pre style="max-height:100%"><code class="prism language-c"><span class="token keyword">int</span><span class="token operator">*</span> p <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 分配内存但未初始化</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 输出结果未定义</span>
+<span class="token function">free</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span><span class="token operator">*</span> q <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">calloc</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 分配内存并初始化为 0</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>q<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 输出 0</span>
+<span class="token function">free</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> </li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="5_674"></a>5、什么是野指针</h3> 
+         <p>野指针是指向已释放或无效内存的指针。这类指针的存在可能导致不可预测的程序行为，包括数据损坏、程序崩溃和安全漏洞。</p> 
+         <ul>
+          <li>野指针通常由以下几种情况产生： 
+           <ul>
+            <li>释放后未置空： 
+             <ul>
+              <li>当内存被释放后，如通过 free() 或 delete，指向该内存的指针仍然保留着原来的地址。这种指针称为野指针。由于原内存可能被操作系统重新分配或用于其他用途，通过野指针进行的任何操作都是未定义的，并且可能是危险的。</li>
+              <li>示例<pre style="max-height:100%"><code class="prism language-c"><span class="token keyword">int</span><span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">*</span>ptr <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token function">free</span><span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 此时 ptr 是野指针</span>
+<span class="token operator">*</span>ptr <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>  <span class="token comment">// 未定义行为</span>
+</code></pre> </li>
+             </ul> </li>
+            <li>指针操作越界： 
+             <ul>
+              <li>如果指针超出了其原本指定的数据结构的边界，它可能变成野指针，指向随机的内存位置。<pre style="max-height:100%"><code class="prism language-c"><span class="token keyword">int</span> array<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{
+                  <!-- --></span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span><span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>array<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+ptr<span class="token operator">++</span><span class="token punctuation">;</span>  <span class="token comment">// ptr 现在指向 array 的边界之外</span>
+</code></pre> </li>
+             </ul> </li>
+            <li>栈内存返回： 
+             <ul>
+              <li>函数内部创建的局部变量存储在栈上，当函数返回时，局部变量的存储空间将被回收。如果有指针指向这些局部变量，一旦函数退出，这些指针也会变成野指针。<pre style="max-height:100%"><code class="prism language-c"><span class="token keyword">int</span><span class="token operator">*</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{
+                  <!-- --></span>
+    <span class="token keyword">int</span> local <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">&amp;</span>local<span class="token punctuation">;</span>  <span class="token comment">// 返回指向局部变量的指针</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span><span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// ptr 是野指针</span>
+</code></pre> </li>
+             </ul> </li>
+           </ul> </li>
+          <li>处理野指针 
+           <ul>
+            <li>为了避免野指针带来的问题，可以采用以下策略： 
+             <ul>
+              <li>立即置空：在释放指针后，立即将指针设置为 NULL 或 nullptr（在 C++11 及以后）。这样做可以防止未定义行为的发生，因为对 NULL 指针的解引用通常会导致程序立即崩溃，而不是继续运行并可能导致更难追踪的错误。<pre style="max-height:100%"><code class="prism language-c"><span class="token keyword">int</span><span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">free</span><span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ptr <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>  <span class="token comment">// 将 ptr 置为 NULL</span>
+</code></pre> </li>
+             </ul> </li>
+            <li>使用智能指针：在 C++ 中，可以使用智能指针如 std::unique_ptr 和 std::shared_ptr 来自动管理内存。智能指针在析构时会自动释放它们所管理的资源，并将内部的裸指针设为 nullptr，从而避免野指针问题。<pre style="max-height:100%"><code class="prism language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;memory&gt;</span></span>
+std<span class="token double-colon punctuation">::</span>unique_ptr<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">ptr</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ptr<span class="token punctuation">.</span><span class="token function">reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 自动释放内存并将内部指针设为 nullptr</span>
+</code></pre> </li>
+           </ul> </li>
+         </ul> 
+         <h3><a id="6_717"></a>6、外设和处理器交互的方式</h3> 
+         <p>外设（如键盘、鼠标、打印机、存储设备、网络接口等）与处理器的交互主要通过以下几种方式进行：</p> 
+         <ul>
+          <li>端口映射 I/O（Port-Mapped I/O, PMIO） 
+           <ul>
+            <li>概念：在这种方式中，外设被分配一组特定的I/O端口号。处理器通过专门的I/O指令（如 IN 和 OUT 指令在 x86 架构上）访问这些端口来读写外设。</li>
+            <li>特点：I/O 端口空间通常比内存地址空间小得多，处理器使用特定的指令进行访问，这可以简化编程模型和硬件设计。</li>
+           </ul> </li>
+          <li>内存映射 I/O（Memory-Mapped I/O, MMIO） 
+           <ul>
+            <li>概念：在内存映射I/O中，外设控制寄存器被映射到主内存地址空间的一部分。处理器可以使用普通的内存访问指令（如 MOV）来访问这些控制寄存器，就像访问普通内存一样。</li>
+            <li>特点：由于使用标准的内存访问指令，编程通常更直观和灵活。这也允许外设和处理器之间更高效的数据传输，尤其是在需要传输大量数据时。</li>
+           </ul> </li>
+          <li>直接内存访问（Direct Memory Access, DMA） 
+           <ul>
+            <li>概念：DMA 是一种允许某些硬件子系统独立于主CPU对系统内存进行读写的技术。DMA 控制器可以在不占用CPU的情况下，直接在内存和外设之间传输数据。</li>
+            <li>特点：极大地提高数据传输效率，减轻CPU负担，常用于高速数据传输场景，如硬盘、声卡、网络卡等。</li>
+           </ul> </li>
+          <li>中断（Interrupts） 
+           <ul>
+            <li>概念：当外设需要处理器注意时（例如，数据准备好了或设备需要服务），它会发送一个中断信号到处理器。处理器会在适当的时间点响应中断，暂停当前任务，保存状态，然后执行一个特定的中断服务程序（ISR）来处理外设的需求。</li>
+            <li>特点：中断驱动的通信允许处理器高效地响应多个外设的需求，而不需要在轮询每个设备状态时浪费资源。</li>
+           </ul> </li>
+          <li>轮询（Polling） 
+           <ul>
+            <li>概念：处理器定期检查外设的状态以确定是否需要服务，而不是等待外设发出中断。</li>
+            <li>特点：在某些实时或低延迟要求的应用中，轮询可以提供稳定的响应时间，因为它不依赖于中断处理的开销。然而，这种方法可能会占用更多的CPU资源，因为处理器需要持续检查外设状态。</li>
+           </ul> </li>
+         </ul> 
+         <hr> 
+         <p><mark>我的qq：2442391036，欢迎交流！</mark></p> 
+         <hr> 
+        </div> 
+        <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/markdown_views-f23dff6052.css" rel="stylesheet"> 
+        <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/style-c216769e99.css" rel="stylesheet"> 
+       </div> 
+       <div id="treeSkill"></div> 
+      </article>  
+     </div> 
+     <div class="directory-boxshadow-dialog" style="display:none;"> 
+      <div class="directory-boxshadow-dialog-box"> 
+      </div> 
+      <div class="vip-limited-time-offer-box-new" id="vip-limited-time-offer-box-new"> 
+       <img class="limited-img limited-img-new" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fvip-limited-close-newWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141"> 
+       <div class="vip-limited-time-top">
+         确定要放弃本次机会？ 
+       </div> 
+       <span class="vip-limited-time-text">福利倒计时</span> 
+       <div class="limited-time-box-new"> 
+        <span class="time-hour"></span> 
+        <i>:</i> 
+        <span class="time-minite"></span> 
+        <i>:</i> 
+        <span class="time-second"></span> 
+       </div> 
+       <div class="limited-time-vip-box"> 
+        <p> <img class="coupon-img" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fvip-limited-close-roup.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141"> <span class="def">立减 ¥</span> <span class="active limited-num"></span> </p> 
+        <span class="">普通VIP年卡可用</span> 
+       </div> 
+       <a class="limited-time-btn-new" href="https://mall.csdn.net/vip" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.9621&quot;}" data-report-query="spm=1001.2101.3001.9621">立即使用</a> 
+      </div> 
+     </div>     
+     <a id="commentBox" name="commentBox"></a>         
+    </main>     
+   </div> 
+   <div class="recommend-right align-items-stretch clearfix" id="rightAside" data-type="recommend"> 
+    <aside class="recommend-right_aside"> 
+     <div id="recommend-right"> 
+      <div class="flex-column aside-box groupfile" id="groupfile"> 
+       <div class="groupfile-div"> 
+        <h3 class="aside-title">目录</h3> 
+        <div class="align-items-stretch group_item"> 
+         <div class="pos-box"> 
+          <div class="scroll-box"> 
+           <div class="toc-box"></div> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="aside-box kind_person d-flex flex-column"> 
+       <h3 class="aside-title">分类专栏</h3> 
+       <div class="align-items-stretch kindof_item" id="kind_person_column"> 
+        <div class="aside-content"> 
+         <ul> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12755939.html" data-report-click="{&quot;mod&quot;:&quot;popu_826&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4230&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12755939.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756724.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 嵌入式软件面经 </span> <span class="pay-tag">付费</span> </a> <span class="special-column-num">11篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12659202.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12659202.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756927.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> imx6ull </span> </a> <span class="special-column-num">2篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12306316.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12306316.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756757.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 软件安装 </span> </a> <span class="special-column-num">9篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12305826.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12305826.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756918.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 服务器 </span> </a> <span class="special-column-num">6篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12613050.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12613050.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756926.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> GNU Radio </span> </a> <span class="special-column-num">25篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12504031.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12504031.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20190918140053667.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 雷达通信一体化 </span> </a> <span class="special-column-num">6篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12279858.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12279858.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756738.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 荔枝派 </span> </a> <span class="special-column-num">18篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12470736.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12470736.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756757.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> OFDM </span> </a> <span class="special-column-num">11篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12392658.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12392658.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756738.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 通信原理 </span> </a> <span class="special-column-num">11篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12480915.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12480915.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756780.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 信号处理 </span> </a> <span class="special-column-num">4篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12554367.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12554367.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756930.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> USRP </span> </a> <span class="special-column-num">8篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12284519.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12284519.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756724.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> LabVIEW </span> </a> <span class="special-column-num">11篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12636128.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12636128.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756923.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> STM32 </span> </a> <span class="special-column-num">1篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12600659.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12600659.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756724.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> REDHAWK </span> </a> <span class="special-column-num">7篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12584912.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12584912.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756919.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> linux内核 </span> </a> <span class="special-column-num">3篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12556087.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12556087.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756930.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> Qt </span> </a> <span class="special-column-num">3篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12427382.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12427382.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756927.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 音视频开发 </span> </a> <span class="special-column-num">30篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12485453.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12485453.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756916.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 代码随记 </span> </a> <span class="special-column-num">2篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12474416.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12474416.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756757.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 雷达系统设计MATLAB仿真 </span> </a> <span class="special-column-num">6篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12445346.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12445346.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756918.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> zynq-7020 </span> </a> <span class="special-column-num">5篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12459416.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12459416.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756757.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> system generator </span> </a> <span class="special-column-num">4篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12442281.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12442281.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756928.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> python </span> </a> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12289495.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12289495.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756780.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> linux系统编程 </span> </a> <span class="special-column-num">7篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12398415.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12398415.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756780.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 云IDE </span> </a> <span class="special-column-num">1篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12325880.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12325880.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756922.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> linux设备驱动程序 </span> </a> <span class="special-column-num">5篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12305832.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12305832.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756919.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> ubuntu </span> </a> <span class="special-column-num">3篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12371843.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12371843.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756927.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> NI采集卡 </span> </a> <span class="special-column-num">1篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12281337.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12281337.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756754.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> Git </span> </a> <span class="special-column-num">9篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12337204.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12337204.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756925.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> Bellhop </span> </a> <span class="special-column-num">3篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12298114.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12298114.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756913.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 设计模式 </span> </a> <span class="special-column-num">7篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12305836.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12305836.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756757.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> NB-IoT </span> </a> <span class="special-column-num">2篇</span> </li> 
+          <li> <a class="clearfix special-column-name" href="https://blog.csdn.net/qq_41839588/category_12305829.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588/category_12305829.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756928.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> i.mx287 </span> </a> <span class="special-column-num">2篇</span> </li> 
+         </ul> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </aside> 
+   </div> 
+   <div class="recommend-right1  align-items-stretch clearfix" id="rightAsideConcision" data-type="recommend"> 
+    <aside class="recommend-right_aside"> 
+     <div id="recommend-right-concision"> 
+      <div class="flex-column aside-box groupfile" id="groupfileConcision"> 
+       <div class="groupfile-div1"> 
+        <h3 class="aside-title">目录</h3> 
+        <div class="align-items-stretch group_item"> 
+         <div class="pos-box"> 
+          <div class="scroll-box"> 
+           <div class="toc-box"></div> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </aside> 
+   </div> 
+  </div> 
+  <div class="mask-dark"></div> 
+  <div class="skin-boxshadow"></div> 
+  <div class="directory-boxshadow"></div> 
+  <div class="comment-side-box-shadow comment-side-tit-close" id="commentSideBoxshadow"> 
+   <div class="comment-side-content"> 
+    <div class="comment-side-tit"> 
+     <span class="comment-side-tit-count">评论</span> 
+     <img class="comment-side-tit-close" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcloseBt.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141">
+    </div>  
+    <div id="pcFlodCommentSideBox" class="pc-flodcomment-sidebox"> 
+     <div class="comment-fold-tit">
+      <span id="lookUnFlodComment" class="back"><img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcommentArrowLeftWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""></span>被折叠的&nbsp;
+      <span class="count"></span>&nbsp;条评论 
+      <a href="https://blogdev.blog.csdn.net/article/details/122245662" class="tip" target="_blank">为什么被折叠?</a> 
+      <a href="https://bbs.csdn.net/forums/FreeZone" class="park" target="_blank"> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FiconPark.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141">到【灌水乐园】发言</a> 
+     </div> 
+     <div class="comment-fold-content"></div> 
+     <div id="lookBadComment" class="look-bad-comment side-look-comment"> 
+      <a class="look-more-comment">查看更多评论<img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcommentArrowDownWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""></a> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="comment-rewarddialog-box"> 
+    <div class="form-box"> 
+     <div class="title-box">
+       添加红包 
+      <a class="btn-form-close"></a> 
+     </div> 
+     <form id="commentRewardForm"> 
+      <div class="ipt-box"> 
+       <label for="txtName">祝福语</label> 
+       <div class="ipt-btn-box"> 
+        <input type="text" name="name" id="txtName" autocomplete="off" maxlength="50"> 
+        <a class="btn-ipt btn-random"></a> 
+       </div> 
+       <p class="notice">请填写红包祝福语或标题</p> 
+      </div> 
+      <div class="ipt-box"> 
+       <label for="txtSendAmount">红包数量</label> 
+       <div class="ipt-txt-box"> 
+        <input type="text" name="sendAmount" maxlength="4" id="txtSendAmount" placeholder="请填写红包数量(最小10个)" autocomplete="off"> 
+        <span class="after-txt">个</span> 
+       </div> 
+       <p class="notice">红包个数最小为10个</p> 
+      </div> 
+      <div class="ipt-box"> 
+       <label for="txtMoney">红包总金额</label> 
+       <div class="ipt-txt-box error"> 
+        <input type="text" name="money" maxlength="5" id="txtMoney" placeholder="请填写总金额(最低5元)" autocomplete="off"> 
+        <span class="after-txt">元</span> 
+       </div> 
+       <p class="notice">红包金额最低5元</p> 
+      </div> 
+      <div class="balance-info-box"> 
+       <label>余额支付</label> 
+       <div class="balance-info">
+         当前余额
+        <span class="balance">3.43</span>元 
+        <a href="https://i.csdn.net/#/wallet/balance/recharge" class="link-charge" target="_blank">前往充值 &gt;</a> 
+       </div> 
+      </div> 
+      <div class="opt-box"> 
+       <div class="pay-info">
+         需支付：
+        <span class="price">10.00</span>元 
+       </div> 
+       <button type="button" class="ml-auto btn-cancel">取消</button> 
+       <button type="button" class="ml8 btn-submit" disabled="true">确定</button> 
+      </div> 
+     </form> 
+    </div> 
+   </div> 
+   <div class="rr-guide-box"> 
+    <div class="rr-first-box"> 
+     <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FguideRedReward02.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""> 
+     <button class="btn-guide-known next">下一步</button> 
+    </div> 
+    <div class="rr-second-box"> 
+     <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FguideRedReward03.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""> 
+     <button class="btn-guide-known known">知道了</button> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="redEnvolope" id="redEnvolope"> 
+   <div class="env-box"> 
+    <div class="env-container"> 
+     <div class="pre-open" id="preOpen"> 
+      <div class="top"> 
+       <header> 
+        <img class="clearTpaErr" :src="redpacketAuthor.avatar" alt="" src="https://ziquyun.com/main/csdn/img?url=&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141"> 
+        <div class="author">
+         成就一亿技术人!
+        </div> 
+       </header> 
+       <div class="bot-icon"></div> 
+      </div> 
+      <footer> 
+       <div class="red-openbtn open-start"></div> 
+       <div class="tip">
+         领取后你会自动成为博主和红包主的粉丝 
+        <a class="rule" target="_blank">规则</a> 
+       </div> 
+      </footer> 
+     </div> 
+     <div class="opened" id="opened"> 
+      <div class="bot-icon"> 
+       <header> 
+        <a class="creatorUrl" href="" target="_blank"> <img class="clearTpaErr" src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fprofile-avatar.csdnimg.cn%2Fdefault.jpg%212&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""> </a> 
+        <div class="author"> 
+         <div class="tt">
+          hope_wisdom
+         </div> 发出的红包 
+        </div> 
+       </header> 
+      </div> 
+      <div class="receive-box"> 
+       <header></header> 
+       <div class="receive-list"> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="close-btn"></div> 
+   </div> 
+  </div> 
+  <div id="rewardNew" class="reward-popupbox-new"> 
+   <p class="rewad-title">打赏作者<span class="reward-close"><img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcloseBt.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141"></span></p> 
+   <dl class="profile-box"> 
+    <dd> 
+     <a href="https://blog.csdn.net/qq_41839588" data-report-click="{&quot;mod&quot;:&quot;popu_379&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/qq_41839588&quot;,&quot;ab&quot;:&quot;new&quot;}"> <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fprofile-avatar.csdnimg.cn%2F576b49ba9bd04bd8b8a16191c209eb93_qq_41839588.jpg%211&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" class="avatar_pic"> </a> 
+    </dd> 
+    <dt> 
+     <p class="blog-name">须尽欢~~</p> 
+     <p class="blog-discript">你的鼓励将是我创作的最大动力</p> 
+    </dt> 
+   </dl> 
+   <div class="reward-box-new"> 
+    <div class="reward-content">
+     <div class="reward-right"></div>
+    </div> 
+   </div> 
+   <div class="money-box"> 
+    <span class="choose-money choosed" data-id="1">¥1</span> 
+    <span class="choose-money " data-id="2">¥2</span> 
+    <span class="choose-money " data-id="4">¥4</span> 
+    <span class="choose-money " data-id="6">¥6</span> 
+    <span class="choose-money " data-id="10">¥10</span> 
+    <span class="choose-money " data-id="20">¥20</span> 
+   </div> 
+   <div class="sure-box"> 
+    <div class="sure-box-money"> 
+     <div class="code-box"> 
+      <div class="code-num-box"> 
+       <span class="code-name">扫码支付：</span>
+       <span class="code-num">¥1</span> 
+      </div> 
+      <div class="code-img-box"> 
+       <div class="renovate"> 
+        <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-time-out.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141"> 
+        <span>获取中</span> 
+       </div> 
+      </div> 
+      <div class="code-pay-box"> 
+       <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewWeiXin.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""> 
+       <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewZhiFuBao.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""> 
+       <span>扫码支付</span> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="sure-box-blance"> 
+     <p class="tip">您的余额不足，请更换扫码支付或<a target="_blank" data-report-click="{&quot;mod&quot;:&quot;1597646289_003&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4302&quot;}" href="https://i.csdn.net/#/wallet/balance/recharge?utm_source=RewardVip" class="go-invest">充值</a></p> 
+     <p class="is-have-money"><a class="reward-sure">打赏作者</a></p> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="pay-code"> 
+   <div class="pay-money">
+    实付
+    <span class="pay-money-span" data-nowprice="" data-oldprice="">元</span>
+   </div> 
+   <div class="content-blance">
+    <a class="blance-bt" href="javascript:;">使用余额支付</a>
+   </div> 
+   <div class="content-code"> 
+    <div id="payCode" data-id=""> 
+     <div class="renovate"> 
+      <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-time-out.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141"> 
+      <span>点击重新获取</span> 
+     </div> 
+    </div> 
+    <div class="pay-style">
+     <span><img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fweixin.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141"></span>
+     <span><img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fzhifubao.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141"></span>
+     <span><img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fjingdong.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141"></span>
+     <span class="text">扫码支付</span>
+    </div> 
+   </div> 
+   <div class="bt-close"> 
+    <svg t="1567152543821" class="icon" viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10924" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12"> 
+     <defs> 
+      <style type="text/css"></style> 
+     </defs> 
+     <path d="M512 438.378667L806.506667 143.893333a52.032 52.032 0 1 1 73.6 73.621334L585.621333 512l294.485334 294.485333a52.074667 52.074667 0 0 1-73.6 73.642667L512 585.621333 217.514667 880.128a52.053333 52.053333 0 1 1-73.621334-73.642667L438.378667 512 143.893333 217.514667a52.053333 52.053333 0 1 1 73.621334-73.621334L512 438.378667z" fill="" p-id="10925"></path> 
+    </svg> 
+   </div> 
+   <div class="pay-balance"> 
+    <input type="radio" class="pay-code-radio" data-type="details"> 
+    <span class="span">钱包余额</span> 
+    <span class="balance" style="color:#FC5531;font-size:14px;">0</span> 
+    <div class="pay-code-tile"> 
+     <img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-help.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""> 
+     <div class="pay-code-content"> 
+      <div class="span"> 
+       <p class="title">抵扣说明：</p> 
+       <p> 1.余额是钱包充值的虚拟货币，按照1:1的比例进行支付金额的抵扣。<br> 2.余额无法直接购买下载，可以购买VIP、付费专栏及课程。</p> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <a class="pay-balance-con" href="https://i.csdn.net/#/wallet/balance/recharge" target="_blank"><img src="https://ziquyun.com/main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Frecharge.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fqq_41839588%2Farticle%2Fdetails%2F141105141" alt=""><span>余额充值</span></a> 
+  </div> 
+  <div style="display:none;">  
+  </div> 
+  <div class="keyword-dec-box" id="keywordDecBox"></div>       
+  <link rel="stylesheet" href="https://g.csdnimg.cn/lib/cboxEditor/1.1.6/embed-editor.min.css"> 
+  <link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.6.12/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-light.css">                 
+ </body>
+</html>
