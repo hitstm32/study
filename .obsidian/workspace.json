@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "哈工大操作系统/2.3用户级线程.md",
+                "file": "项目/tb4117/gui.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "哈工大操作系统/2.3用户级线程.md",
+                "file": "项目/tb4117/gui.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "哈工大操作系统/2.3用户级线程.md",
+                "file": "项目/tb4117/gui.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "哈工大操作系统/2.3用户级线程.md"
+                "file": "项目/tb4117/gui.md"
               }
             }
           }
@@ -149,8 +149,11 @@
   },
   "active": "41b0257f08160f51",
   "lastOpenFiles": [
-    "哈工大操作系统/2.4内核级线程.md",
-    "哈工大操作系统/2.3用户级线程.md",
+    "项目/tb4117/usb抓包分析.md",
+    "项目/tb4117/libuvc学习.md",
+    "项目/tb4117/系统移植过程.md",
+    "找工作/面经.md",
+    "找工作/面试.md",
     "项目/tb4117/gui.md",
     "面试/9.网络编程.html",
     "面试/8.进程&线程.html",
@@ -162,12 +165,9 @@
     "面试/2.预处理&关键字.html",
     "面试/11.操作系统.html",
     "面试/10.驱动开发.html",
-    "找工作/面经.md",
-    "找工作/面试.md",
-    "哈工大操作系统/2.2多进程图像.md",
-    "Linux/IIC/3.Controller Driver 层.md",
     "Linux/IIC/img/Pasted image 20240903151801.png",
     "Linux/IIC/img/Pasted image 20240903114204.png",
+    "Linux/IIC/3.Controller Driver 层.md",
     "Linux/IIC/2.驱动框架.md",
     "Linux/IIC/1.IIC协议.md",
     "Linux/设备总线模型.md",
@@ -182,7 +182,10 @@
     "哈工大操作系统/2.5内核级线程代码实现.md",
     "哈工大操作系统/2.7CPU调度策略.md",
     "哈工大操作系统/2.7一个实际的schedule函数.md",
+    "哈工大操作系统/2.4内核级线程.md",
     "哈工大操作系统/1.3操作系统启动（setup.s）.md",
+    "哈工大操作系统/2.3用户级线程.md",
+    "哈工大操作系统/2.2多进程图像.md",
     "哈工大操作系统/2.1 CPU管理的直观想法.md",
     "Linux/pinctrl子系统.md",
     "Linux/同步与互斥.md",
@@ -191,9 +194,6 @@
     "Linux/USB.md",
     "Linux/Linux设备模型.md",
     "Linux/LCD子系统.md",
-    "Linux/Input子系统.md",
-    "csapp/1b.01 overview.md",
-    "csapp/1b.02 run-riscv-simulation.md",
-    "哈工大操作系统/3.4段页结合的实际内存管理.md"
+    "Linux/Input子系统.md"
   ]
 }
